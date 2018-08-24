@@ -1,10 +1,16 @@
 package com.gm.demo.aio.im.handler;
 
+import com.gm.demo.aio.im.server.ServerHandler;
+import com.gm.help.base.Quick;
+
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 
 /**
+ * 读取数据处理器
+ *
  * @author Jason
  */
 public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
@@ -43,6 +49,12 @@ public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
 
     @Override
     public void failed(Throwable exc, ByteBuffer attachment) {
-        exc.printStackTrace();
+        if(exc instanceof IOException){
+            Quick.run(channel::close);
+            ServerHandler.channels.remove(channel);
+        }else {
+            exc.printStackTrace();
+        }
+
     }
 }

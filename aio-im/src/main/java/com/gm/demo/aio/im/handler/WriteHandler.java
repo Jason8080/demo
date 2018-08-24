@@ -6,6 +6,11 @@ import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 
+/**
+ * 写出数据处理器
+ *
+ * @author Jason
+ */
 public class WriteHandler implements CompletionHandler<Integer, ByteBuffer> {
 
     /**
