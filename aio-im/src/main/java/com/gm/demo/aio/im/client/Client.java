@@ -30,6 +30,10 @@ public class Client extends Thread {
             content = Quick.exec(reader::readLine);
             // 写入控制台内容
             ByteBuffer wrap = ByteBuffer.wrap(content.getBytes());
+            if(!client.isOpen()){
+                client = Quick.exec(AsynchronousSocketChannel::open);
+                client.connect(new InetSocketAddress("127.0.0.1", PORT), client, new ClientHandler());
+            }
             client.write(wrap, wrap, new WriteHandler(client));
             wrap.clear();
         }
