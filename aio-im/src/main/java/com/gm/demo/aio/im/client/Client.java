@@ -1,6 +1,5 @@
 package com.gm.demo.aio.im.client;
 
-import com.gm.demo.aio.im.handler.ReadHandler;
 import com.gm.help.base.Quick;
 import com.gm.utils.base.Logger;
 
@@ -18,25 +17,19 @@ import java.nio.charset.Charset;
  *
  * @author Jason
  */
-public class Client {
+public class Client extends Thread {
     private static final int PORT = 8001;
     private static AsynchronousSocketChannel client = Quick.exec(AsynchronousSocketChannel::open);
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    public static final int ONE_SIZE = 1024;
-    private static ByteBuffer one = ByteBuffer.allocate(0);
 
-
-
-
-    public static void main(String[] args) throws Exception {
+    @Override
+    public void run() {
         // 连接一次服务器
-        client.connect(new InetSocketAddress("127.0.0.1", PORT)).get();
+        client.connect(new InetSocketAddress("127.0.0.1", PORT), client, new ClientHandler());
         String content = null;
-        ByteBuffer buffer = ByteBuffer.allocate(1024);
-        client.read(buffer, buffer, new ReadHandler(client));
         // 循环读写信息
         while (!Charset.defaultCharset().name().equals(content)) {
-            content = reader.readLine();
+            content = Quick.exec(reader::readLine);
             // 写入控制台内容
             ByteBuffer wrap = ByteBuffer.wrap(content.getBytes());
             client.write(wrap, wrap, new CompletionHandler<Integer, ByteBuffer>() {
@@ -55,5 +48,9 @@ public class Client {
             });
             wrap.clear();
         }
+    }
+
+    public static void main(String[] args) {
+        new Client().start();
     }
 }

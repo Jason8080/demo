@@ -9,6 +9,9 @@ import java.nio.channels.CompletionHandler;
  */
 public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
 
+    /**
+     * 单次读取数据大小
+     */
     public static final int ONE_SIZE = 1024;
 
     /**
@@ -17,7 +20,7 @@ public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
     private final AsynchronousSocketChannel channel;
 
     /**
-     * 单次读取数据大小
+     * 缓冲数据
      */
     private ByteBuffer one = ByteBuffer.allocate(0);
 
@@ -34,7 +37,7 @@ public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
             System.out.println(new String(one.array()));
             one = ByteBuffer.allocate(0);
         }
-        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        ByteBuffer buffer = ByteBuffer.allocate(ONE_SIZE);
         channel.read(buffer, buffer, this);
     }
 
