@@ -22,7 +22,7 @@ public class Server extends Thread {
     /**
      * The constant server.
      */
-    public static final AsynchronousServerSocketChannel server = Quick.exec(() -> AsynchronousServerSocketChannel.open());
+    private static final AsynchronousServerSocketChannel server = Quick.exec(() -> AsynchronousServerSocketChannel.open());
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 

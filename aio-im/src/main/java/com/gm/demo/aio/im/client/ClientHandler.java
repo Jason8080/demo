@@ -1,7 +1,9 @@
 package com.gm.demo.aio.im.client;
 
 import com.gm.demo.aio.im.handler.ReadHandler;
+import com.gm.help.base.Quick;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
@@ -22,6 +24,10 @@ public class ClientHandler implements CompletionHandler<Void, AsynchronousSocket
 
     @Override
     public void failed(Throwable exc, AsynchronousSocketChannel client) {
-        exc.printStackTrace();
+        if(exc instanceof IOException){
+            Quick.run(client::close);
+        }else {
+            exc.printStackTrace();
+        }
     }
 }
