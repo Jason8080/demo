@@ -12,7 +12,6 @@ import java.nio.charset.Charset;
 
 
 /**
- * AIO疑惑: client为什么不能复用?
  *
  * @author Jason
  */
@@ -36,6 +35,11 @@ public class Client extends Thread {
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         new Client().start();
     }
