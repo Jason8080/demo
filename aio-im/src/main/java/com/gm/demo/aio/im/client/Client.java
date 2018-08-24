@@ -20,9 +20,15 @@ import static com.gm.demo.aio.im.server.Server.PORT;
  *
  * @author Jason
  */
-public class Client extends Thread {
+public final class Client extends Thread {
+
+    private final static Client startup = new Client();
+
     private static AsynchronousSocketChannel client = getClient();
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+    private Client() {
+    }
 
     @Override
     public void run() {
@@ -52,11 +58,9 @@ public class Client extends Thread {
     }
 
     /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
+     * Startup.
      */
-    public static void main(String[] args) {
-        new Client().start();
+    public static void startup() {
+        startup.start();
     }
 }

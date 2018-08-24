@@ -17,7 +17,9 @@ import java.util.Iterator;
  *
  * @author Jason
  */
-public class Server extends Thread {
+public final class Server extends Thread {
+
+    private final static Server startup = new Server();
 
     /**
      * The constant server.
@@ -34,6 +36,9 @@ public class Server extends Thread {
      * The constant IP.
      */
     public final static String IP = "127.0.0.1";
+
+    private Server() {
+    }
 
     @Override
     public void run() {
@@ -55,11 +60,9 @@ public class Server extends Thread {
     }
 
     /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
+     * Startup.
      */
-    public static void main(String[] args) {
-        new Server().start();
+    public static void startup() {
+        startup.start();
     }
 }
