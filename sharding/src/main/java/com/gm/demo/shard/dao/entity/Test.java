@@ -1,30 +1,29 @@
 package com.gm.demo.shard.dao.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.AllArgsConstructor;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
  * @author Jason
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@TableName("test_")
-public class Test extends Model<Test> implements Serializable {
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+@Entity
+@Table(name = "test_")
+@ApiModel("掩饰实体")
+public class Test implements Serializable {
+    @Id
+    @ApiModelProperty(hidden = true)
+    private Long orderId;
 
+    @ApiModelProperty(hidden = true)
+    private Long userId;
+
+    @ApiModelProperty(example = "嗯哼", value = "名称")
     private String name;
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
 }

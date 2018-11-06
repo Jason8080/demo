@@ -1,14 +1,12 @@
 package com.gm.demo.shard.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.dangdang.ddframe.rdb.sharding.id.generator.IdGenerator;
 import com.gm.demo.shard.dao.entity.Test;
+import com.gm.demo.shard.dao.repository.TestRepository;
 import com.gm.demo.shard.service.TestService;
 import com.gm.model.request.PageReq;
 import com.gm.model.response.JsonResult;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,12 +20,31 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
     @Autowired
     TestService testService;
+    @Autowired
+    TestRepository testRepository;
+    @Autowired
+    private IdGenerator idGenerator;
 
-    @PostMapping("save")
-    @ApiOperation(value = "保存数据", notes = "...", response = JsonResult.class)
-    public JsonResult save(Test test){
-        test.insert();
+    @PostMapping("add")
+    @ApiOperation(value = "添加数据", notes = "...", response = JsonResult.class)
+    public JsonResult add(Test test){
+        test.setUserId(idGenerator.generateId().longValue());
+        test.setOrderId(idGenerator.generateId().longValue());
+        testRepository.save(test);
         return JsonResult.SUCCESS_;
+//
+//        for (int i = 0; i < 10; i++) {
+//            test = new Test();
+//            test.setUserId((long) i);
+//            test.setOrderId((long) i);
+//            testRepository.save(test);
+//        }
+//        for (int i = 10; i < 20; i++) {
+//            test = new Test();
+//            test.setUserId((long) i + 1);
+//            test.setOrderId((long) i);
+//            testRepository.save(test);
+//        }
     }
 
     @GetMapping("get")
@@ -36,9 +53,8 @@ public class TestController {
             @ApiImplicitParam(name = "pageNo", value = "起始页", example = "1"),
             @ApiImplicitParam(name = "pageSize", value = "页容量", example = "10"),
     })
-    public JsonResult<Test> get(PageReq req){
-        IPage<Test> page = testService.get(req);
-        JsonResult<Test> result = new JsonResult(page.getCurrent(), page.getSize(), page.getTotal(), page.getRecords());
-        return result;
+    public JsonResult get(PageReq req){
+        Iterable<Test> all = testRepository.findAll();
+        return JsonResult.as(all);
     }
 }

@@ -1,14 +1,9 @@
 package com.gm.demo.shard.conf;
 
-import com.google.common.base.Predicate;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.async.DeferredResult;
-import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
