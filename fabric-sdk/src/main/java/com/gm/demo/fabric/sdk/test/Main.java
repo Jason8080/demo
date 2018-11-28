@@ -34,15 +34,15 @@ public class Main {
             // 装载时已经初始化的ca客户端
             HFCAClient ca = sampleOrg.getCAClient();
 
-            // 注册用户测试
-            RegistrationRequest rr = new RegistrationRequest("user4", "org1.department1");
-
             // 设置管理员
             SampleUser admin = sampleStore.getMember("admin", sampleOrg.getName());
 
             admin.setEnrollment(ca.enroll(admin.getName(), "adminpw"));
 
             admin.setMspId(sampleOrg.getMSPID());
+
+            // 注册用户测试
+            RegistrationRequest rr = new RegistrationRequest("user4", "org1.department1");
 
             ca.register(rr, admin);
         }
