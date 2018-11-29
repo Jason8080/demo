@@ -6,6 +6,7 @@ import com.gm.demo.tx.lcn.api.service.AccountService;
 import com.gm.utils.base.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -22,6 +23,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @TxTransaction
+    @Transactional(rollbackFor = Exception.class)
     public void pay(Long id, BigDecimal amount) {
         accountDao.insert(amount);
         Logger.info(id+": "+amount.doubleValue());
