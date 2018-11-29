@@ -28,11 +28,11 @@ public class ShopServiceImpl implements ShopService {
     @Transactional(rollbackFor = Exception.class)
     @TxTransaction(isStart = true)
     public void buy(Long id, String name, BigDecimal amount) {
-        // 销售记录
+        // 销售记录(本地){有回滚}
         shopDao.insert(name, amount);
-        // 生成订单
+        // 生成订单(远程){未回滚}
         orderService.buy(id, name);
-        // 账户扣钱
+        // 账户扣钱(远程){数据库有唯一索引异常}
         accountService.pay(id, amount);
     }
 
