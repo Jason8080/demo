@@ -3,14 +3,12 @@ package com.gm.demo.tx.lcn.api.service.fallback;
 import com.gm.demo.tx.lcn.api.service.AccountService;
 import com.gm.demo.tx.lcn.api.service.OrderService;
 import com.gm.utils.base.Logger;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 /**
  * @author Jason
  */
-@Component
 public class DefaultFallback implements OrderService,AccountService {
     @Override
     public void buy(Long id, String name) {
