@@ -1,10 +1,12 @@
 package com.gm.demo.tx.lcn.shop.service.impl;
 
+import com.codingapi.tx.annotation.TxTransaction;
 import com.gm.demo.tx.lcn.api.service.AccountService;
 import com.gm.demo.tx.lcn.api.service.OrderService;
 import com.gm.demo.tx.lcn.shop.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -20,6 +22,8 @@ public class ShopServiceImpl implements ShopService {
     AccountService accountService;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
+    @TxTransaction(isStart = true)
     public void buy(Long id, String name, BigDecimal amount) {
         // 生成订单
         orderService.buy(id, name);
