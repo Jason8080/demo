@@ -46,6 +46,10 @@ public class Org {
 
                     final SampleOrg sampleOrg = new SampleOrg(orgName, val.trim());
 
+                    String domain = Prop.getProperty(INTEGRATIONTESTS_ORG + orgName + ".domname");
+
+                    sampleOrg.setDomainName(domain);
+
                     // 这里直接初始化了Ca客户端
                     Quick.run(() -> {
 
