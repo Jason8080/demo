@@ -27,7 +27,7 @@ public class Org {
 
     private static final String INTEGRATIONTESTSTLS = PROPBASE + "integrationtests.tls";
 
-    private static final HashMap<String, SampleOrg> sampleOrgs = new HashMap();
+    public static final HashMap<String, SampleOrg> sampleOrgs = new HashMap();
 
     /**
      * 装载Org.
