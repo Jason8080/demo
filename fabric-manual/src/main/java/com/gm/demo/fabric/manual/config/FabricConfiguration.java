@@ -6,6 +6,7 @@ import com.gm.demo.fabric.manual.config.fabric.OrgConfig;
 import com.gm.demo.fabric.manual.config.fabric.UserConfig;
 import com.gm.demo.fabric.manual.model.SampleEnrollment;
 import com.gm.demo.fabric.manual.model.SampleOrg;
+import com.gm.demo.fabric.manual.model.SampleOrgFactory;
 import com.gm.demo.fabric.manual.model.SampleUser;
 import org.apache.commons.io.IOUtils;
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
@@ -18,8 +19,13 @@ import org.hyperledger.fabric_ca.sdk.HFCAClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.Reader;
+import java.io.StringReader;
 import java.security.PrivateKey;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import static java.lang.String.format;
@@ -39,44 +45,37 @@ public class FabricConfiguration {
 //        client.setUserContext(peerAdmin);
     }
 
-    @Bean("caOrg1")
-    public HFCAClient ca(Org1Config config) throws Exception {
-        return getCa(config);
-    }
-
-    @Bean("caOrg2")
-    public HFCAClient ca(Org2Config config) throws Exception {
-        return getCa(config);
-    }
-
-    @Bean("admin")
+    @Bean
     public SampleUser admin(UserConfig config) {
         SampleUser admin = new SampleUser();
         admin.setName(config.getAdminName());
+        admin.setPass(config.getAdminPass());
         return admin;
+    }
+
+    @Bean
+    public SampleOrgFactory sampleOrgFactory(SampleOrg org1, SampleOrg org2) {
+        SampleOrgFactory factory = new SampleOrgFactory();
+        List<SampleOrg> sos = new ArrayList();
+        sos.add(org1);
+        sos.add(org2);
+        factory.setSos(sos);
+        return factory;
     }
 
     @Bean("org1")
     public SampleOrg org1(Org1Config config) throws Exception {
         SampleOrg org = new SampleOrg(config.getPeerName(), config.getPeerMspId());
-        org.setCa(ca(config));
+        org.setCa(getCa(config));
+        org.setPeerAdmin(createPeerAdmin(config));
         return org;
     }
 
     @Bean("org2")
     public SampleOrg org2(Org2Config config) throws Exception {
         SampleOrg org = new SampleOrg(config.getPeerName(), config.getPeerMspId());
-        org.setCa(ca(config));
+        org.setCa(getCa(config));
         return org;
-    }
-
-    @Bean("peerOrg1Admin")
-    public SampleUser peerOrg1Admin(Org1Config config) throws Exception {
-        return createPeerAdmin(config);
-    }
-    @Bean("peerOrg2Admin")
-    public SampleUser peerOrg2Admin(Org2Config config) throws Exception {
-        return createPeerAdmin(config);
     }
 
 

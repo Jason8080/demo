@@ -14,6 +14,8 @@ public class SampleUser implements User {
 
     private String name;
 
+    private String pass;
+
     private Set<String> roles;
 
     private String account;

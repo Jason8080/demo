@@ -13,6 +13,7 @@ public class SampleOrg implements Serializable {
     private String name;
     private String mspId;
     private HFCAClient ca;
+    private SampleUser peerAdmin;
 
     public SampleOrg() {
     }

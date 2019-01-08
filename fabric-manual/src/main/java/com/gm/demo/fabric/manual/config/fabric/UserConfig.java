@@ -17,4 +17,5 @@ import org.springframework.stereotype.Component;
 public class UserConfig {
     private String adminName;
     private String adminPass;
+    private String newName;
 }
