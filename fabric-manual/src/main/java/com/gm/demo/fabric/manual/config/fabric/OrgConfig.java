@@ -11,7 +11,9 @@ import java.io.Serializable;
 public class OrgConfig implements Serializable {
     private String caLocation;
     private String caCert;
+    private String peerName;
     private String peerMspId;
+    private String peerAdmin;
     private String domain;
     private String keystore;
     private String signCerts;

@@ -75,7 +75,7 @@ public class End2endIT {
 
     private static final TestConfig testConfig = TestConfig.getConfig();
     private static final String TEST_ADMIN_NAME = "admin";
-    private static final String user_name = "user2";
+    private static final String user_name = "user3";
     private static final String user_org1_pass = "ihySLhQozNpz";
     private static final String user_org2_pass = "ybucqjRvPWVg";
     private static final String TEST_FIXTURES_PATH = "src/test/fixture";
