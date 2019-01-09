@@ -81,6 +81,7 @@ public class FabricConfiguration {
 
     /**
      * 创建并配置Ca客户端
+     *
      * @param config 组织配置
      * @return 客户端
      * @throws Exception
@@ -96,6 +97,7 @@ public class FabricConfiguration {
 
     /**
      * 创建并配置peer管理员
+     *
      * @param config 组织配置
      * @return 管理员对象
      * @throws Exception
@@ -112,7 +114,8 @@ public class FabricConfiguration {
         try (PEMParser pemParser = new PEMParser(pemReader)) {
             pemPair = (PrivateKeyInfo) pemParser.readObject();
         }
-        PrivateKey privateKey = new JcaPEMKeyConverter().setProvider(BouncyCastleProvider.PROVIDER_NAME).getPrivateKey(pemPair);
+        PrivateKey privateKey = new JcaPEMKeyConverter().setProvider(BouncyCastleProvider
+                .PROVIDER_NAME).getPrivateKey(pemPair);
         // 这是证书签
         File inSignCerts = new File(clazz.getResource(config.getSignCerts()).toURI());
         byte[] sign = IOUtils.toByteArray(new FileInputStream(inSignCerts));
@@ -126,10 +129,12 @@ public class FabricConfiguration {
     private File findSk(File directory) {
         File[] matches = directory.listFiles((dir, name) -> name.endsWith("_sk"));
         if (null == matches) {
-            throw new RuntimeException(format("Matches returned null does %s directory exist?", directory.getAbsoluteFile().getName()));
+            throw new RuntimeException(format("Matches returned null does %s directory exist?",
+                    directory.getAbsoluteFile().getName()));
         }
         if (matches.length != 1) {
-            throw new RuntimeException(format("Expected in %s only 1 sk file but found %d", directory.getAbsoluteFile().getName(), matches.length));
+            throw new RuntimeException(format("Expected in %s only 1 sk file but found %d",
+                    directory.getAbsoluteFile().getName(), matches.length));
         }
         return matches[0];
 
