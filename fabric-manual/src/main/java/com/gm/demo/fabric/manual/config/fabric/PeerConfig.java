@@ -11,6 +11,8 @@ import java.io.Serializable;
 public class PeerConfig implements Serializable {
     private String org1Name;
     private String org1Loc;
+    private String org1EventLoc;
     private String org2Name;
     private String org2Loc;
+    private String org2EventLoc;
 }

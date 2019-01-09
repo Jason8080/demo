@@ -18,8 +18,8 @@ public class DemoController {
     FabricServiceImpl fabricService;
 
     @GetMapping("start")
-    public JsonResult start() {
-        fabricService.handler();
+    public JsonResult start(String name) {
+        fabricService.handler(name);
         return JsonResult.SUCCESS_;
     }
 }
