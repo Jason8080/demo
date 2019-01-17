@@ -12,10 +12,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @Configuration
-@ConfigurationProperties(prefix = "fabric.order1")
-@PropertySource("classpath:fabric-order.properties")
-public class Order1Config {
-    private String name;
-    private String loc;
-    private String tlsServer;
+@ConfigurationProperties(prefix = "fabric.channel.foo")
+@PropertySource("classpath:fabric-channel.properties")
+public class FooConfig extends ChannelConfig {
 }
