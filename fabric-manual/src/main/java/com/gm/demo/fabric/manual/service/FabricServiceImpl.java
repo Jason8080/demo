@@ -45,13 +45,13 @@ public class FabricServiceImpl {
 
     public void handler() {
         try {
-            createChannel(fooConfig.getName());
+            Channel channel = createChannel(fooConfig.getName());
         }catch (Exception e){
 
         }
     }
 
-    private void createChannel(String name) throws Exception {
+    private Channel createChannel(String name) throws Exception {
         client.setUserContext(org1.getPeerAdmin());
         Class<? extends FabricServiceImpl> clazz = this.getClass();
         File fTx = new File(clazz.getResource(fooConfig.getTx()).toURI());
@@ -63,23 +63,10 @@ public class FabricServiceImpl {
                 , getOrderProperties());
         // 创建通道
         Channel channel = client.newChannel(name, order, configuration, signature);
-        // 创建Peer
-        Peer peer0 = client.newPeer(peer0Config.getOrg1Name(), peer0Config.getOrg1Loc());
-        // 创建事件
-        EventHub event = client.newEventHub(peer0Config.getOrg1Name(), peer0Config
-                .getOrg1EventLoc());
-        // 添加服务
-        // 如果没有任何order会报错
-        // Channel myChannel does not have any orderers associated with it.
-        channel.addOrderer(order);
-        // 添加事件
-        channel.addEventHub(event);
-        // 添加节点
-        channel.joinPeer(peer0);
         // 初始化
         channel.initialize();
-        //
-        Thread.sleep(10000);
+        // OK
+        return channel;
     }
 
     /**

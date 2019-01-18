@@ -1,6 +1,7 @@
 package com.gm.demo.fabric.manual.controller;
 
 import com.gm.demo.fabric.manual.service.FabricServiceImpl;
+import com.gm.model.response.JsonResult;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +18,8 @@ public class DemoController {
     FabricServiceImpl fabricService;
 
     @GetMapping("start")
-    public Object start() {
+    public JsonResult start() {
         fabricService.handler();
-        return 200;
+        return JsonResult.SUCCESS_;
     }
 }
