@@ -48,8 +48,7 @@ public class FabricServiceImpl {
 
     public void handler() {
         Quick.run(x->{
-            Channel bar = FabricConfiguration.createChannel(client, org1, order1Config,
-                    barConfig);
+            client.setUserContext(org1.getPeerAdmin());
             Peer peer0 = client.newPeer(peer0Org1Config.getName(), peer0Org1Config.getLoc(),
                     FabricConfiguration.getTlsProperties(peer0Org1Config));
             System.out.println("end!");
