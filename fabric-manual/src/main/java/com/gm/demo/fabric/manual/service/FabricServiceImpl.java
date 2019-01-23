@@ -63,16 +63,16 @@ public class FabricServiceImpl {
 
     public void handler() {
         Quick.run(x -> {
-            // 创建通道 and 共识
             Channel foo = FabricConfiguration.createChannel(client, org1, order1Config, fooConfig);
-            // 添加背书节点 and 事件
             FabricConfiguration.joinPeer(client, foo, peer0Org1Config);
-            FabricConfiguration.joinPeer(client, foo, peer0Org2Config);
             FabricConfiguration.joinPeer(client, foo, peer1Org1Config);
-            FabricConfiguration.joinPeer(client, foo, peer1Org2Config);
-            // 初始化通道
             foo.initialize();
-            //
+
+
+            Channel bar = FabricConfiguration.createChannel(client, org2, order1Config, barConfig);
+            FabricConfiguration.joinPeer(client, bar, peer0Org2Config);
+            FabricConfiguration.joinPeer(client, bar, peer1Org2Config);
+            bar.initialize();
 
         });
     }

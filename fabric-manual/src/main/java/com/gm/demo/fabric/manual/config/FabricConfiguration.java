@@ -125,10 +125,9 @@ public class FabricConfiguration {
 
 
     public static void joinPeer(HFClient client, Channel channel, PeerConfig peerConfig) throws Exception {
-        Peer peer0Org1 = client.newPeer(peerConfig.getName(), peerConfig.getLoc(),
-                FabricConfiguration.getTlsProperties(peerConfig));
-        channel.joinPeer(peer0Org1);
+        Peer peer0Org1 = client.newPeer(peerConfig.getName(), peerConfig.getLoc(), getTlsProperties(peerConfig));
         EventHub eventHub = client.newEventHub(peerConfig.getName(), peerConfig.getEventLoc(), getTlsProperties(peerConfig));
+        channel.joinPeer(peer0Org1);
         channel.addEventHub(eventHub);
     }
 
