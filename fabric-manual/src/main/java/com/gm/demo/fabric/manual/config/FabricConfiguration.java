@@ -9,10 +9,7 @@ import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMParser;
 import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
-import org.hyperledger.fabric.sdk.Channel;
-import org.hyperledger.fabric.sdk.ChannelConfiguration;
-import org.hyperledger.fabric.sdk.HFClient;
-import org.hyperledger.fabric.sdk.Orderer;
+import org.hyperledger.fabric.sdk.*;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
 import org.hyperledger.fabric_ca.sdk.HFCAClient;
 import org.springframework.context.annotation.Bean;
@@ -126,6 +123,15 @@ public class FabricConfiguration {
 
     }
 
+
+    public static void joinPeer(HFClient client, Channel channel, PeerConfig peerConfig) throws Exception {
+        Peer peer0Org1 = client.newPeer(peerConfig.getName(), peerConfig.getLoc(),
+                FabricConfiguration.getTlsProperties(peerConfig));
+        channel.joinPeer(peer0Org1);
+        EventHub eventHub = client.newEventHub(peerConfig.getName(), peerConfig.getEventLoc(), getTlsProperties(peerConfig));
+        channel.addEventHub(eventHub);
+    }
+
     public static Channel createChannel(HFClient client, SampleOrg org, OrderConfig orderConfig, ChannelConfig config) throws Exception {
         client.setUserContext(org.getPeerAdmin());
         File file = new File(FabricConfiguration.class.getResource(config.getTx()).toURI());
@@ -136,8 +142,8 @@ public class FabricConfiguration {
         Orderer order = client.newOrderer(orderConfig.getName(), orderConfig.getLoc(), getTlsProperties(orderConfig));
         // 创建通道
         Channel channel = client.newChannel(config.getName(), order, configuration, signature);
-        // 初始化
-        channel.initialize();
+        // 加入共识
+        channel.addOrderer(order);
         // OK
         return channel;
     }
