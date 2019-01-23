@@ -58,6 +58,7 @@ public class FabricConfiguration {
     public SampleOrg org2(Org2Config config) throws Exception {
         SampleOrg org = new SampleOrg(config.getPeerName(), config.getPeerMspId());
         org.setCa(getCa(config));
+        org.setPeerAdmin(createPeerAdmin(config));
         return org;
     }
 
