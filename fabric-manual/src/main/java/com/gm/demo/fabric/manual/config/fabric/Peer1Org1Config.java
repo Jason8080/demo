@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @Configuration
-@ConfigurationProperties(prefix = "fabric.per0")
+@ConfigurationProperties(prefix = "fabric.per1.org1")
 @PropertySource("classpath:fabric-peer.properties")
-public class Peer0Config extends PeerConfig {
+public class Peer1Org1Config extends TlsConfig {
 }

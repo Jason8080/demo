@@ -8,11 +8,7 @@ import java.io.Serializable;
  * @author Jason
  */
 @Data
-public class PeerConfig implements Serializable {
-    private String org1Name;
-    private String org1Loc;
-    private String org1EventLoc;
-    private String org2Name;
-    private String org2Loc;
-    private String org2EventLoc;
+public class PeerConfig extends TlsConfig implements Serializable {
+    private String loc;
+    private String eventLoc;
 }

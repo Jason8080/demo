@@ -6,6 +6,7 @@ import lombok.Data;
  * @author Jason
  */
 @Data
-public class OrderConfig extends TlsConfig {
-    private String loc;
+public class TlsConfig {
+    private String name;
+    private String tls;
 }

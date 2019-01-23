@@ -133,7 +133,7 @@ public class FabricConfiguration {
         byte[] signature = client.getChannelConfigurationSignature
                 (configuration, org.getPeerAdmin());
         // 创建共识
-        Orderer order = client.newOrderer(orderConfig.getName(), orderConfig.getLoc(), getOrderProperties(orderConfig));
+        Orderer order = client.newOrderer(orderConfig.getName(), orderConfig.getLoc(), getTlsProperties(orderConfig));
         // 创建通道
         Channel channel = client.newChannel(config.getName(), order, configuration, signature);
         // 初始化
@@ -153,12 +153,12 @@ public class FabricConfiguration {
      * @return
      * @throws Exception
      */
-    public static Properties getOrderProperties(OrderConfig orderConfig) throws Exception {
-        String name = orderConfig.getName();
-        String tlsServer = orderConfig.getTlsServer();
+    public static Properties getTlsProperties(TlsConfig tlsConfig) throws Exception {
+        String name = tlsConfig.getName();
+        String crt = tlsConfig.getTls();
         Properties ret = new Properties();
         ret.setProperty("hostnameOverride", name);
-        File cert = new File(FabricConfiguration.class.getResource(tlsServer).toURI());
+        File cert = new File(FabricConfiguration.class.getResource(crt).toURI());
         ret.setProperty("sslProvider", "openSSL");
         ret.setProperty("negotiationType", "TLS");
         ret.setProperty("pemFile", cert.getAbsolutePath());
