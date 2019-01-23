@@ -1,19 +1,18 @@
 package com.gm.demo.fabric.manual.config;
 
-import com.gm.demo.fabric.manual.config.fabric.Org1Config;
-import com.gm.demo.fabric.manual.config.fabric.Org2Config;
-import com.gm.demo.fabric.manual.config.fabric.OrgConfig;
-import com.gm.demo.fabric.manual.config.fabric.UserConfig;
+import com.gm.demo.fabric.manual.config.fabric.*;
 import com.gm.demo.fabric.manual.model.SampleEnrollment;
 import com.gm.demo.fabric.manual.model.SampleOrg;
-import com.gm.demo.fabric.manual.model.SampleOrgFactory;
 import com.gm.demo.fabric.manual.model.SampleUser;
 import org.apache.commons.io.IOUtils;
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMParser;
 import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
+import org.hyperledger.fabric.sdk.Channel;
+import org.hyperledger.fabric.sdk.ChannelConfiguration;
 import org.hyperledger.fabric.sdk.HFClient;
+import org.hyperledger.fabric.sdk.Orderer;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
 import org.hyperledger.fabric_ca.sdk.HFCAClient;
 import org.springframework.context.annotation.Bean;
@@ -24,9 +23,8 @@ import java.io.FileInputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.security.PrivateKey;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.String.format;
 
@@ -37,12 +35,10 @@ import static java.lang.String.format;
 public class FabricConfiguration {
 
     @Bean
-    public HFClient client(/*SampleUser peerAdmin*/) throws Exception {
+    public HFClient client() throws Exception {
         HFClient client = HFClient.createNewInstance();
         client.setCryptoSuite(CryptoSuite.Factory.getCryptoSuite());
         return client;
-        // 这里暂不设置peer节点管理员
-//        client.setUserContext(peerAdmin);
     }
 
     @Bean
@@ -51,16 +47,6 @@ public class FabricConfiguration {
         admin.setName(config.getAdminName());
         admin.setPass(config.getAdminPass());
         return admin;
-    }
-
-    @Bean
-    public SampleOrgFactory sampleOrgFactory(SampleOrg org1, SampleOrg org2) {
-        SampleOrgFactory factory = new SampleOrgFactory();
-        List<SampleOrg> sos = new ArrayList();
-        sos.add(org1);
-        sos.add(org2);
-        factory.setSos(sos);
-        return factory;
     }
 
     @Bean("org1")
@@ -86,7 +72,7 @@ public class FabricConfiguration {
      * @return 客户端
      * @throws Exception
      */
-    private HFCAClient getCa(OrgConfig config) throws Exception {
+    public static HFCAClient getCa(OrgConfig config) throws Exception {
         Properties properties = new Properties();
         properties.setProperty("pemFile", new File(config.getCaCert()).getAbsolutePath());
         properties.setProperty("allowAllHostNames", "true");
@@ -102,8 +88,8 @@ public class FabricConfiguration {
      * @return 管理员对象
      * @throws Exception
      */
-    private SampleUser createPeerAdmin(OrgConfig config) throws Exception {
-        Class<? extends FabricConfiguration> clazz = this.getClass();
+    public static SampleUser createPeerAdmin(OrgConfig config) throws Exception {
+        Class<? extends FabricConfiguration> clazz = FabricConfiguration.class;
         // 创建管理员
         SampleUser peerAdmin = new SampleUser(config.getPeerAdmin(), config.getPeerMspId());
         // 这是私钥库
@@ -126,7 +112,7 @@ public class FabricConfiguration {
         return peerAdmin;
     }
 
-    private File findSk(File directory) {
+    public static File findSk(File directory) {
         File[] matches = directory.listFiles((dir, name) -> name.endsWith("_sk"));
         if (null == matches) {
             throw new RuntimeException(format("Matches returned null does %s directory exist?",
@@ -140,4 +126,46 @@ public class FabricConfiguration {
 
     }
 
+    public static Channel createChannel(HFClient client, SampleOrg org, OrderConfig orderConfig, ChannelConfig config) throws Exception {
+        client.setUserContext(org.getPeerAdmin());
+        File file = new File(FabricConfiguration.class.getResource(config.getTx()).toURI());
+        ChannelConfiguration configuration = new ChannelConfiguration(file);
+        byte[] signature = client.getChannelConfigurationSignature
+                (configuration, org.getPeerAdmin());
+        // 创建共识
+        Orderer order = client.newOrderer(orderConfig.getName(), orderConfig.getLoc(), getOrderProperties(orderConfig));
+        // 创建通道
+        Channel channel = client.newChannel(config.getName(), order, configuration, signature);
+        // 初始化
+        channel.initialize();
+        // OK
+        return channel;
+    }
+
+
+
+    /**
+     * 不配置这个会抛出异常
+     * <p>
+     * grpc: Server.Serve failed to complete security handshake from "192.168.1.223:53182": tls:
+     * first record does not look like a TLS handshake
+     *
+     * @return
+     * @throws Exception
+     */
+    public static Properties getOrderProperties(OrderConfig orderConfig) throws Exception {
+        String name = orderConfig.getName();
+        String tlsServer = orderConfig.getTlsServer();
+        Properties ret = new Properties();
+        ret.setProperty("hostnameOverride", name);
+        File cert = new File(FabricConfiguration.class.getResource(tlsServer).toURI());
+        ret.setProperty("sslProvider", "openSSL");
+        ret.setProperty("negotiationType", "TLS");
+        ret.setProperty("pemFile", cert.getAbsolutePath());
+        // 超时配置
+        ret.put("grpc.NettyChannelBuilderOption.keepAliveTime", new Object[]{5L, TimeUnit.MINUTES});
+        ret.put("grpc.NettyChannelBuilderOption.keepAliveTimeout", new Object[]{8L, TimeUnit
+                .SECONDS});
+        return ret;
+    }
 }

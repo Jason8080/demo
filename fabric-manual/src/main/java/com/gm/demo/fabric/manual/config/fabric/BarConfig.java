@@ -1,7 +1,6 @@
 package com.gm.demo.fabric.manual.config.fabric;
 
 import lombok.Data;
-import org.hyperledger.fabric.sdk.Orderer;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @Configuration
-@ConfigurationProperties(prefix = "fabric.order1")
-@PropertySource("classpath:fabric-order.properties")
-public class Order1Config extends OrderConfig {
+@ConfigurationProperties(prefix = "fabric.channel.bar")
+@PropertySource("classpath:fabric-channel.properties")
+public class BarConfig extends ChannelConfig {
 }
