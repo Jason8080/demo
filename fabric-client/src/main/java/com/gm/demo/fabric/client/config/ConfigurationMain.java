@@ -4,9 +4,7 @@ import com.gm.demo.fabric.client.config.order.Order;
 import com.gm.demo.fabric.client.config.peer.Peer;
 import com.gm.demo.fabric.client.config.user.Admin;
 import org.hyperledger.fabric.sdk.Channel;
-import org.hyperledger.fabric.sdk.EventHub;
 import org.hyperledger.fabric.sdk.HFClient;
-import org.hyperledger.fabric.sdk.Orderer;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -38,14 +36,9 @@ public class ConfigurationMain {
     }
 
     @Bean
-    public Orderer getOrder(HFClient client, Order order) throws Exception {
-        return client.newOrderer(order.getName(), order.getLoc());
-    }
-
-    @Bean
-    public Channel getChannel(HFClient client, Orderer order) throws Exception {
+    public Channel getChannel(HFClient client, Order order) throws Exception {
         Channel js = client.newChannel(js_channel_name);
-        js.addOrderer(order);
+        js.addOrderer(client.newOrderer(order.getName(), order.getLoc()));
         js.addPeer(client.newPeer(peer0Org1.getName(), peer0Org1.getLoc()));
         js.addEventHub(client.newEventHub(peer0Org1.getName(), peer0Org1.getEventLoc()));
         return js;
