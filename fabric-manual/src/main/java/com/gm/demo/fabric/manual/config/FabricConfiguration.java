@@ -121,7 +121,6 @@ public class FabricConfiguration {
                     directory.getAbsoluteFile().getName(), matches.length));
         }
         return matches[0];
-
     }
 
 
