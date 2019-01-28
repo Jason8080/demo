@@ -43,7 +43,7 @@ public class ConfigurationMain {
     }
 
     @Bean
-    public Channel getChannel(HFClient client, Orderer order, org.hyperledger.fabric.sdk.Peer peer, EventHub event) throws Exception {
+    public Channel getChannel(HFClient client, Orderer order) throws Exception {
         Channel js = client.newChannel(js_channel_name);
         js.addOrderer(order);
         js.addPeer(client.newPeer(peer0Org1.getName(), peer0Org1.getLoc()));
