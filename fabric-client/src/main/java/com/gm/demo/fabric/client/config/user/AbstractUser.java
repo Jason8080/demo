@@ -62,4 +62,8 @@ public class AbstractUser implements User {
     public String getMspId() {
         return mspId;
     }
+
+    public AbstractUser enroll() throws Exception {
+        return this;
+    }
 }
