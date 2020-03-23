@@ -48,11 +48,13 @@ public class OpenCv {
         Mat image = Imgcodecs.imread(img);
         MatOfRect faces = new MatOfRect();
 
-        Size minSize = new Size(250, 250);
-        Size maxSize = new Size(800, 800);
+//        Size minSize = new Size(250, 250);
+        Size minSize = new Size();
+//        Size maxSize = new Size(800, 800);
+        Size maxSize = new Size();
 
-//        cv.detectMultiScale(image, faces, 1.1, 4, 0,  minSize, maxSize);
-        cv.detectMultiScale(image, faces);
+        cv.detectMultiScale(image, faces, 1.1f, 4, 0,  minSize, maxSize);
+//        cv.detectMultiScale(image, faces);
         System.out.println(String.format("Detected %s faces", faces.toArray().length));
         // ------------------------------------------
         for (Rect rect : faces.toArray()) {
