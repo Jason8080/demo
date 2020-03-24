@@ -53,8 +53,10 @@ public class OpenCv {
         }
         // 读取图片
         Mat image = Imgcodecs.imread(img);
+
+        // 降低灰度
+        Imgproc.cvtColor(image, image, Imgproc.COLOR_BGR2GRAY);
         MatOfRect faces = new MatOfRect();
-        boolean empty = image.empty();
 
 //        Size minSize = new Size(250, 250);
         Size minSize = new Size();
@@ -62,8 +64,8 @@ public class OpenCv {
         Size maxSize = new Size();
 
 //        cv.detectMultiScale(image, faces, 1.1f, 1, 0,  minSize, maxSize);
-//        cv.detectMultiScale(image, faces, 1.1f, 1);
-        cv.detectMultiScale(image, faces);
+        cv.detectMultiScale(image, faces, 1.1f, 1);
+//        cv.detectMultiScale(image, faces);
         System.out.println(String.format("Detected %s faces", faces.toArray().length));
         // ------------------------------------------
         for (Rect rect : faces.toArray()) {
