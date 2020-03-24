@@ -26,15 +26,12 @@ import java.util.UUID;
  */
 public class ReplaceImg {
 
-    public final static String root = "C:\\Users\\xiaok\\Desktop\\实验室\\";
+    public final static String root = "C:\\Users\\xiaok\\Desktop\\laboratory\\";
 
     public static void main(String[] args) throws IOException {
-        File sourceFile = new File(root + "face.jpg");
-        File faceFile = new File(root + "头像\\a_source.jpg");
-        int i=100;
-        while (i-->0) {
-            eachReplace(sourceFile, faceFile);
-        }
+        File sourceFile = new File(root + "A.jpg");
+        File faceFile = new File(root + "head\\a_source.jpg");
+        eachReplace(sourceFile, faceFile);
     }
 
     public static void eachReplace(File sourceFile, File faceFile) throws IOException {
@@ -55,7 +52,7 @@ public class ReplaceImg {
 
         // 保存新图
         if(faces.size()>0)
-            write(source, sourceFile.getName(), root + "仓库\\");
+            write(source, sourceFile.getName(), root + "repository\\");
     }
 
     public static void write(BufferedImage source, String filename, String root) throws IOException {

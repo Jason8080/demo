@@ -5,6 +5,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +18,8 @@ import java.util.List;
  */
 public class OpenCv {
 
-    public static final String name = "/lbpcascades"+"/lbpcascade_frontalface_improved"+".xml";
+    public static final String filename = "haarcascade_frontalface_alt_tree.xml";
+    public static final String name = "/haarcascades_cuda/"+ filename;
     public static final String path = OpenCv.class.getResource(name).getPath();
     public static CascadeClassifier cv;
     static {
@@ -33,7 +35,8 @@ public class OpenCv {
      */
     public static void main(String[] args) {
         // 读取图片
-        List<Integer[]> positions = positions("C:\\Users\\xiaok\\Desktop\\实验室\\face.png");
+        String img = "C:\\Users\\xiaok\\Desktop\\laboratory\\face.jpg";
+        List<Integer[]> positions = positions(img);
         positions.forEach(x -> System.out.println(Arrays.toString(x)));
     }
 
@@ -44,17 +47,23 @@ public class OpenCv {
     public static List<Integer[]> positions(String img){
         // 存储位置
         List<Integer[]> positions = new ArrayList();
+        if(!new File(img).exists()){
+            System.out.println("文件不存在!!!");
+            return positions;
+        }
         // 读取图片
         Mat image = Imgcodecs.imread(img);
         MatOfRect faces = new MatOfRect();
+        boolean empty = image.empty();
 
 //        Size minSize = new Size(250, 250);
         Size minSize = new Size();
 //        Size maxSize = new Size(800, 800);
         Size maxSize = new Size();
 
-        cv.detectMultiScale(image, faces, 1.1f, 4, 0,  minSize, maxSize);
-//        cv.detectMultiScale(image, faces);
+//        cv.detectMultiScale(image, faces, 1.1f, 1, 0,  minSize, maxSize);
+//        cv.detectMultiScale(image, faces, 1.1f, 1);
+        cv.detectMultiScale(image, faces);
         System.out.println(String.format("Detected %s faces", faces.toArray().length));
         // ------------------------------------------
         for (Rect rect : faces.toArray()) {
@@ -77,7 +86,7 @@ public class OpenCv {
 
     public static void writeEffect(String img, Mat image) {
         String name = img.substring(img.lastIndexOf("\\") + 1);
-        String filename = "C:\\Users\\xiaok\\Desktop\\实验室\\效果\\" + name;
+        String filename = "C:\\Users\\xiaok\\Desktop\\laboratory\\effect\\" + name;
         System.out.println(String.format("Writing %s", filename));
         Imgcodecs.imwrite(filename, image);
     }
