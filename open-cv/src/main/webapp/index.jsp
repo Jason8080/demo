@@ -16,13 +16,13 @@
         <form action="/cv" method="post" enctype="multipart/form-data">
             <input type="file" name="file">
             <c:if test="${adj!=null}">
+                左移: <input type="number" name="left" value="${adj.left}" value="10" step="10"/>
                 放大: <input type="number" v name="ratio" value="${adj.ratio}" value="0.07" step="0.02"/>
-                左移: <input type="number" name="left" value="${adj.left}" value="10" step="5"/>
                 上移: <input type="number" name="top" value="${adj.top}" value="5" step="5"/>
             </c:if>
             <c:if test="${adj==null}">
+                左移: <input type="number" name="left" value="10" step="10"/>
                 放大: <input type="number" name="ratio" value="0.07" step="0.01"/>
-                左移: <input type="number" name="left" value="10" step="5"/>
                 上移: <input type="number" name="top" value="5" step="5"/>
             </c:if>
             <button type="button" onclick="come()">提交</button>
