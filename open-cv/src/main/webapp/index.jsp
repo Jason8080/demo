@@ -16,14 +16,14 @@
         <form action="/cv" method="post" enctype="multipart/form-data">
             <input type="file" name="file">
             <c:if test="${adj!=null}">
-                <input name="ratio" value="${adj.ratio}" placeholder="该值越大, 图片越小, 默认15">
-                <input name="left" value="${adj.left}" placeholder="该值越大, 往左边移的越多, 默认10">
-                <input name="top" value="${adj.top}" placeholder="该值越大, 往上边移的越多, 默认5">
+                放大: <input type="number" v name="ratio" value="${adj.ratio}" value="0.07" step="0.02"/>
+                左移: <input type="number" name="left" value="${adj.left}" value="10" step="5"/>
+                上移: <input type="number" name="top" value="${adj.top}" value="5" step="5"/>
             </c:if>
             <c:if test="${adj==null}">
-                <input name="ratio" placeholder="该值越大, 图片越小, 默认15">
-                <input name="left" placeholder="该值越大, 往左边移的越多, 默认10">
-                <input name="top" placeholder="该值越大, 往上边移的越多, 默认5">
+                放大: <input type="number" name="ratio" value="0.07" step="0.01"/>
+                左移: <input type="number" name="left" value="10" step="5"/>
+                上移: <input type="number" name="top" value="5" step="5"/>
             </c:if>
             <button type="button" onclick="come()">提交</button>
             <span id="res"></span>

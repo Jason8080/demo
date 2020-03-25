@@ -13,7 +13,7 @@ public class Adj {
     private Integer top;
 
     public Double getRatio() {
-        return ratio == null ? 15d : ratio;
+        return ratio == null ? 0.07 : ratio;
     }
 
     public void setRatio(Double ratio) {

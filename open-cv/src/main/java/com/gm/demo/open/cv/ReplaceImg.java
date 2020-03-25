@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public class ReplaceImg {
     // 该值越大, 图片越小, 默认15
-    public static double ratio = 8;
+    public static double ratio = 0.07;
     // 该值越大, 往左边移的越多, 默认10
     public static int offset_left = 30;
     // 该值越大, 往上边移的越多, 默认5
@@ -84,7 +84,7 @@ public class ReplaceImg {
 
     public static BufferedImage size(BufferedImage source, BufferedImage sourceFace) {
         int widthRaw = source.getWidth();
-        int size = (int) (widthRaw / ratio);
+        int size = (int) (widthRaw * ratio);
         // 需要根据 指定大小压缩
         return zoomInImg(sourceFace, size, size);
     }
