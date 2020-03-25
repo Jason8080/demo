@@ -4,9 +4,12 @@ import com.gm.demo.open.cv.ReplaceImg;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.PrintWriter;
 
 /**
  * 人脸识别P图控制器
@@ -19,13 +22,15 @@ public class OpenCvController {
     private final String path = "H:\\projects\\demo\\open-cv\\target\\open-cv-1.0-SNAPSHOT\\img\\preview.jpg";
     private final static File faceSource = new File("C:\\Users\\xiaok\\Desktop\\laboratory\\head\\a_source.jpg");
     @RequestMapping("cv")
-    public String cv(MultipartFile file, Adj adj, Model model) throws Exception {
+    public void cv(MultipartFile file, Adj adj, Model model, HttpServletResponse res) throws Exception {
         file.transferTo(f);
         ReplaceImg.ratio = adj.getRatio();
         ReplaceImg.offset_left = adj.getLeft();
         ReplaceImg.offset_top = adj.getTop();
         ReplaceImg.eachReplace(f, faceSource, path);
         model.addAttribute("adj", adj);
-        return "forward:/index.jsp";
+        PrintWriter writer = res.getWriter();
+        writer.print(true);
+        writer.close();
     }
 }
