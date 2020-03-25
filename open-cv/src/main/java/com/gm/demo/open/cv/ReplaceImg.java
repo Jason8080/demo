@@ -26,21 +26,21 @@ import java.util.UUID;
  */
 public class ReplaceImg {
     // 该值越大, 图片越小, 默认15
-    public static final double ratio = 8;
+    public static double ratio = 8;
     // 该值越大, 往左边移的越多, 默认10
-    public static final int offset_left = 30;
+    public static int offset_left = 30;
     // 该值越大, 往上边移的越多, 默认5
-    public static final int offset_top = 10;
+    public static int offset_top = 10;
 
     public final static String root = "C:\\Users\\xiaok\\Desktop\\laboratory\\";
 
     public static void main(String[] args) throws IOException {
         File sourceFile = new File(root + "B.jpg");
         File faceFile = new File(root + "head\\a_source.jpg");
-        eachReplace(sourceFile, faceFile);
+        eachReplace(sourceFile, faceFile, root+"repository\\B.jpg");
     }
 
-    public static void eachReplace(File sourceFile, File faceFile) throws IOException {
+    public static void eachReplace(File sourceFile, File faceFile, String path) throws IOException {
         // 原图
         BufferedImage source = ImageIO.read(sourceFile);
 
@@ -58,14 +58,14 @@ public class ReplaceImg {
 
         // 保存新图
         if (faces.size() > 0)
-            write(source, sourceFile.getName(), root + "repository\\");
+            write(source, sourceFile.getName(), path);
     }
 
-    public static void write(BufferedImage source, String filename, String root) throws IOException {
+    public static void write(BufferedImage source, String filename, String path) throws IOException {
         int index = filename.lastIndexOf(".");
         String name = filename.substring(0, index);
         String suffix = filename.substring(index + 1);
-        File file = new File(root + "preview." + suffix);
+        File file = new File(path);
         ImageIO.write(source, suffix, file);
     }
 

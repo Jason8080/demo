@@ -78,7 +78,7 @@ public class OpenCv {
             position[3] = rect.height;
             positions.add(position);
             // 画出效果
-            writeEffect(img, image);
+            // writeEffect(img, image);
         }
         // ------------------------------------------
         return positions;
