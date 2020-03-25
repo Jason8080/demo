@@ -33,6 +33,14 @@
         <img id="img" src="/img/preview.jpg">
     </div>
 </body>
+<style>
+    input {
+        height: 30px;
+    }
+    button {
+        height: 30px;
+    }
+</style>
 <script>
     //  如果我们要使用 ajax2.0 结合FormData 来提交数据 必须使用 post
     // document.querySelector('button[value=button]').onclick = function () {
