@@ -15,5 +15,10 @@
             <artifactId>opencv</artifactId>
             <version>3.4.3-1.4.3</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
     </dependencies>
 </project>

@@ -25,11 +25,17 @@ import java.util.UUID;
  * @modified : -
  */
 public class ReplaceImg {
+    // 该值越大, 图片越小, 默认15
+    public static final double ratio = 8;
+    // 该值越大, 往左边移的越多, 默认10
+    public static final int offset_left = 30;
+    // 该值越大, 往上边移的越多, 默认5
+    public static final int offset_top = 10;
 
     public final static String root = "C:\\Users\\xiaok\\Desktop\\laboratory\\";
 
     public static void main(String[] args) throws IOException {
-        File sourceFile = new File(root + "A.jpg");
+        File sourceFile = new File(root + "B.jpg");
         File faceFile = new File(root + "head\\a_source.jpg");
         eachReplace(sourceFile, faceFile);
     }
@@ -45,38 +51,50 @@ public class ReplaceImg {
         List<Integer[]> faces = OpenCv.positions(sourceFile.getPath());
 
         // 压缩头像
-        BufferedImage face = size(sourceFace, faces);
+        BufferedImage face = size(source, sourceFace);
 
         // 重新构图
         recompose(source, face, faces);
 
         // 保存新图
-        if(faces.size()>0)
+        if (faces.size() > 0)
             write(source, sourceFile.getName(), root + "repository\\");
     }
 
     public static void write(BufferedImage source, String filename, String root) throws IOException {
-        File file = new File(root + UUID.randomUUID().toString() + "." + filename);
         int index = filename.lastIndexOf(".");
-        ImageIO.write(source, filename.substring(index + 1), file);
+        String name = filename.substring(0, index);
+        String suffix = filename.substring(index + 1);
+        File file = new File(root + "preview." + suffix);
+        ImageIO.write(source, suffix, file);
     }
 
 
-    public static void recompose(BufferedImage source, BufferedImage target, List<Integer[]> faces) throws IOException {
-        // 将target写到source中指定的位置上去
+    public static void recompose(BufferedImage source, BufferedImage face, List<Integer[]> faces) throws IOException {
+        // 将face写到source中指定的位置上去
         Graphics graphics = source.getGraphics();
-        faces.forEach((Integer[] loc) -> graphics.drawImage(target, loc[2], loc[3], null));
+        faces.forEach((Integer[] loc) -> {
+            if(loc[0] > 100) {
+                Integer x = loc[0] - offset_left;
+                Integer y = loc[1] - offset_top;
+                graphics.drawImage(face, x, y, null);
+            }
+        });
     }
 
-    public static BufferedImage size(BufferedImage source, List<Integer[]> faces) {
+    public static BufferedImage size(BufferedImage source, BufferedImage sourceFace) {
+        int widthRaw = source.getWidth();
+        int size = (int) (widthRaw / ratio);
         // 需要根据 指定大小压缩
-        if (faces.size() > 0) {
-            Integer[] loc = faces.get(0);
-            Integer width = loc[2];
-            Integer height = loc[3];
-            return source.getSubimage(0, 0, width, height);
-        }
-        return source.getSubimage(0, 0, source.getWidth(), source.getHeight());
+        return zoomInImg(sourceFace, size, size);
+    }
+
+    private static BufferedImage zoomInImg(BufferedImage source, int maxWidth, int maxHeight) {
+        BufferedImage newImage = new BufferedImage(maxWidth, maxHeight, source.getType());
+        Graphics g = newImage.getGraphics();
+        g.drawImage(source, 0, 0, maxWidth, maxHeight, null);
+        g.dispose();
+        return newImage;
     }
 
 
