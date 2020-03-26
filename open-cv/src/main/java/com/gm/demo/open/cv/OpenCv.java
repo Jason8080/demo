@@ -42,7 +42,36 @@ public class OpenCv {
     }
 
 
+    public static List<Integer[]> contourId(List<Integer[]> positions, Mat img) {
+        List<MatOfPoint> contours = findContours(img);
+        int maxSizeIndex=-1;
+        int maxSize=Integer.MIN_VALUE;
+        //找出轮廓面积最大的轮廓
+        for (int i=0;i<contours.size();i++){
+            MatOfPoint mop = contours.get(i);
+            int size=mop.width()*mop.height();
+            if(size>maxSize){
+                maxSize=size;
+                maxSizeIndex=i;
+            }
+        }
+        if(maxSizeIndex!=-1){
+            String dump=contours.get(maxSizeIndex).dump();
+            String[] split = dump.split(",");
+        }
+        return positions;
+    }
 
+
+    public static List<MatOfPoint> findContours(Mat img) {
+        // 设置临界
+        Imgproc.threshold(img, img, 0, 255, Imgproc.THRESH_BINARY_INV);
+        // 检测边缘
+        Mat mat = new Mat();
+        List<MatOfPoint> contours = new ArrayList();
+        Imgproc.findContours(img, contours, mat, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
+        return contours;
+    }
 
 
     public static List<Integer[]> positions(String img, What what){
@@ -53,10 +82,10 @@ public class OpenCv {
             return positions;
         }
         // 读取图片
-        Mat image = Imgcodecs.imread(img);
+        Mat image = Imgcodecs.imread(img, Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
         switch (what){
             case FACE: faceId(positions, image); break;
-            case RECT: ; break;
+            case RECT: contourId(positions, image); break;
             default: ; break;
         }
         // 返回位置
