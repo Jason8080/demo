@@ -23,7 +23,7 @@ import java.util.List;
 public class OpenCv {
 
     public static final String filename = "haarcascade_frontalface_alt_tree.xml";
-    public static final String name = "/haarcascades_cuda/"+ filename;
+    public static final String name = "/haarcascades_cuda/" + filename;
     public static final String path = OpenCv.class.getResource(name).getPath();
     public static CascadeClassifier cv;
 
@@ -33,60 +33,98 @@ public class OpenCv {
     }
 
 
-
     @Test
-    public void testFace (){
+    public void testFace() {
         String img = "C:\\Users\\xiaok\\Desktop\\laboratory\\await\\A.jpg";
-        List<Integer[]> positions = positions(img, What.FACE);
+        List<Integer[]> positions = positions(img, What.RECT);
         positions.forEach(x -> System.out.println(Arrays.toString(x)));
     }
 
 
     public static List<Integer[]> contourId(List<Integer[]> positions, Mat img) {
         List<MatOfPoint> contours = findContours(img);
-        int maxSizeIndex=-1;
-        int maxSize=Integer.MIN_VALUE;
-        //找出轮廓面积最大的轮廓
-        for (int i=0;i<contours.size();i++){
+        for (int i = 0; i < contours.size(); i++) {
             MatOfPoint mop = contours.get(i);
-            int size=mop.width()*mop.height();
-            if(size>maxSize){
-                maxSize=size;
-                maxSizeIndex=i;
+            Rect rect = new Rect(new Point(595,556), mop.size());
+            drawEffect(img, rect);
+        }
+        return positions;
+    }
+    public static List<Integer[]> contourIdMax(List<Integer[]> positions, Mat img) {
+        List<MatOfPoint> contours = findContours(img);
+        int maxSizeIndex = -1;
+        int maxSize = Integer.MIN_VALUE;
+        //找出轮廓面积最大的轮廓
+        for (int i = 0; i < contours.size(); i++) {
+            MatOfPoint mop = contours.get(i);
+            int size = mop.width() * mop.height();
+            if (size > maxSize) {
+                maxSize = size;
+                maxSizeIndex = i;
             }
         }
-        if(maxSizeIndex!=-1){
-            String dump=contours.get(maxSizeIndex).dump();
-            String[] split = dump.split(",");
+        if (maxSizeIndex != -1) {
+            int minX=Integer.MAX_VALUE;
+            int minY=Integer.MAX_VALUE;
+            int maxX=Integer.MIN_VALUE;
+            int maxY=Integer.MIN_VALUE;
+            Integer[] position = new Integer[4];
+            String dump = contours.get(maxSizeIndex).dump();
+            String[] split = dump.substring(1,dump.length()-1).split(";");
+            for (String s : split) {
+                String[] l = s.split(",");
+                int x = Integer.valueOf(l[0].trim());
+                int y = Integer.valueOf(l[1].trim());
+                minX = Math.min(x, minX);
+                maxX = Math.max(x, maxX);
+                minY = Math.min(y, minY);
+                maxY = Math.max(y, maxY);
+            }
+            int width=maxX-minX;
+            int height=maxY-minY;
+            position[0] = minX;
+            position[1] = minY;
+            position[2] = width;
+            position[3] = height;
+            positions.add(position);
         }
         return positions;
     }
 
 
     public static List<MatOfPoint> findContours(Mat img) {
-        // 设置临界
-        Imgproc.threshold(img, img, 0, 255, Imgproc.THRESH_BINARY_INV);
+        // 边缘检测
+        Imgproc.Canny(img, img, 20, 60, 3, false);
+        // 膨胀边缘
+        Imgproc.dilate(img, img, new Mat(), new Point(-1,-1), 3, 1, new Scalar(1));
         // 检测边缘
         Mat mat = new Mat();
         List<MatOfPoint> contours = new ArrayList();
-        Imgproc.findContours(img, contours, mat, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
+        Imgproc.findContours(img, contours, mat, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        System.out.println(String.format("There are %s cards", contours.size()));
         return contours;
     }
 
 
-    public static List<Integer[]> positions(String img, What what){
+    public static List<Integer[]> positions(String img, What what) {
         // 存储位置
         List<Integer[]> positions = new ArrayList();
-        if(!new File(img).exists()){
+        if (!new File(img).exists()) {
             System.out.println("文件不存在!!!");
             return positions;
         }
         // 读取图片
         Mat image = Imgcodecs.imread(img, Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
-        switch (what){
-            case FACE: faceId(positions, image); break;
-            case RECT: contourId(positions, image); break;
-            default: ; break;
+        switch (what) {
+            case FACE:
+                faceId(positions, image);
+                break;
+            case RECT:
+                contourId(positions, image);
+                break;
+            default:
+                ;
+                break;
         }
         // 返回位置
         return positions;
@@ -112,6 +150,7 @@ public class OpenCv {
 
     /**
      * 画出矩形效果
+     *
      * @param image
      * @param rect
      */
@@ -125,6 +164,7 @@ public class OpenCv {
 
     /**
      * 图片预处理
+     *
      * @param image 图片对象
      * @param sizeW 像素点加粗宽度
      * @param sizeH 像素点加粗高度
@@ -135,13 +175,13 @@ public class OpenCv {
         //转为灰度
         Imgproc.cvtColor(image, desc, Imgproc.COLOR_BGR2GRAY);
         //图像反向二值化,去除噪点
-        Imgproc.threshold(desc,desc, 187, 255, Imgproc.THRESH_BINARY_INV|Imgproc.THRESH_OTSU);
+        Imgproc.threshold(desc, desc, 187, 255, Imgproc.THRESH_BINARY_INV | Imgproc.THRESH_OTSU);
         //像素点加粗到sizeW*sizeH，让矩形闭合
-        Mat element = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(sizeW,sizeH));
+        Mat element = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(sizeW, sizeH));
         Imgproc.morphologyEx(desc, desc, Imgproc.MORPH_GRADIENT, element);
         //去除边框的线条干扰
         int cutNum = 23;
-        Mat subMat = desc.submat(cutNum,desc.rows()-cutNum,cutNum,desc.cols()-cutNum);
+        Mat subMat = desc.submat(cutNum, desc.rows() - cutNum, cutNum, desc.cols() - cutNum);
         //写入临时文件，读取后再删除，避免直接添加边框图片内容又恢复的问题
         Imgcodecs.imwrite("temp.jpg", subMat);
         Mat temp = Imgcodecs.imread("temp.jpg");
@@ -151,7 +191,7 @@ public class OpenCv {
             e.printStackTrace();
         }
         //减去的边缘再填充回来，避免生成的坐标变位
-        Core.copyMakeBorder(temp, temp, cutNum, cutNum, cutNum, cutNum, Core.BORDER_CONSTANT,new Scalar(0,0,0));
+        Core.copyMakeBorder(temp, temp, cutNum, cutNum, cutNum, cutNum, Core.BORDER_CONSTANT, new Scalar(0, 0, 0));
         return temp;
     }
 
