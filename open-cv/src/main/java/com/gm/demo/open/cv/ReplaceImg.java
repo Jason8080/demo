@@ -48,7 +48,7 @@ public class ReplaceImg {
         BufferedImage sourceFace = ImageIO.read(faceFile);
 
         // 人脸识别
-        List<Integer[]> faces = OpenCv.positions(sourceFile.getPath());
+        List<Integer[]> faces = OpenCv.positions(sourceFile.getPath(), What.FACE);
 
         // 压缩头像
         BufferedImage face = size(source, sourceFace);
