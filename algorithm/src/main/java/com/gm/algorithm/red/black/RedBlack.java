@@ -52,46 +52,50 @@ public class RedBlack<C extends Comparable> {
             // 2. 获取叔节点
             Node<C> uncle = grand.getUncle(parent);
             // 3. 调整树结构
-            adjust(parent, grand, uncle);
+            adjust(parent, grand, uncle, twig);
         }
     }
 
     /**
      * 调整树结构
+     * @param uncle 叔节点
      * @param parent 父节点 ()
      * @param grand 祖节点
-     * @param uncle 叔节点
+     * @param twig
      */
-    private void adjust(Node<C> parent, Node<C> grand, Node<C> uncle) {
+    private void adjust(Node<C> uncle, Node<C> parent, Node<C> grand, Node<C> twig) {
         // 叔父节点也是红色, 变色即可
         if (uncle == null || !uncle.isBlack()) {
-            changeColor(grand, parent, uncle);
+            changeColor(grand, parent, uncle, twig);
         } else {
             // 叔父节点是黑色
-            rotate(grand, parent, uncle);
+            rotate(grand, parent, uncle, twig);
         }
     }
 
     /**
      * 旋转
      *
+     * @param twig
      * @param grand  祖节点
      * @param parent 父节点
      * @param uncle  叔节点
      */
-    private void rotate(Node grand, Node<C> parent, Node<C> uncle) {
+    private void rotate(Node grand, Node<C> parent, Node<C> uncle, Node<C> twig) {
         // 1. 判断父节点是否是右节点
-        boolean isRight = parent.isRight();
+        boolean parentRight = parent.isRight();
+        // 2. 判断新节点是否右节点
+        boolean twigRight = twig.isRight();
     }
 
     /**
      * 变色
-     *
-     * @param grand  祖节点
+     *  @param grand  祖节点
      * @param parent 父节点
      * @param uncle  叔节点
+     * @param twig
      */
-    private void changeColor(Node grand, Node<C> parent, Node uncle) {
+    private void changeColor(Node grand, Node<C> parent, Node uncle, Node<C> twig) {
         // 1. 变色
         parent.blackOxide();
         uncle.blackOxide();
@@ -102,7 +106,7 @@ public class RedBlack<C extends Comparable> {
         }
         // 3. 祖父也不是黑色, 需要继续调整
         if(g1!=null && !g1.isBlack()){
-            adjust(grand, g1, g1.getUncle(grand));
+            adjust(g1.getUncle(grand), grand, g1, twig);
         }
     }
 
