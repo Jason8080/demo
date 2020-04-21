@@ -86,6 +86,10 @@ public class RedBlack<C extends Comparable> {
         boolean parentRight = parent.isRight();
         // 2. 判断新节点是否右节点
         boolean twigRight = twig.isRight();
+        // 父右插右: 父成祖, 祖变左, 新在右 (左旋转)
+        // 父右插左: 新成祖, 祖变左, 父在右 (左旋转)
+        // 父左插右: 新成祖, 祖变右, 父在左 (右旋转)
+        // 父左插左: 父成祖, 祖变右, 新在右 (右旋转)
     }
 
     /**
