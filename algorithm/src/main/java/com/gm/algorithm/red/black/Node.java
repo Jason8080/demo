@@ -30,7 +30,7 @@ public class Node<C extends Comparable> implements Comparable<C> {
     }
 
     // 获取内容
-    public Object getC() {
+    public C getC() {
         return c;
     }
 
@@ -40,6 +40,14 @@ public class Node<C extends Comparable> implements Comparable<C> {
 
     public boolean isBlack() {
         return cColor==0;
+    }
+
+    public boolean isRight() {
+        Node right = parent.getRight();
+        if(this != right){
+            return false;
+        }
+        return true;
     }
 
     public void setParent(Node parent) {

@@ -28,7 +28,7 @@ public class RedBlack<C extends Comparable> {
      */
     public void insert(C c) {
         // 1. 构建末节点
-        Node twig = Node.twig(c);
+        Node<C> twig = Node.twig(c);
         // 2. 获取父节点
         Node<C> parent = getParent(tree, twig);
         // 3. 重编树结构
@@ -42,15 +42,15 @@ public class RedBlack<C extends Comparable> {
      * @param parent 父节点
      * @param twig   末节点
      */
-    private void refactor(Node<C> parent, Node twig) {
+    private void refactor(Node<C> parent, Node<C> twig) {
         if (parent.isBlack()) {
             // 不用修改树结构, 直接追加到末尾
             append(parent, twig);
         } else {
             // 1. 获取祖节点
-            Node grand = parent.getParent();
+            Node<C> grand = parent.getParent();
             // 2. 获取叔节点
-            Node uncle = grand.getUncle(parent);
+            Node<C> uncle = grand.getUncle(parent);
             // 3. 调整树结构
             adjust(parent, grand, uncle);
         }
@@ -62,7 +62,7 @@ public class RedBlack<C extends Comparable> {
      * @param grand 祖节点
      * @param uncle 叔节点
      */
-    private void adjust(Node<C> parent, Node grand, Node uncle) {
+    private void adjust(Node<C> parent, Node<C> grand, Node<C> uncle) {
         // 叔父节点也是红色, 变色即可
         if (uncle == null || !uncle.isBlack()) {
             changeColor(grand, parent, uncle);
@@ -79,8 +79,9 @@ public class RedBlack<C extends Comparable> {
      * @param parent 父节点
      * @param uncle  叔节点
      */
-    private void rotate(Node grand, Node<C> parent, Node uncle) {
-
+    private void rotate(Node grand, Node<C> parent, Node<C> uncle) {
+        // 1. 判断父节点是否是右节点
+        boolean isRight = parent.isRight();
     }
 
     /**
@@ -105,7 +106,7 @@ public class RedBlack<C extends Comparable> {
         }
     }
 
-    private void append(Node<C> parent, Node twig) {
+    private void append(Node<C> parent, Node<C> twig) {
         twig.setParent(parent);
         parent.setChild(twig);
     }
