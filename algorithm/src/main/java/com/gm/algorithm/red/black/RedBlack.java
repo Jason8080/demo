@@ -38,32 +38,46 @@ public class RedBlack<C extends Comparable> {
 
     /**
      * 检查树结构
+     *
      * @param parent 父节点
-     * @param twig 末节点
+     * @param twig   末节点
      */
     private void refactor(Node<C> parent, Node twig) {
-        if(parent.isBlack()){
+        if (parent.isBlack()) {
             // 不用修改树结构, 直接追加到末尾
             append(parent, twig);
-        }else {
+        } else {
             // 1. 获取祖节点
             Node grand = parent.getParent();
             // 2. 获取叔节点
             Node uncle = grand.getUncle(parent);
-            // 3. 叔父节点也是红色, 变色即可
-            if(uncle==null || !uncle.isBlack()){
-                changeColor(grand, parent, uncle);
-            }else {
-                rotate(grand, parent, uncle);
-            }
+            // 3. 调整树结构
+            adjust(parent, grand, uncle);
+        }
+    }
+
+    /**
+     * 调整树结构
+     * @param parent 父节点 ()
+     * @param grand 祖节点
+     * @param uncle 叔节点
+     */
+    private void adjust(Node<C> parent, Node grand, Node uncle) {
+        // 叔父节点也是红色, 变色即可
+        if (uncle == null || !uncle.isBlack()) {
+            changeColor(grand, parent, uncle);
+        } else {
+            // 叔父节点是黑色
+            rotate(grand, parent, uncle);
         }
     }
 
     /**
      * 旋转
-     * @param grand 祖节点
+     *
+     * @param grand  祖节点
      * @param parent 父节点
-     * @param uncle 叔节点
+     * @param uncle  叔节点
      */
     private void rotate(Node grand, Node<C> parent, Node uncle) {
 
@@ -71,14 +85,24 @@ public class RedBlack<C extends Comparable> {
 
     /**
      * 变色
-     * @param grand 祖节点
+     *
+     * @param grand  祖节点
      * @param parent 父节点
-     * @param uncle 叔节点
+     * @param uncle  叔节点
      */
     private void changeColor(Node grand, Node<C> parent, Node uncle) {
+        // 1. 变色
         parent.blackOxide();
         uncle.blackOxide();
-        grand.redOxide();
+        // 2. 判断祖父节点
+        Node g1 = grand.getParent();
+        if (g1 != null) {
+            grand.redOxide();
+        }
+        // 3. 祖父也不是黑色, 需要继续调整
+        if(g1!=null && !g1.isBlack()){
+            adjust(grand, g1, g1.getUncle(grand));
+        }
     }
 
     private void append(Node<C> parent, Node twig) {
@@ -89,6 +113,7 @@ public class RedBlack<C extends Comparable> {
 
     /**
      * 根据新结点/末节点查找父节点
+     *
      * @param root 根节点
      * @param twig 末节点
      * @return 父节点
