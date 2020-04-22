@@ -1,6 +1,6 @@
 package com.gm.algorithm.red.black;
 
-public class Node<C extends Comparable> implements Comparable<C> {
+public class Node<C extends Comparable>{
     // 父节点
     private Node parent;
     // 普通节点
@@ -43,11 +43,11 @@ public class Node<C extends Comparable> implements Comparable<C> {
     }
 
     public boolean isRight() {
-        Node right = parent.getRight();
-        if(this != right){
-            return false;
+        Node left = parent.getLeft();
+        if(this != left){
+            return true;
         }
-        return true;
+        return false;
     }
 
     public void setParent(Node parent) {
@@ -55,7 +55,7 @@ public class Node<C extends Comparable> implements Comparable<C> {
     }
 
     public void setChild(Node twig) {
-        int i = this.compareTo((C) twig.c);
+        int i = c.compareTo((C) twig.c);
         if (i > 0){
             // 放左边
             this.setLeft(twig);
@@ -105,16 +105,14 @@ public class Node<C extends Comparable> implements Comparable<C> {
 
     @Override
     public String toString() {
+        String leftStr = left!=null?left.getC() + "(" + (left.isBlack() ? "黑" : "红") + ")":"";
+        String rightStr = right!=null?right.getC() + "(" + (right.isBlack() ? "黑" : "红") + ")":"";
         return "Node{" +
-                "left=" + left +
-                ", c=" + c +
-                ", right=" + right +
-                ", cColor=" + cColor +
+                "left=" + leftStr +
+                ", c=" + c + "(" + (isBlack() ? "黑" : "红") + ")" +
+                ", right=" + rightStr +
                 '}';
     }
 
-    @Override
-    public int compareTo(C o) {
-        return c.compareTo(o);
-    }
+
 }
