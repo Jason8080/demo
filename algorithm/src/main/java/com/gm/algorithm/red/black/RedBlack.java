@@ -11,7 +11,7 @@ public class RedBlack<C extends Comparable> {
     /**
      * 根节点
      */
-    private final Node<C> tree;
+    private Node<C> tree;
 
     /**
      * 初始化根节点
@@ -33,6 +33,19 @@ public class RedBlack<C extends Comparable> {
         Node<C> parent = getParent(tree, twig);
         // 3. 重编树结构
         refactor(parent, twig);
+        // 4. 修复根节点
+        repairRoot();
+    }
+
+    private void repairRoot() {
+        // 根节点没有父节点
+        if (tree.getParent() != null) {
+            tree.setParent(null);
+        }
+        // 根节点必须是黑色
+        if (!tree.isBlack()) {
+            tree.blackOxide();
+        }
     }
 
 
@@ -58,10 +71,11 @@ public class RedBlack<C extends Comparable> {
 
     /**
      * 调整树结构
-     * @param uncle 叔节点
-     * @param parent 父节点 ()
-     * @param grand 祖节点
-     * @param twig
+     *
+     * @param uncle  叔节点
+     * @param parent 父节点
+     * @param grand  祖节点
+     * @param twig   新节点
      */
     private void adjust(Node<C> uncle, Node<C> parent, Node<C> grand, Node<C> twig) {
         // 叔父节点也是红色, 变色即可
@@ -81,25 +95,169 @@ public class RedBlack<C extends Comparable> {
      * @param parent 父节点
      * @param uncle  叔节点
      */
-    private void rotate(Node grand, Node<C> parent, Node<C> uncle, Node<C> twig) {
+    private void rotate(Node<C> grand, Node<C> parent, Node<C> uncle, Node<C> twig) {
         // 1. 判断父节点是否是右节点
         boolean parentRight = parent.isRight();
         // 2. 判断新节点是否右节点
         boolean twigRight = twig.isRight();
         // 父右插右: 父成祖, 祖变左, 新在右 (左旋转)
+        if (parentRight && twigRight) {
+            rightRight(grand, parent, uncle, twig);
+        }
         // 父右插左: 新成祖, 祖变左, 父在右 (左旋转)
+        else if (parentRight && !twigRight) {
+            rightLeft(grand, parent, uncle, twig);
+        }
         // 父左插右: 新成祖, 祖变右, 父在左 (右旋转)
-        // 父左插左: 父成祖, 祖变右, 新在右 (右旋转)
+        else if (!parentRight && twigRight) {
+            leftRight(grand, parent, uncle, twig);
+        }
+        // 父左插左: 父成祖, 祖变右, 新在左 (右旋转)
+        else if (!parentRight && !twigRight) {
+            leftLeft(grand, parent, uncle, twig);
+        }
+        // 3. 更换根节点: 只有父节点和叔节点有可能成为根节点
+        changeRoot(parent, uncle);
+    }
+
+    private void changeRoot(Node<C>... ns) {
+        for (Node<C> n : ns) {
+            if (n.getParent() == null) {
+                tree = n;
+            }
+        }
+    }
+
+    @SuppressWarnings("all")
+    private void leftLeft(Node<C> grand, Node<C> parent, Node<C> uncle, Node<C> twig) {
+        // 父成祖
+        Node grandParent = null;
+        if(grand != null){
+            grandParent = grand.getParent();
+            if(grandParent != null){
+                grandParent.setChild(parent);
+            }
+        }
+        parent.setParent(grandParent);
+        // 祖变右
+        parent.setRight(grand);
+        grand.setParent(parent);
+        // 新在左
+        parent.setLeft(twig);
+        twig.setParent(parent);
+        // 变色
+        turnColors(parent, grand);
+        // 判断是否继续调整
+        keep(parent);
+    }
+
+    @SuppressWarnings("all")
+    private void leftRight(Node<C> grand, Node<C> parent, Node<C> uncle, Node<C> twig) {
+        // 新成祖
+        Node grandParent = null;
+        if(grand != null){
+            grandParent = grand.getParent();
+            if(grandParent != null){
+                grandParent.setChild(twig);
+            }
+        }
+        twig.setParent(grandParent);
+        // 祖变右
+        twig.setRight(grand);
+        grand.setParent(twig);
+        // 父在左
+        twig.setLeft(parent);
+        parent.setParent(twig);
+        // 变色
+        turnColors(twig, grand);
+        // 判断是否继续调整
+        keep(twig);
+    }
+
+    @SuppressWarnings("all")
+    private void rightLeft(Node<C> grand, Node<C> parent, Node<C> uncle, Node<C> twig) {
+        // 新成祖
+        Node grandParent = null;
+        if(grand != null){
+            grandParent = grand.getParent();
+            if(grandParent != null){
+                grandParent.setChild(twig);
+            }
+        }
+        twig.setParent(grandParent);
+        // 祖变左
+        twig.setLeft(grand);
+        grand.setParent(twig);
+        // 父在右
+        twig.setRight(parent);
+        parent.setParent(twig);
+        // 变色
+        turnColors(twig, grand);
+        // 判断是否继续调整
+        keep(twig);
+    }
+
+    @SuppressWarnings("all")
+    private void rightRight(Node<C> grand, Node<C> parent, Node<C> uncle, Node<C> twig) {
+        // 父成祖
+        Node grandParent = null;
+        if(grand != null){
+            grandParent = grand.getParent();
+            if(grandParent != null){
+                grandParent.setChild(parent);
+            }
+        }
+        parent.setParent(grandParent);
+        // 祖变左
+        parent.setLeft(grand);
+        grand.setParent(parent);
+        // 新在右
+        parent.setRight(twig);
+        twig.setParent(parent);
+        // 变色
+        turnColors(parent, grand);
+        // 判断是否继续调整
+        keep(parent);
+    }
+
+    /**
+     * 检查是否继续
+     *
+     * @param twig
+     */
+    private void keep(Node<C> twig) {
+        Node parent = twig.getParent();
+        Node grand = parent.getParent();
+        Node uncle = grand.getUncle(parent);
+        if (grand == null) {
+            rotate(grand, parent, uncle, twig);
+        } else {
+            adjust(uncle, parent, grand, twig);
+        }
     }
 
     /**
      * 变色
-     *  @param grand  祖节点
+     */
+    private void turnColors(Node<C>... ns) {
+        for (Node<C> n : ns) {
+            if (n.isBlack()) {
+                n.redOxide();
+            } else {
+                n.blackOxide();
+            }
+        }
+    }
+
+    /**
+     * 变色
+     *
+     * @param grand  祖节点
      * @param parent 父节点
      * @param uncle  叔节点
      * @param twig
      */
-    private void changeColor(Node grand, Node<C> parent, Node uncle, Node<C> twig) {
+    private void changeColor(Node<C> grand, Node<C> parent, Node uncle, Node<C> twig) {
         // 1. 变色
         parent.blackOxide();
         uncle.blackOxide();
@@ -109,7 +267,7 @@ public class RedBlack<C extends Comparable> {
             grand.redOxide();
         }
         // 3. 祖父也不是黑色, 需要继续调整
-        if(g1!=null && !g1.isBlack()){
+        if (g1 != null && !g1.isBlack()) {
             adjust(g1.getUncle(grand), grand, g1, twig);
         }
     }

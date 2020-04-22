@@ -8,7 +8,7 @@ public class Node<C extends Comparable> implements Comparable<C> {
     private C c;
     private Node right;
     // 颜色说明: 红1 黑0
-    private byte cColor = 1;
+    private int cColor = 1;
 
     // 构建根节点
     public static <C extends Comparable> Node root(C c) {
