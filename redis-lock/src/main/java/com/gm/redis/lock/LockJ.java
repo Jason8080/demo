@@ -13,22 +13,65 @@ import java.util.UUID;
  * @version : 1.0
  */
 public class LockJ {
+
+    private static final int seconds = 1;
+    private static final int interval = 1;
+
+    interface J<X> {
+        X exec(X x);
+    }
+
+
+    public synchronized static <X> X exec(String key, int interval, J<X> j) {
+        if (lock(key)) {
+            return j.exec(null);
+        } else {
+            try {
+                Thread.sleep(interval);
+                return exec(key, interval, j);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public synchronized static <X> X exec(String key, int interval, int count, J<X> j) {
+        if (lock(key)) {
+            return j.exec(null);
+        } else if (count > 0) {
+            try {
+                Thread.sleep(interval);
+                return exec(key, interval, count--, j);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
+    public synchronized static <X> X exec(String key, J<X> j) {
+        return exec(key, interval, j);
+    }
+
+
     private static final JedisPool jp = new JedisPool();
 
     public synchronized static String getLock() {
-        return getLock("LockJ", 10);
+        return getLock("LockJ", seconds);
     }
 
     public synchronized static boolean lock() {
-        return lock("LockJ", 10);
+        return lock("LockJ", seconds);
     }
 
     public synchronized static String getLock(String key) {
-        return getLock(key, 1);
+        return getLock(key, seconds);
     }
 
     public synchronized static boolean lock(String key) {
-        return lock(key, 1);
+        return lock(key, seconds);
     }
 
     public synchronized static boolean lock(String key, int seconds) {
@@ -38,11 +81,11 @@ public class LockJ {
 
     public synchronized static String getLock(String key, int seconds) {
         Jedis jedis = jp.getResource();
-        if (jedis.ttl(key) == -1) {
-            jedis.expire(key, seconds);
-        }
-        String uuid = UUID.randomUUID().toString();
         try {
+            if (jedis.ttl(key) == -1) {
+                jedis.expire(key, seconds);
+            }
+            String uuid = UUID.randomUUID().toString();
             if (jedis.setnx(key, uuid) == 1) {
                 jedis.expire(key, seconds);
                 return uuid;
