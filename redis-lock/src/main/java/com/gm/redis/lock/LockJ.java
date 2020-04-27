@@ -22,7 +22,7 @@ public class LockJ {
     }
 
 
-    public synchronized static <X> X exec(String key, int interval, J<X> j) {
+    public static <X> X exec(String key, int interval, J<X> j) {
         if (lock(key)) {
             return j.exec(null);
         } else {
@@ -36,7 +36,7 @@ public class LockJ {
         return null;
     }
 
-    public synchronized static <X> X exec(String key, int interval, int count, J<X> j) {
+    public static <X> X exec(String key, int interval, int count, J<X> j) {
         if (lock(key)) {
             return j.exec(null);
         } else if (count > 0) {
@@ -51,35 +51,35 @@ public class LockJ {
     }
 
 
-    public synchronized static <X> X exec(String key, J<X> j) {
+    public static <X> X exec(String key, J<X> j) {
         return exec(key, interval, j);
     }
 
 
     private static final JedisPool jp = new JedisPool();
 
-    public synchronized static String getLock() {
+    public static String getLock() {
         return getLock("LockJ", seconds);
     }
 
-    public synchronized static boolean lock() {
+    public static boolean lock() {
         return lock("LockJ", seconds);
     }
 
-    public synchronized static String getLock(String key) {
+    public static String getLock(String key) {
         return getLock(key, seconds);
     }
 
-    public synchronized static boolean lock(String key) {
+    public static boolean lock(String key) {
         return lock(key, seconds);
     }
 
-    public synchronized static boolean lock(String key, int seconds) {
+    public static boolean lock(String key, int seconds) {
         String lock = getLock(key, seconds);
         return lock != null;
     }
 
-    public synchronized static String getLock(String key, int seconds) {
+    public static String getLock(String key, int seconds) {
         Jedis jedis = jp.getResource();
         try {
             if (jedis.ttl(key) == -1) {
@@ -96,7 +96,7 @@ public class LockJ {
         return null;
     }
 
-    public synchronized static void unlock(String key) {
+    public static void unlock(String key) {
         Jedis jedis = jp.getResource();
         try {
             jedis.del(key);
@@ -105,7 +105,7 @@ public class LockJ {
         }
     }
 
-    public synchronized static boolean unlock(String key, String value) {
+    public static boolean unlock(String key, String value) {
         Jedis jedis = jp.getResource();
         try {
             String s = jedis.get(key);
