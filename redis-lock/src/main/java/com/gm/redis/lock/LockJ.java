@@ -24,7 +24,11 @@ public class LockJ {
 
     public static <X> X exec(String key, int interval, J<X> j) {
         if (lock(key)) {
-            return j.exec(null);
+            try {
+                return j.exec(null);
+            } finally {
+                unlock(key);
+            }
         } else {
             try {
                 Thread.sleep(interval);
