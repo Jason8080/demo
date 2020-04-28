@@ -15,7 +15,7 @@ public class StrReversalApplication {
     /**
      * 需求: 将一串字符串从中间分别反转
      * 举例: 123456789 -> 432159876
-     * 要求: 计算是空复杂度, 并尝试给出优化方案
+     * 要求: 计算时空复杂度, 并尝试给出优化方案
      *
      * @param args
      * @throws IOException
