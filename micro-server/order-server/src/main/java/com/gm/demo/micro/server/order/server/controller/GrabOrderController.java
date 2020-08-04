@@ -1,6 +1,6 @@
 package com.gm.demo.micro.server.order.server.controller;
 
-import com.gm.demo.micro.server.api.entity.GrabOrderParams;
+import com.gm.demo.micro.server.order.server.api.entity.GrabOrderParams;
 import com.gm.demo.micro.server.order.server.service.GrabOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

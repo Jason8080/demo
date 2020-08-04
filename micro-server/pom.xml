@@ -12,7 +12,6 @@
 
     <modules>
         <module>eureka</module>
-        <module>api</module>
         <module>order-server</module>
         <module>user-server</module>
         <module>demand-server</module>

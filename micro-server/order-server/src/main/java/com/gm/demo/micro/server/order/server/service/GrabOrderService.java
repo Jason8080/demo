@@ -1,6 +1,7 @@
 package com.gm.demo.micro.server.order.server.service;
 
-import com.gm.demo.micro.server.api.entity.GrabOrderParams;
+
+import com.gm.demo.micro.server.order.server.api.entity.GrabOrderParams;
 
 /**
  * The interface Grab order service.
