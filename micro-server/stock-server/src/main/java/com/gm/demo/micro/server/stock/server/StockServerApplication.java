@@ -1,4 +1,4 @@
-package com.gm.demo.micro.server.order.server;
+package com.gm.demo.micro.server.stock.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,8 +11,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients
 @SpringBootApplication
-public class OrderServerApplication {
+public class StockServerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(OrderServerApplication.class, args);
+        SpringApplication.run(StockServerApplication.class, args);
     }
 }
