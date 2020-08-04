@@ -2,8 +2,7 @@ package com.gm.demo.micro.server.order.server.service;
 
 import com.gm.demo.micro.server.api.entity.GrabOrderParams;
 import com.gm.demo.micro.server.api.entity.StockParams;
-import com.gm.demo.micro.server.api.order.GrabOrderApi;
-import com.gm.demo.micro.server.api.stock.StockApi;
+import com.gm.demo.micro.server.order.server.api.StockApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
