@@ -16,6 +16,7 @@
         <module>user-server</module>
         <module>demand-server</module>
         <module>stock-server</module>
+        <module>api</module>
     </modules>
 
     <properties>

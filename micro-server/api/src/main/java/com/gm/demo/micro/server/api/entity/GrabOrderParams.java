@@ -1,4 +1,4 @@
-package com.gm.demo.micro.server.order.server.api.entity;
+package com.gm.demo.micro.server.api.entity;
 
 import java.io.Serializable;
 

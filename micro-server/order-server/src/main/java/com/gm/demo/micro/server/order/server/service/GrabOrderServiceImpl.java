@@ -1,8 +1,8 @@
 package com.gm.demo.micro.server.order.server.service;
 
-import com.gm.demo.micro.server.order.server.api.entity.GrabOrderParams;
-import com.gm.demo.micro.server.order.server.api.entity.StockParams;
-import com.gm.demo.micro.server.order.server.api.StockApi;
+import com.gm.demo.micro.server.api.entity.GrabOrderParams;
+import com.gm.demo.micro.server.api.entity.StockParams;
+import com.gm.demo.micro.server.api.stock.StockApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +16,7 @@ public class GrabOrderServiceImpl implements GrabOrderService {
 
     @Autowired
     StockApi stockApi;
+
 
     @Override
     public String grabOrder(GrabOrderParams gop) {

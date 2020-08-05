@@ -1,7 +1,7 @@
-package com.gm.demo.micro.server.demand.server.api;
+package com.gm.demo.micro.server.api.order;
 
-import com.gm.demo.micro.server.demand.server.api.entity.GrabOrderParams;
-import com.gm.demo.micro.server.demand.server.api.fallback.ApiFallback;
+import com.gm.demo.micro.server.api.entity.GrabOrderParams;
+import com.gm.demo.micro.server.api.fallback.ApiFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

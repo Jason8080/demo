@@ -1,7 +1,7 @@
 package com.gm.demo.micro.server.demand.server.service;
 
-import com.gm.demo.micro.server.demand.server.api.entity.GrabOrderParams;
-import com.gm.demo.micro.server.demand.server.api.GrabOrderApi;
+import com.gm.demo.micro.server.api.entity.GrabOrderParams;
+import com.gm.demo.micro.server.api.order.GrabOrderApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

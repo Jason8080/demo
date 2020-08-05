@@ -12,6 +12,11 @@
     <artifactId>demand-server</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.gm.demo</groupId>
+            <artifactId>api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -1,6 +1,6 @@
 package com.gm.demo.micro.server.demand.server.service;
 
-import com.gm.demo.micro.server.demand.server.api.entity.GrabOrderParams;
+import com.gm.demo.micro.server.api.entity.GrabOrderParams;
 
 /**
  * The interface Demand service.

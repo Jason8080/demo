@@ -10,9 +10,9 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Jason
  */
 @EnableDiscoveryClient
-@EnableFeignClients
 @SpringBootApplication
-@ComponentScan(basePackages = "com.gm.demo.micro.server")
+@EnableFeignClients(basePackages = {"com.gm.demo.micro.server.api"})
+@ComponentScan(basePackages = {"com.gm.demo.micro.server"})
 public class DemandServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemandServerApplication.class, args);
