@@ -17,6 +17,7 @@
         <module>demand-server</module>
         <module>stock-server</module>
         <module>api</module>
+        <module>gateway</module>
     </modules>
 
     <properties>
