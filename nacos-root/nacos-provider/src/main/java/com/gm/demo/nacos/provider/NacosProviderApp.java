@@ -1,5 +1,6 @@
 package com.gm.demo.nacos.provider;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -15,7 +16,8 @@ public class NacosProviderApp {
     }
 
 
-    @GetMapping("/hello")
+    @GetMapping("hello")
+    @SentinelResource("hello")
     public String hello(){
         System.out.println("计数器+1");
         return "Hello，nacos！";

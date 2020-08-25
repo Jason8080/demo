@@ -1,5 +1,6 @@
 package com.gm.demo.nacos.consumer;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.gm.demo.nacos.server.api.HelloApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -30,7 +31,8 @@ public class NacosConsumerApp {
         return new RestTemplate();
     }
 
-    @GetMapping("/test")
+    @GetMapping("test")
+    @SentinelResource("test")
     public String test() {
         return helloApi.hello();
     }
