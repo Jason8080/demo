@@ -19,6 +19,6 @@ public interface HelloApi {
             method = RequestMethod.GET,
             consumes = MediaType.APPLICATION_JSON
     )
-    String hello() ;
+    Object hello() ;
 }
 

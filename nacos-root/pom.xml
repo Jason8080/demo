@@ -15,6 +15,7 @@
         <module>api</module>
         <module>monitor</module>
         <module>gateway</module>
+        <module>common</module>
     </modules>
 
     <properties>
@@ -23,6 +24,8 @@
         <cloud.alibaba>2.2.1.RELEASE</cloud.alibaba>
         <monitor.version>2.2.1</monitor.version>
         <zipkin.version>2.12.9</zipkin.version>
+        <seata.version>1.2.0</seata.version>
+        <mybatis-plus.version>3.2.0</mybatis-plus.version>
     </properties>
 
     <dependencyManagement>
