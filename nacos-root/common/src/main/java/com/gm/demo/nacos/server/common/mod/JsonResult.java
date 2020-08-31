@@ -22,7 +22,7 @@ public class JsonResult<T> implements Serializable {
     /**
      * 操作成功.
      */
-    public static final JsonResult SUCCESS = new JsonResult(200, "操作成功");
+    public static final JsonResult OK = new JsonResult(200, "操作成功");
 
 
     private final Integer code;
@@ -46,7 +46,7 @@ public class JsonResult<T> implements Serializable {
     }
 
     public static JsonResult ok(){
-        return SUCCESS;
+        return OK;
     }
 
     public static JsonResult fail(){
