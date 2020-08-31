@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @EnableDiscoveryClient
 @ComponentScan("com.gm.demo.nacos.server")
-@PropertySource({"classpath:application.properties", "classpath:common.properties"})
+@PropertySource({
+        "classpath:application.properties",
+        "classpath:common.properties"
+})
 public class NacosProviderApp {
     public static void main(String[] args) {
         SpringApplication.run(NacosProviderApp.class, args);

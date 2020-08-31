@@ -26,6 +26,7 @@
         <zipkin.version>2.12.9</zipkin.version>
         <seata.version>1.2.0</seata.version>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
+        <redis.version>3.3.0</redis.version>
     </properties>
 
     <dependencyManagement>
@@ -50,6 +51,11 @@
                 <version>${cloud.alibaba}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-redis</artifactId>
+                <version></version>
             </dependency>
         </dependencies>
     </dependencyManagement>

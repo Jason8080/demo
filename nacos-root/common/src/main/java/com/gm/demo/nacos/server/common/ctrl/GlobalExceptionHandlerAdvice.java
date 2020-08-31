@@ -29,7 +29,7 @@ public class GlobalExceptionHandlerAdvice {
      * @return
      */
     @ExceptionHandler(Throwable.class)
-    public Object throwable(HttpServletRequest request, Throwable throwable){
+    public Object throwable(HttpServletRequest request, Throwable throwable) {
         return throwable.getMessage();
     }
 
@@ -41,13 +41,13 @@ public class GlobalExceptionHandlerAdvice {
      * @return
      */
     @ExceptionHandler(ConstraintViolationException.class)
-    public Object validateException(HttpServletRequest request, ConstraintViolationException ex){
+    public Object validateException(HttpServletRequest request, ConstraintViolationException ex) {
         StringBuilder sb = new StringBuilder();
-        for (ConstraintViolation cv : ex.getConstraintViolations()){
+        for (ConstraintViolation cv : ex.getConstraintViolations()) {
             sb.append(cv.getMessage());
             sb.append(";");
         }
-        return sb.toString();
+        return sb.substring(0, sb.length() - 1);
     }
 
 
@@ -62,7 +62,7 @@ public class GlobalExceptionHandlerAdvice {
             ServletRequestBindingException.class, // SpringMVC注解绑定异常
             IllegalStateException.class // 非法参数绑定异常
     })
-    public Object validateException(HttpServletRequest request, Exception ex){
+    public Object validateException(HttpServletRequest request, Exception ex) {
         return "绑定异常";
     }
 
@@ -74,7 +74,7 @@ public class GlobalExceptionHandlerAdvice {
      * @return
      */
     @ExceptionHandler(TypeMismatchException.class)
-    public Object validateException(HttpServletRequest request, TypeMismatchException ex){
+    public Object validateException(HttpServletRequest request, TypeMismatchException ex) {
         return "参数异常";
     }
 
@@ -86,7 +86,7 @@ public class GlobalExceptionHandlerAdvice {
      * @return
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public Object validateException(HttpServletRequest request, HttpRequestMethodNotSupportedException ex){
+    public Object validateException(HttpServletRequest request, HttpRequestMethodNotSupportedException ex) {
         return "方法异常";
     }
 }
