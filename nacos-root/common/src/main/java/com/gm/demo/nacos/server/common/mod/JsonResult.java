@@ -1,9 +1,9 @@
 package com.gm.demo.nacos.server.common.mod;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Map;
 
 /**
  * Json响应对象
@@ -13,6 +13,7 @@ import java.util.Map;
  * @param <T> 响应对象泛型
  * @author Jason
  */
+@Data
 public class JsonResult<T> implements Serializable {
     /**
      * 操作失败.
