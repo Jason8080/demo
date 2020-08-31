@@ -1,5 +1,10 @@
 package com.gm.demo.nacos.server.common.config.mp;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.support.http.StatViewServlet;
+import com.alibaba.druid.support.http.WebStatFilter;
+import com.alibaba.druid.wall.WallConfig;
+import com.alibaba.druid.wall.WallFilter;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
@@ -10,10 +15,15 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy;
@@ -36,12 +46,12 @@ public class MyBatisPlusConfig {
     @Bean(name = "master")
     @ConfigurationProperties(prefix = "spring.datasource.hikari.master")
     public DataSource master() {
-        return DataSourceBuilder.create().build();
+        return DataSourceBuilder.create().type(DruidDataSource.class).build();
     }
     @Bean(name = "slave")
     @ConfigurationProperties(prefix = "spring.datasource.hikari.slave")
     public DataSource slave() {
-        return DataSourceBuilder.create().build();
+        return DataSourceBuilder.create().type(DruidDataSource.class).build();
     }
     @Bean(name = "dynamicDataSource")
     public DynamicDataSource dataSource(@Qualifier("master") DataSource master,
@@ -56,6 +66,7 @@ public class MyBatisPlusConfig {
  
  
     @Bean
+    @ConditionalOnClass(value = {PaginationInterceptor.class})
     public PaginationInterceptor paginationInterceptor() {
         return new PaginationInterceptor();
     }
@@ -84,6 +95,7 @@ public class MyBatisPlusConfig {
         sqlSessionFactory.setPlugins(interceptor);
         return sqlSessionFactory.getObject();
     }
+
  
     /**
      * 配置事务管理器
@@ -92,5 +104,5 @@ public class MyBatisPlusConfig {
     public DataSourceTransactionManager transactionManager(DynamicDataSource dataSource) throws Exception {
         return new DataSourceTransactionManager(dataSource);
     }
- 
+
 }
