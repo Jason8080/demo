@@ -1,7 +1,6 @@
 package com.gm.demo.nacos.server.provider;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.gm.demo.nacos.server.api.HelloApi;
 import com.gm.demo.nacos.server.common.mod.JsonResult;
 import com.gm.demo.nacos.server.common.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -20,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = {"com.gm.demo.nacos.server.api"})
+@EnableFeignClients(basePackages = {"com.gm.demo.nacos.server.provider"})
 @ComponentScan("com.gm.demo.nacos.server")
 public class NacosConsumerApp {
     public static void main(String[] args) {

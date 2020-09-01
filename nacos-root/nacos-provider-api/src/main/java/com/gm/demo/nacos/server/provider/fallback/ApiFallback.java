@@ -1,6 +1,6 @@
-package com.gm.demo.nacos.server.api.fallback;
+package com.gm.demo.nacos.server.provider.fallback;
 
-import com.gm.demo.nacos.server.api.HelloApi;
+import com.gm.demo.nacos.server.provider.HelloApi;
 import org.springframework.stereotype.Component;
 
 @Component

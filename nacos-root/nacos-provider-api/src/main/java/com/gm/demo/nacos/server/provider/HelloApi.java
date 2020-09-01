@@ -1,6 +1,6 @@
-package com.gm.demo.nacos.server.api;
+package com.gm.demo.nacos.server.provider;
 
-import com.gm.demo.nacos.server.api.fallback.ApiFallback;
+import com.gm.demo.nacos.server.provider.fallback.ApiFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
