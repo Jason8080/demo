@@ -1,6 +1,5 @@
 package com.gm.demo.nacos.server.common.mod;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -28,12 +27,15 @@ public class JsonResult<T> implements Serializable {
     /**
      * 原则上, 所有字段不可更改
      */
-    private Integer code;
-    private String msg;
-    private Long time = System.currentTimeMillis();
-    private T data;
+    private final Integer code;
+    private final String msg;
+    private final Long time = System.currentTimeMillis();
+    private final T data;
 
     public JsonResult() {
+        this.code = OK.code;
+        this.msg = OK.msg;
+        this.data = null;
     }
 
     public JsonResult(Integer code, String msg, T data) {

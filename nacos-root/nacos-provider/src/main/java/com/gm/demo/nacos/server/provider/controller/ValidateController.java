@@ -1,6 +1,6 @@
 package com.gm.demo.nacos.server.provider.controller;
 
-import com.gm.demo.nacos.server.common.ctrl.AuthorController;
+import com.gm.demo.nacos.server.common.global.AuthorController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

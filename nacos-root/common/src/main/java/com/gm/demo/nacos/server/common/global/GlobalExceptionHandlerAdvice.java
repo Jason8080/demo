@@ -1,5 +1,6 @@
-package com.gm.demo.nacos.server.common.ctrl;
+package com.gm.demo.nacos.server.common.global;
 
+import com.gm.demo.nacos.server.common.mod.JsonResult;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -28,9 +29,9 @@ public class GlobalExceptionHandlerAdvice {
      * @param throwable
      * @return
      */
-    @ExceptionHandler(Throwable.class)
-    public Object throwable(HttpServletRequest request, Throwable throwable) {
-        return throwable.getMessage();
+    @ExceptionHandler({Exception.class, Throwable.class})
+    public JsonResult throwable(HttpServletRequest request, Throwable throwable) {
+        return JsonResult.FAIL.newly(throwable.getMessage());
     }
 
     /**
@@ -41,13 +42,13 @@ public class GlobalExceptionHandlerAdvice {
      * @return
      */
     @ExceptionHandler(ConstraintViolationException.class)
-    public Object validateException(HttpServletRequest request, ConstraintViolationException ex) {
+    public JsonResult validateException(HttpServletRequest request, ConstraintViolationException ex) {
         StringBuilder sb = new StringBuilder();
         for (ConstraintViolation cv : ex.getConstraintViolations()) {
             sb.append(cv.getMessage());
             sb.append(";");
         }
-        return sb.substring(0, sb.length() - 1);
+        return JsonResult.FAIL.newly(sb.substring(0, sb.length() - 1));
     }
 
 
@@ -62,8 +63,8 @@ public class GlobalExceptionHandlerAdvice {
             ServletRequestBindingException.class, // SpringMVC注解绑定异常
             IllegalStateException.class // 非法参数绑定异常
     })
-    public Object validateException(HttpServletRequest request, Exception ex) {
-        return "绑定异常";
+    public JsonResult validateException(HttpServletRequest request, Exception ex) {
+        return JsonResult.FAIL.newly("请求参数异常");
     }
 
     /**
@@ -74,8 +75,8 @@ public class GlobalExceptionHandlerAdvice {
      * @return
      */
     @ExceptionHandler(TypeMismatchException.class)
-    public Object validateException(HttpServletRequest request, TypeMismatchException ex) {
-        return "参数异常";
+    public JsonResult validateException(HttpServletRequest request, TypeMismatchException ex) {
+        return JsonResult.FAIL.newly("不支持的参数类型");
     }
 
     /**
@@ -86,7 +87,7 @@ public class GlobalExceptionHandlerAdvice {
      * @return
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public Object validateException(HttpServletRequest request, HttpRequestMethodNotSupportedException ex) {
-        return "方法异常";
+    public JsonResult validateException(HttpServletRequest request, HttpRequestMethodNotSupportedException ex) {
+        return JsonResult.FAIL.newly("不支持的请求方式");
     }
 }

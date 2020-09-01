@@ -1,4 +1,4 @@
-package com.gm.demo.nacos.server.common.ctrl;
+package com.gm.demo.nacos.server.common.global;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
