@@ -25,13 +25,16 @@ public class JsonResult<T> implements Serializable {
     public static final JsonResult OK = new JsonResult(200, "操作成功");
 
 
-    private final Integer code;
-    private final String msg;
-    // Map<String, Object> T
-    private final T data;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private final Long time = System.currentTimeMillis();
+    /**
+     * 原则上, 所有字段不可更改
+     */
+    private Integer code;
+    private String msg;
+    private Long time = System.currentTimeMillis();
+    private T data;
 
+    public JsonResult() {
+    }
 
     public JsonResult(Integer code, String msg, T data) {
         this.code = code;

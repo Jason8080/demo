@@ -5,7 +5,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ApiFallback implements HelloApi {
+    @Override
     public String hello() {
+        return "不好意思, 熔断咯..";
+    }
+
+    @Override
+    public Object helloPage() {
         return "不好意思, 熔断咯..";
     }
 }

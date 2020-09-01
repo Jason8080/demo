@@ -1,7 +1,10 @@
 package com.gm.demo.nacos.server.provider;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.gm.demo.nacos.server.common.config.redis.RedisLock;
+import com.gm.demo.nacos.server.common.mod.JsonResult;
+import com.gm.demo.nacos.server.provider.mapper.entity.User;
 import com.gm.demo.nacos.server.provider.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -32,20 +35,20 @@ public class NacosProviderApp {
 
     @GetMapping("helloPage")
     @SentinelResource("helloPage")
-    public Object helloPage() throws InterruptedException {
+    public JsonResult<IPage<User>> helloPage() throws InterruptedException {
         if(redisLock.lock("HELLO_PAGE")) {
             Thread.sleep(200);
             System.out.println("计数器+1");
         }else {
             System.out.println("没拿到哦...");
         }
-        return userService.selectPage();
+        return JsonResult.OK.newly(userService.selectPage());
     }
 
     @GetMapping("hello")
     @SentinelResource("hello")
-    public Object hello(){
+    public JsonResult<IPage<User>> hello(){
         System.out.println("计数器+1");
-        return userService.selectList();
+        return JsonResult.OK.newly(userService.selectList());
     }
 }

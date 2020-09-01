@@ -20,5 +20,11 @@ public interface HelloApi {
             consumes = MediaType.APPLICATION_JSON
     )
     Object hello() ;
+    @RequestMapping(
+            value = "helloPage",
+            method = RequestMethod.GET,
+            consumes = MediaType.APPLICATION_JSON
+    )
+    Object helloPage() ;
 }
 
