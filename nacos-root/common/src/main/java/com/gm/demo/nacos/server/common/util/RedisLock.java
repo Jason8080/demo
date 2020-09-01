@@ -1,4 +1,4 @@
-package com.gm.demo.nacos.server.common.config.redis;
+package com.gm.demo.nacos.server.common.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -9,7 +9,9 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -18,7 +20,7 @@ import javax.validation.ConstraintViolationException;
  * 全局异常处理
  *
  * @author Timi.lee
- * @date 2020/8/28 (周五)
+ * @date 2020 /8/28 (周五)
  */
 @Component
 @RestControllerAdvice
@@ -29,9 +31,9 @@ public class GlobalExceptionHandlerAdvice {
     /**
      * 未知异常
      *
-     * @param request
-     * @param throwable
-     * @return
+     * @param request   the request
+     * @param throwable the throwable
+     * @return json result
      */
     @ExceptionHandler({Exception.class, Throwable.class})
     public JsonResult throwable(HttpServletRequest request, Throwable throwable) {
@@ -42,9 +44,9 @@ public class GlobalExceptionHandlerAdvice {
     /**
      * 数据效验异常
      *
-     * @param request
-     * @param ex
-     * @return
+     * @param request the request
+     * @param ex      the ex
+     * @return json result
      */
     @ExceptionHandler(ConstraintViolationException.class)
     public JsonResult validateException(HttpServletRequest request, ConstraintViolationException ex) {
@@ -61,9 +63,9 @@ public class GlobalExceptionHandlerAdvice {
     /**
      * 数据绑定异常
      *
-     * @param request
-     * @param ex
-     * @return
+     * @param request the request
+     * @param ex      the ex
+     * @return json result
      */
     @ExceptionHandler({
             ServletRequestBindingException.class, // SpringMVC注解绑定异常
@@ -77,9 +79,9 @@ public class GlobalExceptionHandlerAdvice {
     /**
      * 参数类型异常
      *
-     * @param request
-     * @param ex
-     * @return
+     * @param request the request
+     * @param ex      the ex
+     * @return json result
      */
     @ExceptionHandler(TypeMismatchException.class)
     public JsonResult validateException(HttpServletRequest request, TypeMismatchException ex) {
@@ -90,12 +92,12 @@ public class GlobalExceptionHandlerAdvice {
     /**
      * 不支持的请求异常
      *
-     * @param request
-     * @param ex
-     * @return
+     * @param request the request
+     * @param ex      the ex
+     * @return json result
      */
-    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public JsonResult validateException(HttpServletRequest request, HttpRequestMethodNotSupportedException ex) {
+    @ExceptionHandler({HttpRequestMethodNotSupportedException.class,NoHandlerFoundException.class})
+    public JsonResult validateException(HttpServletRequest request, ServletException ex) {
         logger.debug("已捕捉: 不支持的请求异常", ex);
         return JsonResult.FAIL.newly("不支持的请求方式");
     }

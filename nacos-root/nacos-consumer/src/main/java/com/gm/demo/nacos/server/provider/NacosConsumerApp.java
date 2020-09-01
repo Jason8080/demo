@@ -22,7 +22,6 @@ import org.springframework.web.client.RestTemplate;
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = {"com.gm.demo.nacos.server.api"})
 @ComponentScan("com.gm.demo.nacos.server")
-@PropertySource({"classpath:application.properties", "classpath:common.properties"})
 public class NacosConsumerApp {
     public static void main(String[] args) {
         SpringApplication.run(NacosConsumerApp.class, args);

@@ -2,7 +2,7 @@ package com.gm.demo.nacos.server.provider;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.gm.demo.nacos.server.common.config.redis.RedisLock;
+import com.gm.demo.nacos.server.common.util.RedisLock;
 import com.gm.demo.nacos.server.common.mod.JsonResult;
 import com.gm.demo.nacos.server.provider.mapper.entity.User;
 import com.gm.demo.nacos.server.provider.service.UserService;
@@ -19,10 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @EnableDiscoveryClient
 @ComponentScan("com.gm.demo.nacos.server")
-@PropertySource({
-        "classpath:application.properties",
-        "classpath:common.properties"
-})
 public class NacosProviderApp {
     public static void main(String[] args) {
         SpringApplication.run(NacosProviderApp.class, args);
@@ -49,7 +45,6 @@ public class NacosProviderApp {
     @SentinelResource("hello")
     public JsonResult<IPage<User>> hello(){
         System.out.println("计数器+1");
-        if(true) throw new RuntimeException("666");
         return JsonResult.OK.newly(userService.selectList());
     }
 }
