@@ -27,4 +27,10 @@ public class UserService {
         IPage iPage = userMapper.selectPage(page, null);
         return iPage.getRecords();
     }
+
+    @ReadOnly
+    public IPage<User> selectPage(){
+        Page page = new Page(1, 2);
+        return userMapper.selectPage(page, null);
+    }
 }

@@ -1,6 +1,7 @@
 package com.gm.demo.nacos.server.provider;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.gm.demo.nacos.server.common.config.redis.RedisLock;
 import com.gm.demo.nacos.server.provider.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -26,6 +27,20 @@ public class NacosProviderApp {
 
     @Autowired
     UserService userService;
+    @Autowired
+    RedisLock redisLock;
+
+    @GetMapping("helloPage")
+    @SentinelResource("helloPage")
+    public Object helloPage() throws InterruptedException {
+        if(redisLock.lock("HELLO_PAGE")) {
+            Thread.sleep(200);
+            System.out.println("计数器+1");
+        }else {
+            System.out.println("没拿到哦...");
+        }
+        return userService.selectPage();
+    }
 
     @GetMapping("hello")
     @SentinelResource("hello")
