@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="true">
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+<configuration debug="false">
+    <!-- 控制台 appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
             <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %highlight([%-5level] %logger{50} - %msg%n)</pattern>
-            <charset>UTF-8</charset>
+            <!--<charset class="java.nio.charset.Charset">UTF-8</charset>-->
         </encoder>
     </appender>
     <include resource="logback-${spring.profiles.active}.xml"/>

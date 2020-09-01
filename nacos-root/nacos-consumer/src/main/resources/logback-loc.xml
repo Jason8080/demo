@@ -2,6 +2,6 @@
 <included>
     <!-- 开发环境下的日志配置 -->
     <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="STDOUT"/>
     </root>
 </included>

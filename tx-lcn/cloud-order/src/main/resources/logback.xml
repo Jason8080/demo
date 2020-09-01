@@ -13,7 +13,7 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>${ENCODER_PATTERN}</Pattern>
-            <charset>UTF-8</charset>
+             <!--<charset class="java.nio.charset.Charset">UTF-8</charset>-->
         </encoder>
     </appender>
 
@@ -26,7 +26,7 @@
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${ENCODER_PATTERN}</pattern>
-            <charset>UTF-8</charset>
+             <!--<charset class="java.nio.charset.Charset">UTF-8</charset>-->
         </encoder>
     </appender>
 
@@ -39,7 +39,7 @@
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${ENCODER_PATTERN}</pattern>
-            <charset>UTF-8</charset>
+             <!--<charset class="java.nio.charset.Charset">UTF-8</charset>-->
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
@@ -54,7 +54,7 @@
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${ENCODER_PATTERN}</pattern>
-            <charset>UTF-8</charset>
+             <!--<charset class="java.nio.charset.Charset">UTF-8</charset>-->
         </encoder>
     </appender>
 
@@ -62,7 +62,7 @@
     <logger name="com.codingapi" level="debug" additivity="true"/>
 
     <root level="error">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE" />
         <appender-ref ref="ERROR_FILE" />
     </root>

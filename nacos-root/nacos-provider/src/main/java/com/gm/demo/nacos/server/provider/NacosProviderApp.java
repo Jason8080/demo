@@ -6,6 +6,8 @@ import com.gm.demo.nacos.server.common.util.RedisLock;
 import com.gm.demo.nacos.server.common.mod.JsonResult;
 import com.gm.demo.nacos.server.provider.mapper.entity.User;
 import com.gm.demo.nacos.server.provider.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,6 +26,8 @@ public class NacosProviderApp {
         SpringApplication.run(NacosProviderApp.class, args);
     }
 
+    private Logger log = LoggerFactory.getLogger(NacosProviderApp.class);
+
     @Autowired
     UserService userService;
     @Autowired
@@ -34,9 +38,9 @@ public class NacosProviderApp {
     public JsonResult<IPage<User>> helloPage() throws InterruptedException {
         if(redisLock.lock("HELLO_PAGE")) {
             Thread.sleep(200);
-            System.out.println("计数器+1");
+            log.info("计数器+1");
         }else {
-            System.out.println("没拿到哦...");
+            log.info("没拿到哦...");
         }
         return JsonResult.OK.newly(userService.selectPage());
     }
@@ -44,7 +48,7 @@ public class NacosProviderApp {
     @GetMapping("hello")
     @SentinelResource("hello")
     public JsonResult<IPage<User>> hello(){
-        System.out.println("计数器+1");
+        log.error("计数器-1");
         return JsonResult.OK.newly(userService.selectList());
     }
 }
