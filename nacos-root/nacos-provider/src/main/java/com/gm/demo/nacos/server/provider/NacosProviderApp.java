@@ -49,6 +49,7 @@ public class NacosProviderApp {
     @SentinelResource("hello")
     public JsonResult<IPage<User>> hello(){
         System.out.println("计数器+1");
+        if(true) throw new RuntimeException("666");
         return JsonResult.OK.newly(userService.selectList());
     }
 }
