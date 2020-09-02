@@ -38,13 +38,8 @@ public class NacosProviderApp {
     @SentinelResource("helloPage")
     public JsonResult<IPage<User>> helloPage() throws InterruptedException {
         if(redisLock.lock("HELLO_PAGE")) {
-            try {
-                Thread.sleep(200);
-                log.info("计数器+1");
-            } finally {
-                // 不删自动过期
-                redisLock.unlock("HELLO_PAGE");
-            }
+            Thread.sleep(200);
+            log.info("计数器+1");
         }else {
             log.info("没拿到哦...");
         }

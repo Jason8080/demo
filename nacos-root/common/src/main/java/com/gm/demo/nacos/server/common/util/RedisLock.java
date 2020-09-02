@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 /**
@@ -42,23 +43,23 @@ public class RedisLock {
      * @param key key值
      * @return 是否获取到 boolean
      */
-    public synchronized boolean lock(String key){
+    public boolean lock(String key){
         String lock = lockPrefix + key;
         // 利用lambda表达式
         return (Boolean) redisTemplate.execute((RedisCallback) connection -> {
- 
+
             long expireAt = System.currentTimeMillis() + lockExpire + 1;
 
             if (connection.setNX(lock.getBytes(), String.valueOf(expireAt).getBytes())) {
                 return true;
             } else {
- 
+
                 byte[] value = connection.get(lock.getBytes());
 
                 if (Objects.nonNull(value) && value.length > 0) {
- 
+
                     long expireTime = Long.parseLong(new String(value));
- 
+
                     if (expireTime < System.currentTimeMillis()) {
                         // 如果锁已经过期
                         byte[] oldValue = connection.getSet(lock.getBytes(), String.valueOf(System.currentTimeMillis() + lockExpire + 1).getBytes());
@@ -75,16 +76,28 @@ public class RedisLock {
      * 解锁 (删除)
      *
      * @param key the key
+     * @return
      */
-    public void unlock(String key) {
-        redisTemplate.delete(key);
+    public void unlock(String key, String val) {
+        String lock = lockPrefix + key;
+        redisTemplate.execute((RedisCallback) connection -> {
+            byte[] bytes = connection.get(lock.getBytes());
+            if(Objects.nonNull(bytes) && bytes.length > 0) {
+                // 防止解别人的锁
+                String old = new String(bytes);
+                if(old.equals(val)) {
+                    connection.del(lock.getBytes());
+                    return true;
+                }
+            }
+            return false;
+        });
     }
 
-
-    private boolean setNX(String key){
+    private boolean setNX(String key, String val){
         String lock = lockPrefix + key;
         return (Boolean) redisTemplate.execute((RedisCallback) connection
-                -> connection.setNX(lock.getBytes(), new byte[0]));
+                -> connection.setNX(lock.getBytes(), val.getBytes()));
     }
 
     /**
@@ -93,12 +106,13 @@ public class RedisLock {
      * @param key the key
      * @param run the run
      */
-    public synchronized void lock(String key, Runnable run){
-        if(setNX(key)){
+    public void lock(String key, Runnable run){
+        String val = UUID.randomUUID().toString();
+        if(setNX(key, val)){
             try {
                 run.run();
             } finally {
-                unlock(key);
+                unlock(key, val);
             }
         }
     }
@@ -111,12 +125,13 @@ public class RedisLock {
      * @param run the run
      * @return the t
      */
-    public synchronized <T> T lock(String key, Supplier<T> run){
-        if(setNX(key)){
+    public <T> T lock(String key, Supplier<T> run){
+        String val = UUID.randomUUID().toString();
+        if(setNX(key, val)){
             try {
                 return run.get();
             } finally {
-                unlock(key);
+                unlock(key, val);
             }
         }
         return null;
