@@ -6,6 +6,7 @@ import com.gm.demo.nacos.server.common.util.RedisLock;
 import com.gm.demo.nacos.server.common.mod.JsonResult;
 import com.gm.demo.nacos.server.provider.mapper.entity.User;
 import com.gm.demo.nacos.server.provider.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class NacosProviderApp {
     RedisLock redisLock;
 
     @GetMapping("helloPage")
+    @ApiOperation("访问分页数据")
     @SentinelResource("helloPage")
     public JsonResult<IPage<User>> helloPage() throws InterruptedException {
         if(redisLock.lock("HELLO_PAGE")) {
@@ -45,6 +47,7 @@ public class NacosProviderApp {
     }
 
     @GetMapping("hello")
+    @ApiOperation("访问数据")
     @SentinelResource("hello")
     public JsonResult<IPage<User>> hello(){
         log.error("计数器-1");

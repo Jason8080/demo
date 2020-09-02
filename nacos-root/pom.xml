@@ -20,6 +20,9 @@
         <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
         <spring-boot.version>2.3.2.RELEASE</spring-boot.version>
         <cloud.alibaba>2.2.1.RELEASE</cloud.alibaba>
+        <feign.version>1.4.7.RELEASE</feign.version>
+        <jaxrs.version>3.0.12.Final</jaxrs.version>
+        <swagger.version>3.0.0</swagger.version>
         <monitor.version>2.2.1</monitor.version>
         <zipkin.version>2.12.9</zipkin.version>
         <seata.version>1.2.0</seata.version>

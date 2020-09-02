@@ -3,6 +3,7 @@ package com.gm.demo.nacos.server.provider;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.gm.demo.nacos.server.common.mod.JsonResult;
 import com.gm.demo.nacos.server.common.util.JsonUtil;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,12 +37,14 @@ public class NacosConsumerApp {
 
     @GetMapping("testPage")
     @SentinelResource("testPage")
+    @ApiOperation("测试分页数据")
     public JsonResult testPage() {
         return JsonUtil.o2o(helloApi.helloPage(), JsonResult.class);
     }
 
     @GetMapping("test")
     @SentinelResource("test")
+    @ApiOperation("测试数据")
     public JsonResult test() {
         return JsonUtil.o2o(helloApi.hello(), JsonResult.class);
     }
