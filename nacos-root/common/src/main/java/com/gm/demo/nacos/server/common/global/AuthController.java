@@ -33,9 +33,11 @@ public class AuthController {
 
     @ModelAttribute
     public void preHandler(
-            @NotNull(message = "请先登陆")
             @RequestHeader(value = "token", required = false) String token
     ){
+        if(StringUtils.isEmpty(token)){
+            throw new SkillException("请先登录", 502);
+        }
         ServletRequestAttributes sra = (ServletRequestAttributes)
                 // RequestContextHolder:
                 //  配合@ModelAttribute使用, 避免Service另起线程Request空异常风险
