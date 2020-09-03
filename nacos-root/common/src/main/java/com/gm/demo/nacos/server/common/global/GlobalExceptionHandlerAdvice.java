@@ -1,5 +1,6 @@
 package com.gm.demo.nacos.server.common.global;
 
+import com.gm.demo.nacos.server.common.ex.SkillException;
 import com.gm.demo.nacos.server.common.mod.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,20 @@ public class GlobalExceptionHandlerAdvice {
     @ExceptionHandler({Exception.class, Throwable.class})
     public JsonResult throwable(HttpServletRequest request, Throwable throwable) {
         logger.error("已捕捉: 未知异常", throwable);
+        return JsonResult.FAIL.newly(throwable.getMessage());
+    }
+
+
+    /**
+     * 认证异常.
+     *
+     * @param request   the request
+     * @param throwable the throwable
+     * @return the json result
+     */
+    @ExceptionHandler({SkillException.class})
+    public JsonResult skillException(HttpServletRequest request, Throwable throwable) {
+        logger.error("已捕捉: 认证异常", throwable);
         return JsonResult.FAIL.newly(throwable.getMessage());
     }
 
