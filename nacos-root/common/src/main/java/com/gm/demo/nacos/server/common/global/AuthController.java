@@ -44,7 +44,7 @@ public class AuthController {
         response = sra.getResponse();
         String old = redisClient.get(TOKEN_PREFIX.concat(token));
         if(StringUtils.isEmpty(old)){
-            throw new SkillException();
+            throw new SkillException("请先登录");
         }
     }
 

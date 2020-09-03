@@ -8,7 +8,6 @@ package com.gm.demo.nacos.server.common.ex;
  */
 public class SkillException extends RuntimeException {
     public SkillException() {
-        super("请先登录");
     }
 
     public SkillException(String message) {
