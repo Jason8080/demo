@@ -1,4 +1,4 @@
-package com.gm.demo.nacos.server.provider.dao;
+package com.gm.demo.nacos.server.provider.dao.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gm.demo.nacos.server.provider.dao.entity.User;
