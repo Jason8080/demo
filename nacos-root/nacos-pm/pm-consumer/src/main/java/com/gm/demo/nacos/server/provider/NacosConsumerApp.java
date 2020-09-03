@@ -19,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = {"com.gm.demo.nacos.server.provider"})
-@ComponentScan("com.gm.demo.nacos.server")
+@ComponentScan("com.gm.demo.nacos.server.common")
 public class NacosConsumerApp {
     public static void main(String[] args) {
         SpringApplication.run(NacosConsumerApp.class, args);

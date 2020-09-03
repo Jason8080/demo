@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan("com.gm.demo.nacos.server")
+@ComponentScan("com.gm.demo.nacos.server.common")
 public class NacosProviderApp {
     public static void main(String[] args) {
         SpringApplication.run(NacosProviderApp.class, args);
