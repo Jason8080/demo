@@ -1,4 +1,4 @@
-package com.gm.demo.nacos.server.provider.mapper.entity;
+package com.gm.demo.nacos.server.provider.dao.entity;
 
 import lombok.Data;
 

@@ -1,8 +1,8 @@
 package com.gm.demo.nacos.server.provider.service;
 
 import com.gm.demo.nacos.server.common.config.mp.ReadOnly;
-import com.gm.demo.nacos.server.provider.mapper.UserMapper;
-import com.gm.demo.nacos.server.provider.mapper.entity.User;
+import com.gm.demo.nacos.server.provider.dao.UserMapper;
+import com.gm.demo.nacos.server.provider.dao.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

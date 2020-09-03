@@ -4,7 +4,7 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.gm.demo.nacos.server.common.util.RedisLock;
 import com.gm.demo.nacos.server.common.mod.JsonResult;
-import com.gm.demo.nacos.server.provider.mapper.entity.User;
+import com.gm.demo.nacos.server.provider.dao.entity.User;
 import com.gm.demo.nacos.server.provider.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;

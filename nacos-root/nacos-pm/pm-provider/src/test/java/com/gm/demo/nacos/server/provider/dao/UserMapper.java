@@ -1,7 +1,7 @@
-package com.gm.demo.nacos.server.provider.mapper;
+package com.gm.demo.nacos.server.provider.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.gm.demo.nacos.server.provider.mapper.entity.User;
+import com.gm.demo.nacos.server.provider.dao.entity.User;
 
 /**
  * 通用映射器

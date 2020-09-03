@@ -1,5 +1,5 @@
 package com.gm.demo.nacos.server.provider;
-import com.gm.demo.nacos.server.provider.mapper.entity.User;
+import com.gm.demo.nacos.server.provider.dao.entity.User;
 import com.gm.demo.nacos.server.provider.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
