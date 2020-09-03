@@ -44,16 +44,16 @@ public class GlobalExceptionHandlerAdvice {
 
 
     /**
-     * 认证异常.
+     * 技术异常.
      *
      * @param request   the request
-     * @param throwable the throwable
+     * @param ex the ex
      * @return the json result
      */
     @ExceptionHandler({SkillException.class})
-    public JsonResult skillException(HttpServletRequest request, Throwable throwable) {
-        logger.error("已捕捉: 认证异常", throwable);
-        return JsonResult.FAIL.newly(throwable.getMessage());
+    public JsonResult skillException(HttpServletRequest request, SkillException ex) {
+        logger.error("已捕捉: 技术异常", ex);
+        return JsonResult.FAIL.newly(ex.getCode(), ex.getMessage());
     }
 
     /**
