@@ -14,17 +14,17 @@ import java.util.concurrent.TimeUnit;
  * @date 2020 /8/28 (周五)
  */
 @Component
-public class RedisClient {
+public class RedisClient<K,V> {
 
 	@Autowired
-	private RedisTemplate redisTemplate;
+	private RedisTemplate<K,V> redisTemplate;
 
 	/**
 	 * Gets redis template.
 	 *
 	 * @return the redis template
 	 */
-	public RedisTemplate<String, Object> getRedisTemplate() {
+	public RedisTemplate<K,V> getRedisTemplate() {
 		return redisTemplate;
 	}
 
@@ -35,9 +35,9 @@ public class RedisClient {
 	 * @param val the val
 	 * @throws Exception the exception
 	 */
-	public void set(String key, Object val) throws Exception {
-		 ValueOperations<String, Object> ops = redisTemplate.opsForValue();
-		 ops.set(key, val);
+	public void set(K key, V val) {
+		ValueOperations<K,V> ops = redisTemplate.opsForValue();
+		ops.set(key, val);
 	}
 
 	/**
@@ -49,10 +49,10 @@ public class RedisClient {
 	 * @return the boolean
 	 * @throws Exception the exception
 	 */
-	public Boolean set(String key, Object val, long expireSecond) throws Exception {
-		 ValueOperations<String, Object> ops = redisTemplate.opsForValue();
-		 ops.set(key, val);
-		 return redisTemplate.expire(key, expireSecond, TimeUnit.SECONDS);
+	public Boolean set(K key, V val, long expireSecond) {
+		ValueOperations<K,V> ops = redisTemplate.opsForValue();
+		ops.set(key, val);
+		return redisTemplate.expire(key, expireSecond, TimeUnit.SECONDS);
 	}
 
 	/**
@@ -62,9 +62,9 @@ public class RedisClient {
 	 * @return the object
 	 * @throws Exception the exception
 	 */
-	public Object get(String key) throws Exception {
-		 ValueOperations<String, Object> ops = redisTemplate.opsForValue();
-		 return ops.get(key);
+	public V get(K key) {
+		ValueOperations<K,V> ops = redisTemplate.opsForValue();
+		return ops.get(key);
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class RedisClient {
 	 * @return the boolean
 	 * @throws Exception the exception
 	 */
-	public Boolean exists(String key) throws Exception {
+	public Boolean exists(K key) throws Exception {
 		return redisTemplate.hasKey(key);
 	}
 }

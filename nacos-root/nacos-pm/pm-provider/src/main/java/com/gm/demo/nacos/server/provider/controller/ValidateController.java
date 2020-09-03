@@ -1,6 +1,6 @@
 package com.gm.demo.nacos.server.provider.controller;
 
-import com.gm.demo.nacos.server.common.global.AuthorController;
+import com.gm.demo.nacos.server.common.global.AuthController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2020/8/28 (周五)
  */
 @RestController
-public class ValidateController extends AuthorController {
+public class ValidateController extends AuthController {
 
     @RequestMapping("hello2")
     public String hello2(int a) {
