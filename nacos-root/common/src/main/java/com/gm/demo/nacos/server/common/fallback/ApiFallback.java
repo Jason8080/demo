@@ -1,6 +1,7 @@
 package com.gm.demo.nacos.server.common.fallback;
 
-import cn.huolala.nacos.server.common.mod.JsonResult;
+
+import com.gm.demo.nacos.server.common.mod.JsonResult;
 
 /**
  * @author DELL

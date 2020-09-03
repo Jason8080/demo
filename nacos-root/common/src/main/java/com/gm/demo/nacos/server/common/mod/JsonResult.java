@@ -22,6 +22,10 @@ public class JsonResult<T> implements Serializable {
      * 操作成功.
      */
     public static final JsonResult OK = new JsonResult(200, "操作成功");
+    /**
+     * 认证失败.
+     */
+    public static final JsonResult AUTH = new JsonResult(502, "认证失败");
 
 
     /**
@@ -64,5 +68,9 @@ public class JsonResult<T> implements Serializable {
 
     public JsonResult newly(T data){
         return new JsonResult(this.code, this.msg, data);
+    }
+
+    public JsonResult newly(Integer code, String msg){
+        return new JsonResult(code, msg, data);
     }
 }
