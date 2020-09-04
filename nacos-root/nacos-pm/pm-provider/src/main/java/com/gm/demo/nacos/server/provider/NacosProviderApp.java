@@ -2,8 +2,8 @@ package com.gm.demo.nacos.server.provider;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.gm.demo.nacos.server.common.config.redis.RedisLock;
 import com.gm.demo.nacos.server.common.mod.JsonResult;
+import com.gm.demo.nacos.server.common.util.RedisUtil;
 import com.gm.demo.nacos.server.provider.dao.entity.User;
 import com.gm.demo.nacos.server.provider.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -31,13 +31,13 @@ public class NacosProviderApp {
     @Autowired
     UserService userService;
     @Autowired
-    RedisLock redisLock;
+    RedisUtil redisUtil;
 
     @GetMapping("helloPage")
     @ApiOperation("访问分页数据")
     @SentinelResource("helloPage")
     public JsonResult<IPage<User>> helloPage() throws InterruptedException {
-        if(redisLock.lock("HELLO_PAGE")) {
+        if(redisUtil.rl().lock("HELLO_PAGE")) {
             Thread.sleep(200);
             log.info("计数器+1");
         }else {
