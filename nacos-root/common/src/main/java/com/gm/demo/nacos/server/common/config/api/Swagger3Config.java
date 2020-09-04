@@ -15,6 +15,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 /**
  * The type Swagger 3 config.
  *
+ * @Profile({"loc","dev","stg","prd"})
  * @author Timi
  */
 @Configuration
@@ -23,6 +24,8 @@ public class Swagger3Config {
 
     @Value("${spring.profiles.active:prd}")
     private String env;
+    @Value("${spring.application.name}")
+    private String server;
 
     /**
      * Create rest api docket.
@@ -32,6 +35,7 @@ public class Swagger3Config {
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.OAS_30)
+                .pathMapping(server)
                 .enable(!"prd".equals(env))
                 .apiInfo(apiInfo())
                 .select()
