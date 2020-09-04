@@ -1,9 +1,7 @@
-package com.gm.demo.nacos.server.common.util;
+package com.gm.demo.nacos.server.common.config.redis;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,19 +11,15 @@ import java.util.concurrent.TimeUnit;
  * @author Timi
  * @date 2020 /8/28 (周五)
  */
-@Component
 public class RedisClient<K,V> {
+	private String prefix;
+	private Integer expire;
+	private RedisTemplate redisTemplate;
 
-	@Autowired
-	private RedisTemplate<K,V> redisTemplate;
-
-	/**
-	 * Gets redis template.
-	 *
-	 * @return the redis template
-	 */
-	public RedisTemplate<K,V> getRedisTemplate() {
-		return redisTemplate;
+	public <V, K> RedisClient(RedisTemplate<K, V> redisTemplate, String prefix, Integer expire) {
+		this.prefix = prefix;
+		this.expire = expire;
+		this.redisTemplate = redisTemplate;
 	}
 
 	/**
@@ -36,8 +30,8 @@ public class RedisClient<K,V> {
 	 * @throws Exception the exception
 	 */
 	public void set(K key, V val) {
-		ValueOperations<K,V> ops = redisTemplate.opsForValue();
-		ops.set(key, val);
+		 ValueOperations<K,V> ops = redisTemplate.opsForValue();
+		 ops.set(key, val);
 	}
 
 	/**
@@ -50,9 +44,9 @@ public class RedisClient<K,V> {
 	 * @throws Exception the exception
 	 */
 	public Boolean set(K key, V val, long expireSecond) {
-		ValueOperations<K,V> ops = redisTemplate.opsForValue();
-		ops.set(key, val);
-		return redisTemplate.expire(key, expireSecond, TimeUnit.SECONDS);
+		 ValueOperations<K,V> ops = redisTemplate.opsForValue();
+		 ops.set(key, val);
+		 return redisTemplate.expire(key, expireSecond, TimeUnit.SECONDS);
 	}
 
 	/**
@@ -63,8 +57,8 @@ public class RedisClient<K,V> {
 	 * @throws Exception the exception
 	 */
 	public V get(K key) {
-		ValueOperations<K,V> ops = redisTemplate.opsForValue();
-		return ops.get(key);
+		 ValueOperations<K,V> ops = redisTemplate.opsForValue();
+		 return ops.get(key);
 	}
 
 	/**

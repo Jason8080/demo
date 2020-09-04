@@ -2,7 +2,7 @@ package com.gm.demo.nacos.server.provider;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.gm.demo.nacos.server.common.util.RedisLock;
+import com.gm.demo.nacos.server.common.config.redis.RedisLock;
 import com.gm.demo.nacos.server.common.mod.JsonResult;
 import com.gm.demo.nacos.server.provider.dao.entity.User;
 import com.gm.demo.nacos.server.provider.service.UserService;

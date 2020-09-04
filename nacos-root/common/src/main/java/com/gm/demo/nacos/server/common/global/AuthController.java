@@ -1,7 +1,7 @@
 package com.gm.demo.nacos.server.common.global;
 
 import com.gm.demo.nacos.server.common.ex.SkillException;
-import com.gm.demo.nacos.server.common.util.RedisClient;
+import com.gm.demo.nacos.server.common.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
@@ -12,7 +12,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.NotNull;
 
 /**
  * 通用鉴权控制器
@@ -27,7 +26,7 @@ public class AuthController {
     private HttpServletResponse response;
 
     @Autowired
-    RedisClient<String, String> redisClient;
+    RedisUtil<String, String> redisUtil;
 
     public static final String TOKEN_PREFIX = "POS:AUTH:TOKEN_";
 
@@ -44,7 +43,7 @@ public class AuthController {
                 RequestContextHolder.getRequestAttributes();
         request = sra.getRequest();
         response = sra.getResponse();
-        String old = redisClient.get(TOKEN_PREFIX.concat(token));
+        String old = redisUtil.rc().get(TOKEN_PREFIX.concat(token));
         if(StringUtils.isEmpty(old)){
             throw new SkillException("请先登录", 502);
         }

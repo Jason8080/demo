@@ -1,9 +1,7 @@
-package com.gm.demo.nacos.server.common.util;
+package com.gm.demo.nacos.server.common.config.redis;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
-import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -15,19 +13,16 @@ import java.util.Date;
  * @author Timi
  * @date 2020 /8/28 (周五)
  */
-@Component
 public class RedisId {
+    private String prefix;
+    private Integer expire;
+    private RedisTemplate redisTemplate;
 
-    /**
-     * The constant LOCK_PREFIX.
-     */
-    public static final String LOCK_PREFIX = "POS:ID:";
-
-    /**
-     * The Redis template.
-     */
-    @Autowired
-    RedisTemplate<String, String> redisTemplate;
+    public RedisId(RedisTemplate redisTemplate, String prefix, Integer expire) {
+        this.prefix = prefix;
+        this.expire = expire;
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * 生成自增ID
