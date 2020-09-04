@@ -3,7 +3,6 @@ package com.gm.demo.nacos.server.common.util;
 import com.gm.demo.nacos.server.common.config.redis.RedisClient;
 import com.gm.demo.nacos.server.common.config.redis.RedisId;
 import com.gm.demo.nacos.server.common.config.redis.RedisLock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -22,14 +21,11 @@ public class RedisUtil<K,V> {
     @Value("${redis.common.expire:300}")
     private Integer expire = 300;
 
-    @Autowired
-    private RedisTemplate redisTemplate;
-
     private RedisClient<K,V> redisClient;
     private RedisLock redisLock;
     private RedisId redisId;
 
-    public RedisUtil() {
+    public RedisUtil(RedisTemplate redisTemplate) {
         redisClient = new RedisClient<K,V>(redisTemplate, prefix, expire);
         redisLock = new RedisLock(redisTemplate, prefix, expire);
         redisId = new RedisId(redisTemplate, prefix, expire);
