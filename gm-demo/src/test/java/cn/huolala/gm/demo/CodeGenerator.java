@@ -19,7 +19,7 @@ public class CodeGenerator {
 
     private static final String system = "";
     //    private static final String system = scanner("系统名称");
-    private static final String model = "gm-demo";
+    private static final String model = "";
 //    private static final String model = scanner("模块名称");
 
     private static final String rootPackage = "cn.huolala";
