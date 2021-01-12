@@ -32,7 +32,7 @@ public class CodeGenerator {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    private static final String url = "jdbc:mysql://host:3306/db0?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
+    private static final String url = "jdbc:mysql://127.0.0.1:3306/db0?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
     private static final String driverName = "com.mysql.cj.jdbc.Driver";
     private static final String username = "root";
     private static final String password = "root";
@@ -49,8 +49,7 @@ public class CodeGenerator {
         while (!StringUtils.isEmpty(table = scanner("表名"))) {
             // 代码生成器
             AutoGenerator mpg = mpg();
-            String tablePrefix = mpg.getStrategy().getTablePrefix()[0];
-            mpg.getStrategy().setInclude(tablePrefix + table);
+            mpg.getStrategy().setInclude(table);
             // 执行生成器
             mpg.execute();
         }
