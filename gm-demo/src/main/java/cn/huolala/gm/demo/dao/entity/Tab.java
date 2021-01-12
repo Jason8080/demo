@@ -37,7 +37,7 @@ public class Tab implements Serializable {
 
     private Long userId;
 
-    private Integer deleteTag;
+    private Boolean deleteTag;
 
 
 }

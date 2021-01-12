@@ -51,7 +51,7 @@ public class TabServiceImpl extends ServiceImpl<TabMapper, Tab> implements TabSe
     public void logicDelById(Long id) {
         Tab tab = new Tab();
         tab.setId(id);
-        tab.setDeleteTag(1);
+        tab.setDeleteTag(true);
         tabMapper.updateById(tab);
     }
 

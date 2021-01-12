@@ -56,7 +56,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     public void logicDelById(Long id) {
         ${entity} ${entity?uncap_first} = new ${entity}();
         ${entity?uncap_first}.setId(id);
-        ${entity?uncap_first}.setDeleteTag(1);
+        ${entity?uncap_first}.setDeleteTag(true);
         ${table.mapperName?uncap_first}.updateById(${entity?uncap_first});
     }
 
