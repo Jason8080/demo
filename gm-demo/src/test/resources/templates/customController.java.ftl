@@ -6,7 +6,6 @@ import cn.huolala.common.base.mod.JsonResult;
 import cn.huolala.common.base.mod.PageRequest;
 import cn.huolala.common.cloud.fallback.ApiFallback;
 import cn.huolala.common.logback.anno.ApiPrint;
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -60,7 +59,6 @@ public class ${table.controllerName} {
 
      @ApiOperation(value = "批量保存")
      @ApiPrint(value = "批量保存")
-     @SentinelResource(value = "saveBatch", fallbackClass = ApiFallback.class)
      @PostMapping(value = "saveBatch")
      @ApiImplicitParams({
            @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
@@ -74,7 +72,6 @@ public class ${table.controllerName} {
 
       @ApiOperation(value = "保存")
       @ApiPrint(value = "保存")
-      @SentinelResource(value = "save", fallbackClass = ApiFallback.class)
       @PostMapping(value = "save")
       @ApiImplicitParams({
             @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
@@ -88,7 +85,6 @@ public class ${table.controllerName} {
 
       @ApiOperation(value = "新增/修改", notes = "有`主键`则修改反之新增")
       @ApiPrint(value = "新增/修改")
-      @SentinelResource(value = "modify", fallbackClass = ApiFallback.class)
       @PostMapping(value = "modify")
       @ApiImplicitParams({
             @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
@@ -106,7 +102,6 @@ public class ${table.controllerName} {
             @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
             @ApiImplicitParam(name = "id", value = "编号", dataType = "long", dataTypeClass = Long.class),
       })
-      @SentinelResource(value = "logicDelById", fallbackClass = ApiFallback.class)
       @PostMapping(value = "logicDelById")
       public JsonResult logicDelById(
             @RequestBody @NotNull(message = "编号是空") Long id
@@ -117,7 +112,6 @@ public class ${table.controllerName} {
 
       @ApiOperation(value = "获取单条")
       @ApiPrint(value = "获取单条")
-      @SentinelResource(value = "getById", fallbackClass = ApiFallback.class)
       @GetMapping(value = "getById")
       @ApiImplicitParams({
             @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
@@ -131,7 +125,6 @@ public class ${table.controllerName} {
 
       @ApiOperation(value = "获取列表")
       @ApiPrint(value = "获取列表")
-      @SentinelResource(value = "listBy", fallbackClass = ApiFallback.class)
       @PostMapping(value = "listBy")
       @ApiImplicitParams({
             @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
@@ -144,7 +137,6 @@ public class ${table.controllerName} {
 
       @ApiOperation(value = "分页查询")
       @ApiPrint(value = "分页查询")
-      @SentinelResource(value = "listPageBy", fallbackClass = ApiFallback.class)
       @PostMapping(value = "listPageBy")
       @ApiImplicitParams({
             @ApiImplicitParam(name = "current", value = "起始页", paramType = "query", dataType = "integer", dataTypeClass = Integer.class),
