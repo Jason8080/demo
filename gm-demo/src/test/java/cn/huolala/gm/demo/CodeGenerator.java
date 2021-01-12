@@ -25,7 +25,7 @@ public class CodeGenerator {
     private static final String rootPackage = "cn.huolala";
 //    private static final String rootPackage = scanner("根路径(包)");
 
-    private static final String parentPackage = rootPackage + "." + model.replace("-", ".");
+    private static final String parentPackage = "".equals(model) ? rootPackage : rootPackage + "." + model.replace("-", ".");
 
     private static final String tablePrefix = "t_pos_";
 //    private static final String tablePrefix = scanner("表名前缀(生成文件将去除)");
@@ -41,6 +41,7 @@ public class CodeGenerator {
 
     /**
      * 防止敏感信息泄露 -> 请手动调整配置
+     *
      * @param args thank you, my friend !
      */
     public static void main(String[] args) {
