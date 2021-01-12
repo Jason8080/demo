@@ -20,6 +20,10 @@
         </dependency>
         <dependency>
             <groupId>cn.huolala</groupId>
+            <artifactId>common-webapp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.huolala</groupId>
             <artifactId>common-swagger</artifactId>
         </dependency>
         <dependency>
