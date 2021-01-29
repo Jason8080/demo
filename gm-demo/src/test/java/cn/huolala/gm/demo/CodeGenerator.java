@@ -17,8 +17,8 @@ import java.util.*;
 public class CodeGenerator {
     // -----------------------------------------------------------------------------------------------------------------
 
-    private static final String system = "";
-    //    private static final String system = scanner("系统名称");
+    private static final String pro = "";
+    //    private static final String system = scanner("项目名称");
     private static final String model = "gm-demo";
     //    private static final String model = scanner("模块名称");
     private static final String project = "";
@@ -138,7 +138,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/" + system + "/" + model + "/src/main/java/" + parentPackage.replace(".", "/") + "/controller/vo"
+                return projectPath + "/" + pro + "/" + model + "/src/main/java/" + parentPackage.replace(".", "/") + "/controller/vo"
                         + "/" + tableInfo.getEntityName() + "Vo" + StringPool.DOT_JAVA;
             }
         });
@@ -171,7 +171,7 @@ public class CodeGenerator {
     private static GlobalConfig getGlobalConfig() {
         String projectPath = System.getProperty("user.dir");
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir(projectPath + "/" + system + "/" + model + "/src/main/java");
+        gc.setOutputDir(projectPath + "/" + pro + "/" + model + "/src/main/java");
         gc.setAuthor("Timi°");
         gc.setOpen(false);
         gc.setServiceName("%sService");
