@@ -17,14 +17,17 @@ import java.util.*;
 public class CodeGenerator {
     // -----------------------------------------------------------------------------------------------------------------
 
+    private static final String system = "";
+    //    private static final String system = scanner("系统名称");
     private static final String pro = "";
-    //    private static final String system = scanner("项目名称");
-    private static final String model = "gm-demo";
+    //    private static final String pro = scanner("项目名称");
+    private static final String model = "";
     //    private static final String model = scanner("模块名称");
-    private static final String project = "";
+    private static final String project = "gm-demo";
 //    private static final String project = scanner("项目名称(单体项目才用这个名字)");
 
-    private static final String rootPackage = "cn.huolala";
+    private static final String rootPackage = "cn.huolala" + ("".equals(system) ? ""
+            : "." + system.replaceAll("-", "."));
 //    private static final String rootPackage = scanner("根路径(包)");
 
     private static final String parentPackage = "".equals(model)
