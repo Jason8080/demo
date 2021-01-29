@@ -1,6 +1,6 @@
 package com.gm.common.dynamic.service;
 
-import cn.huolala.common.mysql.anno.ReadOnly;
+import cn.gmlee.tools.mysql.anno.ReadOnly;
 import com.gm.common.dynamic.dao.entity.Tx;
 import com.gm.common.dynamic.dao.mapper.TxMapper;
 import org.springframework.beans.factory.annotation.Autowired;

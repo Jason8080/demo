@@ -1,5 +1,9 @@
 package cn.huolala.gm.demo.service.impl;
 
+import cn.gmlee.tools.base.mod.PageRequest;
+import cn.gmlee.tools.base.mod.PageResponse;
+import cn.gmlee.tools.base.util.BeanUtil;
+import cn.huolala.gm.demo.controller.vo.TabVo;
 import cn.huolala.gm.demo.dao.entity.Tab;
 import cn.huolala.gm.demo.dao.mapper.TabMapper;
 import cn.huolala.gm.demo.service.TabService;
@@ -13,6 +17,7 @@ import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -29,13 +34,17 @@ public class TabServiceImpl extends ServiceImpl<TabMapper, Tab> implements TabSe
     TabMapper tabMapper;
 
     @Override
-    public void saveBatch(List<Tab> list) {
-        list.stream().mapToInt(tab -> tabMapper.insert(tab)).sum();
+    public void saveBatch(List<TabVo> list) {
+        list.stream().mapToInt(vo -> {
+            Tab tab = BeanUtil.convert(vo, Tab.class);
+            return tabMapper.insert(tab);
+        }).sum();
     }
 
     @Override
-    public void modify(Tab tab) {
-        if (Objects.isNull(tab.getId())) {
+    public void modify(TabVo vo) {
+        Tab tab = BeanUtil.convert(vo, Tab.class);
+        if (Objects.isNull(vo.getId())) {
             tabMapper.insert(tab);
         } else {
             tabMapper.updateById(tab);
@@ -43,10 +52,19 @@ public class TabServiceImpl extends ServiceImpl<TabMapper, Tab> implements TabSe
     }
 
     @Override
-    public void updateBatch(List<Tab> list) {
-        list.stream().mapToInt(tab -> tabMapper.updateById(tab)).sum();
+    public void updateBatch(List<TabVo> list) {
+        list.stream().mapToInt(vo -> {
+            Tab tab = BeanUtil.convert(vo, Tab.class);
+            return tabMapper.updateById(tab);
+        }).sum();
     }
 
+    /**
+     * 添加 logic-delete-field=deleteTag 之后改为修改deleteTag=1
+     *  -> tabMapper.deleteById(id);
+     * 建议 take notes by oneself, as follows
+     * @param id the id
+     */
     @Override
     public void logicDelById(Long id) {
         Tab tab = new Tab();
@@ -61,12 +79,19 @@ public class TabServiceImpl extends ServiceImpl<TabMapper, Tab> implements TabSe
     }
 
     @Override
-    public List<Tab> listBy(Tab tab) {
-        return tabMapper.selectList(new QueryWrapper(tab));
+    public List<TabVo> listBy(TabVo tab) {
+        List<Tab> list = tabMapper.selectList(new QueryWrapper(tab));
+        return list.stream().map(o -> BeanUtil.convert(o, TabVo.class)).collect(Collectors.toList());
     }
 
     @Override
-    public IPage listPageBy(Page page, Tab tab) {
-        return tabMapper.selectPage(page, new QueryWrapper(tab));
+    public PageResponse<TabVo> listPageBy(PageRequest pageRequest, TabVo tab) {
+        // 1. 建议采用PageResponse对象封装分页对象: 简洁,但不强制
+        Page page = new Page(pageRequest.current, pageRequest.size);
+        IPage<Tab> selectPage = tabMapper.selectPage(page, new QueryWrapper(tab));
+        // 2. 建议采用Vo展示数据: 隔离、简洁、非必需
+        List<Tab> records = selectPage.getRecords();
+        List<TabVo> list = records.stream().map(o -> BeanUtil.convert(o, TabVo.class)).collect(Collectors.toList());
+        return new PageResponse(pageRequest, selectPage.getTotal(), list);
     }
 }

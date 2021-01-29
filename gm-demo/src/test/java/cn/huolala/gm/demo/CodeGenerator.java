@@ -108,6 +108,8 @@ public class CodeGenerator {
 //        strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(tablePrefix);
+        // 逻辑删除字段名 (需要配置全局数据库逻辑删除标识值: v3.0.1之后支持)
+//        strategy.setLogicDeleteFieldName("del");
         return strategy;
     }
 

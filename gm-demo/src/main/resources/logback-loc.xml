@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-    <!-- 开发环境下的日志配置 -->
-    <root level="INFO">
-        <appender-ref ref="STDOUT"/>
-    </root>
+    <property name="CUSTOM_LOG_LEVEL" value="INFO"/>
+    <property name="CUSTOM_SYS_PATH" value="/data/logs/"/>
+    <property name="CUSTOM_SYS_NAME" value="gm-demo"/>
+    <property name="CUSTOM_BUG_PACKAGE" value="cn.huolala"/>
+    <property name="CUSTOM_SQL_PACKAGE" value="cn.huolala"/>
 </included>

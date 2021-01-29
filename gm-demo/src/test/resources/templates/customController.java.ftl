@@ -2,9 +2,10 @@ package ${package.Controller};
 
 
 
-import cn.huolala.common.base.mod.JsonResult;
-import cn.huolala.common.base.mod.PageRequest;
-import cn.huolala.common.logback.anno.ApiPrint;
+import cn.gmlee.tools.base.entity.Id;
+import cn.gmlee.tools.base.mod.JsonResult;
+import cn.gmlee.tools.base.mod.PageRequest;
+import cn.gmlee.tools.logback.anno.ApiPrint;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -63,7 +64,7 @@ public class ${table.controllerName} {
            @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
      })
      public JsonResult saveBatch(
-           @RequestBody @NotNull(message = "数据是空") @Validated List<${entity}> vos
+            @Validated @RequestBody @NotNull(message = "数据是空") List<${entity}> vos
       ) {
            ${table.serviceName?uncap_first}.saveBatch(vos);
            return JsonResult.OK;
@@ -76,7 +77,7 @@ public class ${table.controllerName} {
             @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
       })
       public JsonResult save(
-            @RequestBody @Validated ${entity} vo
+            @Validated @RequestBody ${entity} vo
       ) {
             ${table.serviceName?uncap_first}.save(vo);
             return JsonResult.OK;
@@ -89,7 +90,7 @@ public class ${table.controllerName} {
             @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
       })
       public JsonResult modify(
-            @RequestBody @Validated ${entity} vo
+            @Validated @RequestBody ${entity} vo
       ) {
             ${table.serviceName?uncap_first}.modify(vo);
             return JsonResult.OK;
@@ -103,9 +104,9 @@ public class ${table.controllerName} {
       })
       @PostMapping(value = "logicDelById")
       public JsonResult logicDelById(
-            @RequestBody @NotNull(message = "编号是空") Long id
+            @Validated @RequestBody @NotNull(message = "编号是空") Id id
       ) {
-            ${table.serviceName?uncap_first}.logicDelById(id);
+            ${table.serviceName?uncap_first}.logicDelById(id.id);
             return JsonResult.OK;
       }
 
@@ -117,9 +118,9 @@ public class ${table.controllerName} {
             @ApiImplicitParam(name = "id", value = "编号", paramType = "query", dataType = "long", dataTypeClass = Long.class),
       })
       public JsonResult getById(
-            @NotNull(message = "编号是空") Long id
+            @Validated @RequestBody @NotNull(message = "编号是空") Id id
       ) {
-            return JsonResult.OK.newly(${table.serviceName?uncap_first}.getById(id));
+            return JsonResult.OK.newly(${table.serviceName?uncap_first}.getById(id.id));
       }
 
       @ApiOperation(value = "获取列表")
@@ -129,7 +130,7 @@ public class ${table.controllerName} {
             @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
       })
       public JsonResult listBy(
-            @RequestBody ${entity} vo
+            @Validated @RequestBody ${entity} vo
       ) {
             return JsonResult.OK.newly(${table.serviceName?uncap_first}.listBy(vo));
       }
@@ -143,7 +144,7 @@ public class ${table.controllerName} {
             @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
       })
       public JsonResult listPageBy(
-            PageRequest page, @RequestBody ${entity} vo
+            PageRequest page, @Validated @RequestBody ${entity} vo
       ) {
             return JsonResult.OK.newly(${table.serviceName?uncap_first}.listPageBy(new Page(page.current, page.size), vo));
       }

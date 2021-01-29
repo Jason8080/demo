@@ -1,6 +1,6 @@
 package ${package.Service};
 
-import cn.huolala.common.mysql.anno.ReadOnly;
+import cn.gmlee.tools.mysql.anno.ReadOnly;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import ${superServiceClassPackage};
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

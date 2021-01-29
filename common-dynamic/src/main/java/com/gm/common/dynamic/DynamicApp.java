@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2020/11/5 (周四)
  */
 @SpringBootApplication
-@ComponentScan({"com.gm.common.dynamic","cn.huolala.common"})
+@ComponentScan({"com.gm.common.dynamic","cn.gmlee.tools"})
 public class DynamicApp {
     public static void main(String[] args) {
         SpringApplication.run(DynamicApp.class, args);

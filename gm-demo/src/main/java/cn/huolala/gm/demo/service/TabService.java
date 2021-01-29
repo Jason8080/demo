@@ -1,14 +1,15 @@
 package cn.huolala.gm.demo.service;
 
-import cn.huolala.common.mysql.anno.ReadOnly;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import cn.gmlee.tools.base.mod.PageRequest;
+import cn.gmlee.tools.base.mod.PageResponse;
+import cn.gmlee.tools.mysql.anno.ReadOnly;
+import cn.huolala.gm.demo.controller.vo.TabVo;
+import cn.huolala.gm.demo.dao.entity.Tab;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.huolala.gm.demo.dao.entity.Tab;
-
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,14 +28,14 @@ public interface TabService extends IService<Tab> {
     * @param list the list
     */
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Throwable.class)
-    void saveBatch(List<Tab> list);
+    void saveBatch(List<TabVo> list);
 
     /**
     * 新增/修改 (根据ID).
     *
     * @param tab the file tab
     */
-    void modify(Tab tab);
+    void modify(TabVo tab);
 
     /**
     * 批量修改 (根据ID).
@@ -43,14 +44,16 @@ public interface TabService extends IService<Tab> {
     * @return the int
     */
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Throwable.class)
-    void updateBatch(List<Tab> list);
+    void updateBatch(List<TabVo> list);
 
     /**
     * 逻辑删除 (根据ID).
     *
-    * @param id the id
-    */
-    void logicDelById(Long id);
+     * @param id the id
+     */
+    void logicDelById(@NotNull @NotNull(
+            message = "主键是空"
+    ) Long id);
 
     /**
     * 批量逻辑删除 (根据ID).
@@ -67,15 +70,15 @@ public interface TabService extends IService<Tab> {
     * @return the list
     */
     @ReadOnly
-    List<Tab> listBy(Tab tab);
+    List<TabVo> listBy(TabVo tab);
 
     /**
     * 分页条件查询.
     *
-    * @param page         the page
+    * @param pageRequest         the page
     * @param tab the tab
     * @return the list
     */
     @ReadOnly
-    IPage listPageBy(Page page, Tab tab);
+    PageResponse<TabVo> listPageBy(PageRequest pageRequest, TabVo tab);
 }

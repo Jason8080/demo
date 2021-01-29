@@ -3,9 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>cn.huolala</groupId>
-        <artifactId>common-parent</artifactId>
-        <version>2.0.6</version>
+        <groupId>cn.gmlee</groupId>
+        <artifactId>tools-parent</artifactId>
+        <version>3.0.1</version>
         <relativePath/>
     </parent>
 
@@ -17,28 +17,28 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.huolala</groupId>
-            <artifactId>common-mysql</artifactId>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-mysql</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.huolala</groupId>
-            <artifactId>common-webapp</artifactId>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-webapp</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.huolala</groupId>
-            <artifactId>common-swagger</artifactId>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-swagger</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.huolala</groupId>
-            <artifactId>common-logback</artifactId>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-logback</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.huolala</groupId>
-            <artifactId>common-jackson</artifactId>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-jackson</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.huolala</groupId>
-            <artifactId>common-spring</artifactId>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-spring</artifactId>
         </dependency>
 
 
