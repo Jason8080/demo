@@ -17,7 +17,7 @@ import java.util.*;
 public class CodeGenerator {
     // -----------------------------------------------------------------------------------------------------------------
 
-    private static final String system = "nacos-root";
+    private static final String system = "demo";
     //    private static final String system = scanner("系统名称");
     private static final String pro = "";
     //    private static final String pro = scanner("项目名称");
