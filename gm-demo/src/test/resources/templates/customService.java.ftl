@@ -1,14 +1,15 @@
 package ${package.Service};
 
+import cn.gmlee.tools.base.mod.PageRequest;
+import cn.gmlee.tools.base.mod.PageResponse;
 import cn.gmlee.tools.mysql.anno.ReadOnly;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import ${package.Vo}.${vo};
+import ${package.Entity}.${entity};
 import ${superServiceClassPackage};
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import ${package.Entity}.${entity};
-
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,14 +31,14 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
     * @param list the list
     */
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Throwable.class)
-    void saveBatch(List<${entity}> list);
+    void saveBatch(List<${vo}> list);
 
     /**
     * 新增/修改 (根据ID).
     *
-    * @param ${entity?uncap_first} the file ${entity?uncap_first}
+    * @param ${vo?uncap_first} the file ${vo?uncap_first}
     */
-    void modify(${entity} ${entity?uncap_first});
+    void modify(${vo} ${vo?uncap_first});
 
     /**
     * 批量修改 (根据ID).
@@ -46,7 +47,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
     * @return the int
     */
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Throwable.class)
-    void updateBatch(List<${entity}> list);
+    void updateBatch(List<${vo}> list);
 
     /**
     * 逻辑删除 (根据ID).
@@ -66,20 +67,20 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
     /**
     * 条件查询.
     *
-    * @param ${entity?uncap_first} the ${entity?uncap_first}
+    * @param ${vo?uncap_first} the ${vo?uncap_first}
     * @return the list
     */
     @ReadOnly
-    List<${entity}> listBy(${entity} ${entity?uncap_first});
+    List<${vo}> listBy(${vo} ${vo?uncap_first});
 
     /**
     * 分页条件查询.
     *
-    * @param page         the page
-    * @param ${entity?uncap_first} the ${entity?uncap_first}
-    * @return the list
+    * @param pageRequest         the page
+    * @param ${vo?uncap_first} the ${vo?uncap_first}
+    * @return the page response
     */
     @ReadOnly
-    IPage listPageBy(Page page, ${entity} ${entity?uncap_first});
+    PageResponse<${vo}> listPageBy(PageRequest pageRequest, ${vo} ${vo?uncap_first});
 }
 </#if>

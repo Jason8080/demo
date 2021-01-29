@@ -51,9 +51,7 @@ public interface TabService extends IService<Tab> {
     *
      * @param id the id
      */
-    void logicDelById(@NotNull @NotNull(
-            message = "主键是空"
-    ) Long id);
+    void logicDelById(@NotNull @NotNull(message = "主键是空") Long id);
 
     /**
     * 批量逻辑删除 (根据ID).
