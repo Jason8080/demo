@@ -86,6 +86,7 @@ public class TabController {
     })
     @PostMapping(value = "logicDelById")
     public JsonResult logicDelById(
+            // 注意: 此处为url传参 (可自行更改)
             @NotNull(message = "编号是空") Id id
     ) {
         tabService.logicDelById(id.id);
@@ -100,6 +101,7 @@ public class TabController {
             @ApiImplicitParam(name = "id", value = "编号", paramType = "query", dataType = "long", dataTypeClass = Long.class),
     })
     public JsonResult<TabVo> getById(
+            // 注意: 此处为url传参 (可自行更改)
             @NotNull(message = "编号是空") Id id
     ) {
         Tab tab = tabService.getById(id.id);
