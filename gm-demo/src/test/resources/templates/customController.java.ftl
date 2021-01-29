@@ -6,7 +6,7 @@ import cn.gmlee.tools.base.mod.PageRequest;
 import cn.gmlee.tools.base.mod.PageResponse;
 import cn.gmlee.tools.base.util.BeanUtil;
 import cn.gmlee.tools.logback.anno.ApiPrint;
-import ${package.Vo}.${vo};
+import ${cfg.Vo}.${entity}Vo;
 import ${package.Entity}.${entity};
 import ${package.Service}.${table.serviceName};
 import io.swagger.annotations.Api;
@@ -63,7 +63,7 @@ public class ${table.controllerName} {
         @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
     })
     public JsonResult saveBatch(
-        @Validated @RequestBody @NotNull(message = "数据是空") List<${vo}> vos
+        @Validated @RequestBody @NotNull(message = "数据是空") List<${entity}Vo> vos
     ) {
         ${table.serviceName?uncap_first}.saveBatch(vos);
         return JsonResult.OK;
@@ -76,7 +76,7 @@ public class ${table.controllerName} {
         @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
     })
     public JsonResult save(
-        @Validated @RequestBody ${vo} vo
+        @Validated @RequestBody ${entity}Vo vo
     ) {
         ${entity} ${entity?uncap_first} = BeanUtil.convert(vo, ${entity}.class);
         tabService.save(${entity?uncap_first});
@@ -90,7 +90,7 @@ public class ${table.controllerName} {
         @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
     })
     public JsonResult modify(
-        @Validated @RequestBody ${vo} vo
+        @Validated @RequestBody ${entity}Vo vo
     ) {
         ${table.serviceName?uncap_first}.modify(vo);
         return JsonResult.OK;
@@ -118,14 +118,14 @@ public class ${table.controllerName} {
         @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
         @ApiImplicitParam(name = "id", value = "编号", paramType = "query", dataType = "long", dataTypeClass = Long.class),
     })
-    public JsonResult<${vo}> getById(
+    public JsonResult<${entity}Vo> getById(
         // 注意: 此处为url传参 (可自行更改)
         @NotNull(message = "编号是空") Id id
     ) {
         ${entity} ${entity?uncap_first} = ${table.serviceName?uncap_first}.getById(id.id)
         // 建议统一采用Vo展示数据: 文档简洁、可扩展、安全
-        ${vo} ${vo?uncap_first} = BeanUtil.convert(${entity?uncap_first}, ${vo}.class);
-        return JsonResult.OK.newly(${vo?uncap_first});
+        ${entity}Vo ${entity?uncap_first}Vo = BeanUtil.convert(${entity?uncap_first}, ${entity}Vo.class);
+        return JsonResult.OK.newly(${entity?uncap_first}Vo);
     }
 
     @ApiOperation(value = "获取列表")
@@ -134,8 +134,8 @@ public class ${table.controllerName} {
     @ApiImplicitParams({
         @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
     })
-    public JsonResult<List<${vo}>> listBy(
-        @Validated @RequestBody ${vo} vo
+    public JsonResult<List<${entity}Vo>> listBy(
+        @Validated @RequestBody ${entity}Vo vo
     ) {
         return JsonResult.OK.newly(${table.serviceName?uncap_first}.listBy(vo));
     }
@@ -148,8 +148,8 @@ public class ${table.controllerName} {
         @ApiImplicitParam(name = "size", value = "页数量", paramType = "query", dataType = "integer", dataTypeClass = Integer.class),
         @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
     })
-    public JsonResult<PageResponse<${vo}>> listPageBy(
-        PageRequest pageRequest, @Validated @RequestBody ${vo} vo
+    public JsonResult<PageResponse<${entity}Vo>> listPageBy(
+        PageRequest pageRequest, @Validated @RequestBody ${entity}Vo vo
     ) {
         return JsonResult.OK.newly(${table.serviceName?uncap_first}.listPageBy(pageRequest, vo));
     }

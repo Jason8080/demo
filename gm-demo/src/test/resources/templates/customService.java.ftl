@@ -3,7 +3,7 @@ package ${package.Service};
 import cn.gmlee.tools.base.mod.PageRequest;
 import cn.gmlee.tools.base.mod.PageResponse;
 import cn.gmlee.tools.mysql.anno.ReadOnly;
-import ${package.Vo}.${vo};
+import ${cfg.Vo}.${entity}Vo;
 import ${package.Entity}.${entity};
 import ${superServiceClassPackage};
 import org.springframework.transaction.annotation.Isolation;
@@ -31,14 +31,14 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
     * @param list the list
     */
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Throwable.class)
-    void saveBatch(List<${vo}> list);
+    void saveBatch(List<${entity}Vo> list);
 
     /**
     * 新增/修改 (根据ID).
     *
-    * @param ${vo?uncap_first} the file ${vo?uncap_first}
+    * @param ${entity?uncap_first}Vo the file ${entity?uncap_first}Vo
     */
-    void modify(${vo} ${vo?uncap_first});
+    void modify(${entity}Vo ${entity?uncap_first}Vo);
 
     /**
     * 批量修改 (根据ID).
@@ -47,7 +47,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
     * @return the int
     */
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Throwable.class)
-    void updateBatch(List<${vo}> list);
+    void updateBatch(List<${entity}Vo> list);
 
     /**
     * 逻辑删除 (根据ID).
@@ -67,20 +67,20 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
     /**
     * 条件查询.
     *
-    * @param ${vo?uncap_first} the ${vo?uncap_first}
+    * @param ${entity?uncap_first}Vo the ${entity?uncap_first}Vo
     * @return the list
     */
     @ReadOnly
-    List<${vo}> listBy(${vo} ${vo?uncap_first});
+    List<${entity}Vo> listBy(${entity}Vo ${entity?uncap_first}Vo);
 
     /**
     * 分页条件查询.
     *
     * @param pageRequest         the page
-    * @param ${vo?uncap_first} the ${vo?uncap_first}
+    * @param ${entity?uncap_first}Vo the ${entity?uncap_first}Vo
     * @return the page response
     */
     @ReadOnly
-    PageResponse<${vo}> listPageBy(PageRequest pageRequest, ${vo} ${vo?uncap_first});
+    PageResponse<${entity}Vo> listPageBy(PageRequest pageRequest, ${entity}Vo ${entity?uncap_first}Vo);
 }
 </#if>

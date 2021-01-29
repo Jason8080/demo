@@ -3,7 +3,7 @@ package ${package.ServiceImpl};
 import cn.gmlee.tools.base.mod.PageRequest;
 import cn.gmlee.tools.base.mod.PageResponse;
 import cn.gmlee.tools.base.util.BeanUtil;
-import ${package.Vo}.${vo};
+import ${cfg.Vo}.${entity}Vo;
 import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
@@ -39,7 +39,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     ${table.mapperName} ${table.mapperName?uncap_first};
 
     @Override
-    public void saveBatch(List<${vo}> list) {
+    public void saveBatch(List<${entity}Vo> list) {
         list.stream().mapToInt(vo -> {
             ${entity} ${entity?uncap_first} = BeanUtil.convert(vo, ${entity}.class);
             return tabMapper.insert(${entity?uncap_first});
@@ -47,9 +47,9 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     }
 
     @Override
-    public void modify(${vo} ${vo?uncap_first}) {
-        ${entity} ${entity?uncap_first} = BeanUtil.convert(${vo?uncap_first}, ${entity}.class);
-        if (Objects.isNull(${vo?uncap_first}.getId())) {
+    public void modify(${entity}Vo ${entity?uncap_first}Vo) {
+        ${entity} ${entity?uncap_first} = BeanUtil.convert(${entity?uncap_first}Vo, ${entity}.class);
+        if (Objects.isNull(${entity?uncap_first}Vo.getId())) {
             tabMapper.insert(${entity?uncap_first});
         } else {
             tabMapper.updateById(${entity?uncap_first});
@@ -57,7 +57,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     }
 
     @Override
-    public void updateBatch(List<${vo}> list) {
+    public void updateBatch(List<${entity}Vo> list) {
         list.stream().mapToInt(vo -> {
             ${entity} ${entity?uncap_first} = BeanUtil.convert(vo, ${entity}.class);
             return tabMapper.updateById(${entity?uncap_first});
@@ -84,19 +84,19 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     }
 
     @Override
-    public List<${vo}> listBy(${vo} ${vo?uncap_first}) {
-        List<${entity}> list = tabMapper.selectList(new QueryWrapper(${vo?uncap_first}));
-        return list.stream().map(o -> BeanUtil.convert(o, ${vo}.class)).collect(Collectors.toList());
+    public List<${entity}Vo> listBy(${entity}Vo ${entity?uncap_first}Vo) {
+        List<${entity}> list = tabMapper.selectList(new QueryWrapper(${entity?uncap_first}Vo));
+        return list.stream().map(o -> BeanUtil.convert(o, ${entity}Vo.class)).collect(Collectors.toList());
     }
 
     @Override
-    public PageResponse<${vo}> listPageBy(PageRequest pageRequest, ${vo} ${vo?uncap_first}) {
+    public PageResponse<${entity}Vo> listPageBy(PageRequest pageRequest, ${entity}Vo ${entity?uncap_first}Vo) {
         // 1. 建议采用PageResponse对象封装分页对象: 简洁,但不强制
         Page page = new Page(pageRequest.current, pageRequest.size);
-        IPage<${entity}> selectPage = tabMapper.selectPage(page, new QueryWrapper(${vo?uncap_first}));
+        IPage<${entity}> selectPage = tabMapper.selectPage(page, new QueryWrapper(${entity?uncap_first}Vo));
         // 2. 建议采用Vo展示数据: 隔离、简洁、非必需
         List<${entity}> records = selectPage.getRecords();
-        List<${vo}> list = records.stream().map(o -> BeanUtil.convert(o, ${vo}.class)).collect(Collectors.toList());
+        List<${entity}Vo> list = records.stream().map(o -> BeanUtil.convert(o, ${entity}Vo.class)).collect(Collectors.toList());
         return new PageResponse(pageRequest, selectPage.getTotal(), list);
     }
 }
