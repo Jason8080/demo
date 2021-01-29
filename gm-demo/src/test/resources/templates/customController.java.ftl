@@ -122,7 +122,7 @@ public class ${table.controllerName} {
         // 注意: 此处为url传参 (可自行更改)
         @NotNull(message = "编号是空") Id id
     ) {
-        ${entity} ${entity?uncap_first} = ${table.serviceName?uncap_first}.getById(id.id)
+        ${entity} ${entity?uncap_first} = ${table.serviceName?uncap_first}.getById(id.id);
         // 建议统一采用Vo展示数据: 文档简洁、可扩展、安全
         ${entity}Vo ${entity?uncap_first}Vo = BeanUtil.convert(${entity?uncap_first}, ${entity}Vo.class);
         return JsonResult.OK.newly(${entity?uncap_first}Vo);
