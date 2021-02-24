@@ -30,6 +30,6 @@ public class TxService {
     public void come(Tx tx) {
         txMapper.insert(tx);
         AssertUtil.isOk(oneApi.come(MicroConstant.one), MicroConstant.one+": 远程服务异常");
-        AssertUtil.isOk(twoApi.come(MicroConstant.two), MicroConstant.one+": 远程服务异常");
+        AssertUtil.isOk(twoApi.come(MicroConstant.two), MicroConstant.two+": 远程服务异常");
     }
 }
