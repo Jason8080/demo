@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <property name="CUSTOM_LOG_LEVEL" value="INFO"/>
+    <property name="CUSTOM_SYS_PATH" value="E:/data/logs/"/>
+    <property name="CUSTOM_SYS_NAME" value="seata-two"/>
+    <property name="CUSTOM_BUG_PACKAGE" value="com.gm"/>
+    <property name="CUSTOM_SQL_PACKAGE" value="com.gm"/>
+</included>
