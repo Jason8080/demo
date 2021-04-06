@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gm.data.util.dao.mapper.TabMapper">
+
+    <resultMap type="com.gm.data.util.dao.entity.Tab" id="TabMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="column1" column="column1" jdbcType="VARCHAR"/>
+        <result property="str" column="str" jdbcType="VARCHAR"/>
+        <result property="date" column="date" jdbcType="TIMESTAMP"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="del" column="del" jdbcType="BOOLEAN"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into db0.t_pos_tab(column1, str, date, user_id, del)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.column1}, #{entity.str}, #{entity.date}, #{entity.userId}, #{entity.del})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into db0.t_pos_tab(column1, str, date, user_id, del)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.column1}, #{entity.str}, #{entity.date}, #{entity.userId}, #{entity.del})
+        </foreach>
+        on duplicate key update
+        column1 = values(column1) , str = values(str) , date = values(date) , user_id = values(user_id) , del =
+        values(del)
+    </insert>
+
+</mapper>
+

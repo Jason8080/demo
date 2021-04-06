@@ -11,27 +11,44 @@
 
     <artifactId>data-util</artifactId>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
-
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.4.5</version>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-logback</artifactId>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.22</version>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-ds</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.16</version>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-mybatis</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mybatis.spring.boot</groupId>
+                    <artifactId>mybatis-spring-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-datalog</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-swagger</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-webapp</artifactId>
+        </dependency>
+        <!-- 解决默认值类型异常 -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-models</artifactId>
+            <version>1.5.22</version>
         </dependency>
     </dependencies>
 
