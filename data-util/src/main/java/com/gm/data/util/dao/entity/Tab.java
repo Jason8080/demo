@@ -3,6 +3,7 @@ package com.gm.data.util.dao.entity;
 import java.util.Date;
 
 import cn.gmlee.tools.datalog.annotation.Ignore;
+import cn.gmlee.tools.datalog.annotation.Note;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
@@ -16,17 +17,14 @@ import java.io.Serializable;
  */
 @TableName("t_pos_tab")
 public class Tab extends Model<Tab> {
-    //主键
+    @Note("主键")
     private Long id;
-    //列one
+    @Note("列名")
     private String column1;
-    //字符串
+    @Note("字符")
     private String str;
-    //时间
     private Date date;
-    //用户编号
     private Long userId;
-    //删除标识(数据库设置默认值0)
     private Boolean del;
 
 
