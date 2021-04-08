@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Collection;
@@ -33,10 +34,14 @@ public class TabServiceImpl extends ServiceImpl<TabMapper, Tab> implements TabSe
     }
 
     @Override
+    @Transactional
     public void modify(Tab tab) {
         if (Objects.isNull(tab.getId())) {
             tabMapper.insert(tab);
         } else {
+            Tab query = new Tab();
+            query.setId(tab.getId());
+            tabMapper.selectList(new QueryWrapper(query));
             tabMapper.updateById(tab);
         }
     }
