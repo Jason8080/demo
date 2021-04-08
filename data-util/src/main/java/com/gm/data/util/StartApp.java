@@ -1,6 +1,5 @@
 package com.gm.data.util;
 
-import cn.gmlee.tools.swagger.config.SwaggerWebMvcAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Jas °
  * @date 2021 /3/29 (周一)
  */
-@SpringBootApplication(exclude = SwaggerWebMvcAutoConfiguration.class)
+@SpringBootApplication
 @ComponentScan({"com.gm", "cn.gmlee"})
 public class StartApp {
     /**

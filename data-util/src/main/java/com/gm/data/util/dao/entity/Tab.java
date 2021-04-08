@@ -85,4 +85,16 @@ public class Tab extends Model<Tab> {
     protected Serializable pkVal() {
         return this.id;
     }
+
+    @Override
+    public String toString() {
+        return "Tab{" +
+                "id=" + id +
+                ", column1='" + column1 + '\'' +
+                ", str='" + str + '\'' +
+                ", date=" + date +
+                ", userId=" + userId +
+                ", del=" + del +
+                '}';
+    }
 }

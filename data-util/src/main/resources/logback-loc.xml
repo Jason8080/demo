@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-    <property name="CUSTOM_LOG_LEVEL" value="INFO"/>
+    <property name="CUSTOM_LOG_LEVEL" value="DEBUG"/>
     <property name="CUSTOM_SYS_PATH" value="/home/data/logs/"/>
     <property name="CUSTOM_SYS_NAME" value="demo-datalog"/>
     <property name="CUSTOM_BUG_PACKAGE" value="com.gm"/>
