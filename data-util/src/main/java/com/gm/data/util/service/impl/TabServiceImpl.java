@@ -34,14 +34,10 @@ public class TabServiceImpl extends ServiceImpl<TabMapper, Tab> implements TabSe
     }
 
     @Override
-    @Transactional
     public void modify(Tab tab) {
         if (Objects.isNull(tab.getId())) {
             tabMapper.insert(tab);
         } else {
-            Tab query = new Tab();
-            query.setId(tab.getId());
-            tabMapper.selectList(new QueryWrapper(query));
             tabMapper.updateById(tab);
         }
     }
