@@ -2,8 +2,8 @@ package com.gm.data.util.dao.entity;
 
 import java.util.Date;
 
-import cn.gmlee.tools.datalog.annotation.Ignore;
-import cn.gmlee.tools.datalog.annotation.Note;
+import cn.gmlee.tools.datalog.anno.Ignore;
+import cn.gmlee.tools.datalog.anno.Note;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
