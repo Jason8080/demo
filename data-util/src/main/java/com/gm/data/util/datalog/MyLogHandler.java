@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Jas°
@@ -30,11 +31,17 @@ public class MyLogHandler extends AbstractDatalogInterceptorHandler<MyLog> {
 
     @Override
     public boolean commit(MyLog myLog) {
-        List<Map<String, Object>> result = JdbcUtil.exec(
+        List<Map<String, Object>> oldsData = JdbcUtil.exec(
                 dataSource,
                 myLog.getDatalogSelectSql()
         );
-        System.out.println(result);
+        List<Map<String, Object>> commentMap = JdbcUtil.exec(
+                dataSource,
+                String.format("show full columns from %s", myLog.getDataTable())
+        );
+        Map<String, Object> fieldCommentMap = commentMap.stream().collect(Collectors.toMap(map -> map.get("Field").toString(), map -> map.get("Comment")));
+        System.out.println(fieldCommentMap);
+        System.out.println(oldsData);
         return true;
     }
 }
