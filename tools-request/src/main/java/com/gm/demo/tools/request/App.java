@@ -1,6 +1,5 @@
 package com.gm.demo.tools.request;
 
-import cn.gmlee.tools.request.config.filter.ReplaceStreamFilterAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
