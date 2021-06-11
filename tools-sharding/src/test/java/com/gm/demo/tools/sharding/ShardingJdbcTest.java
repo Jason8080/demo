@@ -1,6 +1,7 @@
 package com.gm.demo.tools.sharding;
 
 import cn.gmlee.tools.base.util.JsonUtil;
+import cn.gmlee.tools.base.util.LocalDateTimeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.gm.demo.tools.sharding.dao.entity.Tab;
 import com.gm.demo.tools.sharding.dao.mapper.TabMapper;
@@ -12,6 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
@@ -51,7 +53,10 @@ public class ShardingJdbcTest {
      */
     @Test
     public void get() throws Exception {
-        QueryWrapper<Tab> qw = new QueryWrapper();
+        Tab query = new Tab();
+        query.setUserId(1L);
+        QueryWrapper<Tab> qw = new QueryWrapper(query);
+//        qw.between("date", LocalDateTimeUtil.offsetCurrent(-1, ChronoUnit.DAYS), new Date());
         List<Tab> tabs = tabMapper.selectList(qw);
         System.out.println(JsonUtil.format(tabs));
     }
