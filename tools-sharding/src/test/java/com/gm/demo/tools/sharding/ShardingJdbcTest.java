@@ -8,7 +8,6 @@ import com.gm.demo.tools.sharding.dao.mapper.TabMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -22,11 +21,8 @@ import java.util.List;
  */
 @ActiveProfiles("loc")
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = App.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = App.class)
 public class ShardingJdbcTest {
-
-    @LocalServerPort
-    private int port;
 
     @Resource
     private TabMapper tabMapper;
@@ -55,8 +51,9 @@ public class ShardingJdbcTest {
     public void get() throws Exception {
         Tab query = new Tab();
         query.setUserId(1L);
+//        query.setDate(new Date());
         QueryWrapper<Tab> qw = new QueryWrapper(query);
-//        qw.between("date", LocalDateTimeUtil.offsetCurrent(-1, ChronoUnit.DAYS), new Date());
+        qw.between("date", LocalDateTimeUtil.offsetCurrent(-1, ChronoUnit.DAYS), new Date());
         List<Tab> tabs = tabMapper.selectList(qw);
         System.out.println(JsonUtil.format(tabs));
     }
