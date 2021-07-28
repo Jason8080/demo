@@ -17,5 +17,6 @@
 
     <modules>
         <module>tools-sharding</module>
+        <module>tools-overstep</module>
     </modules>
 </project>
