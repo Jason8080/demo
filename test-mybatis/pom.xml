@@ -33,6 +33,10 @@
             <groupId>cn.gmlee</groupId>
             <artifactId>tools-swagger</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-datalog</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
