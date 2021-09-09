@@ -20,6 +20,10 @@
             <groupId>cn.gmlee</groupId>
             <artifactId>tools-overstep</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>tools-cloud</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
