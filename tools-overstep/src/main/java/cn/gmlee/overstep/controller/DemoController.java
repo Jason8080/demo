@@ -2,7 +2,7 @@ package cn.gmlee.overstep.controller;
 
 import cn.gmlee.overstep.api.DemoApi;
 import cn.gmlee.overstep.controller.vo.Demo;
-import cn.gmlee.tools.base.mod.JsonResult;
+import cn.hll.tools.base.mod.JsonResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

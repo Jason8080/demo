@@ -22,22 +22,22 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-swagger</artifactId>
             <version>3.0.2</version>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-logback</artifactId>
             <version>3.0.2</version>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-webapp</artifactId>
             <version>3.0.2</version>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-seata</artifactId>
             <version>3.0.2</version>
             <exclusions>

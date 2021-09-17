@@ -14,11 +14,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-sharding</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-mybatis</artifactId>
         </dependency>
         <dependency>

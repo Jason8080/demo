@@ -13,16 +13,24 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-base</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-overstep</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-cloud</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hll.tools</groupId>
+            <artifactId>tools-webapp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hll.tools</groupId>
+            <artifactId>tools-often</artifactId>
         </dependency>
     </dependencies>
 

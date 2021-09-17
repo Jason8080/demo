@@ -5,13 +5,14 @@ import cn.gmlee.test.mybatis.controller.vo.CityVo;
 import cn.gmlee.test.mybatis.dao.mapper.CityMapper;
 import cn.gmlee.test.mybatis.service.CityService;
 
-import cn.gmlee.tools.base.util.BeanUtil;
 
+import cn.hll.tools.base.util.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Collection;

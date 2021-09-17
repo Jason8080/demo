@@ -18,7 +18,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-request</artifactId>
         </dependency>
         <dependency>

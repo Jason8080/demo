@@ -18,24 +18,28 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-ds</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-mybatis</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-code</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-swagger</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-datalog</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hll.tools</groupId>
+            <artifactId>tools-often</artifactId>
         </dependency>
     </dependencies>
 

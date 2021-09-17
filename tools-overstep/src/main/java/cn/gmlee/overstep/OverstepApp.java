@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2021/7/28 (周三)
  */
 @SpringBootApplication
-@ComponentScan("cn.gmlee")
+@ComponentScan({"cn.gmlee", "cn.hll.tools"})
 @EnableFeignClients("cn.gmlee.overstep.api")
 public class OverstepApp {
 

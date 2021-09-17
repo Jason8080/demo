@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>cn.gmlee</groupId>
+        <groupId>cn.hll.tools</groupId>
         <artifactId>tools-parent</artifactId>
-        <version>3.1.2-Beta1</version>
+        <version>LASTER</version>
     </parent>
 
     <groupId>com.gm</groupId>

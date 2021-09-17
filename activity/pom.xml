@@ -13,7 +13,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-ds</artifactId>
         </dependency>
         <dependency>

@@ -1,6 +1,7 @@
 package cn.gmlee.test.mybatis;
 
-import cn.gmlee.tools.code.CodeGenerator;
+
+import cn.hll.tools.code.CodeGenerator;
 
 /**
  * .

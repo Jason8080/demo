@@ -15,15 +15,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-logback</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-ds</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-mybatis</artifactId>
             <exclusions>
                 <exclusion>
@@ -33,15 +33,15 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-datalog</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-swagger</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.gmlee</groupId>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-webapp</artifactId>
         </dependency>
         <!-- 解决默认值类型异常 -->
