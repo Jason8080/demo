@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2021/9/18 (周六)
  */
 @SpringBootApplication
-@ComponentScan({"cn.hll.css.dependencies", "cn.gmlee.demo.rbac.jedis"})
+@ComponentScan({"cn.hll.css.kit", "cn.gmlee.demo.rbac.jedis"})
 public class App {
 
     public static void main(String[] args) {

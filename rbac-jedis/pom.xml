@@ -3,9 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>cn.hll.dependencies</groupId>
+        <groupId>cn.hll.kit</groupId>
         <artifactId>css-boot-starter-parent</artifactId>
-        <version>LASTER</version>
+        <version>2.4.0</version>
         <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -14,11 +14,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.hll.dependencies</groupId>
+            <groupId>cn.hll.kit</groupId>
             <artifactId>css-base</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.hll.dependencies</groupId>
+            <groupId>cn.hll.kit</groupId>
             <artifactId>css-boot-starter-rbac</artifactId>
         </dependency>
 
