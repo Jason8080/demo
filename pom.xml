@@ -20,5 +20,6 @@
         <module>test-mybatis</module>
         <module>tools-overstep</module>
         <module>rbac-jedis</module>
+        <module>css-kafka</module>
     </modules>
 </project>
