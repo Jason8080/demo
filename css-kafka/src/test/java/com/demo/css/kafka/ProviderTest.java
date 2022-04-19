@@ -42,7 +42,8 @@ public class ProviderTest {
     public void test() throws IOException {
         AtomicInteger i = new AtomicInteger();
         while (System.in.read() != 'q') {
-            System.out.println(String.format("发送成功: %s", i.getAndIncrement()));
+            i.getAndIncrement();
+            System.out.println(String.format("发送成功: %s", i.get()));
             ThreadUtil.execute(() -> msgProducer.send(new Kv("ID", i.get())));
         }
     }
