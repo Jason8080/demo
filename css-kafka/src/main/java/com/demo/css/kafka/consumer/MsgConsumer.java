@@ -21,11 +21,11 @@ public class MsgConsumer extends AbstractMessageThreadConsumer {
             concurrency = "${spring.kafka.multiple.consumer.consumer1.concurrency:1}",
             topics = "#{'${spring.kafka.multiple.consumer.consumer1.topics}'.split(',')}"
     )
-    public void onMessage(ConsumerRecord record, Acknowledgment ack) {
+    public void onMessage(ConsumerRecord record/*, Acknowledgment ack*/) {
         Kv kv = JsonUtil.toBean(record.value().toString(), Kv.class);
         System.out.println(String.format("接收完成：%s-%s-%s", record.partition(), record.offset(), kv.getVal()));
         handleMessage(record);
-        ack.acknowledge();
+//        ack.acknowledge();
     }
 
     @Override
