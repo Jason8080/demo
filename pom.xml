@@ -19,5 +19,6 @@
         <module>activity</module>
         <module>test-mybatis</module>
         <module>tools-overstep</module>
+        <module>css-log</module>
     </modules>
 </project>
