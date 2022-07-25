@@ -7,7 +7,7 @@
     <parent>
         <groupId>cn.hll.tools</groupId>
         <artifactId>tools-parent</artifactId>
-        <version>4.7.9</version>
+        <version>4.9.1</version>
     </parent>
 
     <groupId>com.gm</groupId>
@@ -20,5 +20,7 @@
         <module>test-mybatis</module>
         <module>tools-overstep</module>
         <module>css-log</module>
+        <module>tools-request</module>
+        <module>css-proxy</module>
     </modules>
 </project>

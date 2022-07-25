@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication(exclude = {
 //        ReplaceStreamFilterAutoConfiguration.class,
 })
-@ComponentScan({"cn.gmlee", "com.gm.demo"})
+@ComponentScan({"cn.hll.tools", "com.gm.demo"})
 public class App {
 
     public static void main(String[] args) {

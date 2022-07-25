@@ -1,6 +1,6 @@
 package com.gm.demo.tools.request.controller;
 
-import cn.gmlee.tools.base.mod.JsonResult;
+import cn.hll.tools.base.mod.JsonResult;
 import com.gm.demo.tools.request.controller.vo.Demo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
