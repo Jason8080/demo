@@ -22,5 +22,6 @@
         <module>css-log</module>
         <module>tools-request</module>
         <module>css-proxy</module>
+        <module>aio-concurrent</module>
     </modules>
 </project>
