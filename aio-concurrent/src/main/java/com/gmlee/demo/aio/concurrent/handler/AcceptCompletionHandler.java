@@ -5,6 +5,8 @@ import com.gmlee.demo.aio.concurrent.kit.IoKit;
 
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * 连接接收处理器.
@@ -16,6 +18,12 @@ public class AcceptCompletionHandler implements CompletionHandler<AsynchronousSo
         System.out.println("收到连接" + channel);
         try {
             aioServer.run();
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    IoKit.write(channel, "我勒个去".getBytes());
+                }
+            }, 1000, 1000);
         } finally {
             IoKit.read(channel);
         }
