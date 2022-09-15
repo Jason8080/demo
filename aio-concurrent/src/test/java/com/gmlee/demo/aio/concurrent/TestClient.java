@@ -12,7 +12,7 @@ public class TestClient {
         AioClient aioClient = new AioClient();
         Thread.sleep(1000);
         List<Thread> threads = new ArrayList<>();
-        for (int i = 0; i< 1; i++){
+        for (int i = 0; i< 10000; i++){
             final int j = i;
             threads.add(new Thread(() -> IoKit.write(aioClient.getChannel(), ("你好"+j).getBytes())));
         }

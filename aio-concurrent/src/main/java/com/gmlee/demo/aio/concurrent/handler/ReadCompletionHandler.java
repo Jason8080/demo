@@ -1,5 +1,8 @@
 package com.gmlee.demo.aio.concurrent.handler;
 
+import com.gmlee.demo.aio.concurrent.kit.BufferKit;
+import com.gmlee.demo.aio.concurrent.kit.IoKit;
+
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
@@ -28,10 +31,10 @@ public class ReadCompletionHandler implements CompletionHandler<Integer, ByteBuf
     @Override
     public void completed(Integer size, ByteBuffer bb) {
         try {
-            System.out.println(new String(bb.array()));
+            bb.flip();
+            System.out.println(new String(BufferKit.get(bb, bb.remaining())));
         }finally {
-            ByteBuffer buffer = ByteBuffer.allocate(1024);
-            channel.read(buffer, buffer, this);
+            IoKit.read(channel);
         }
     }
 
