@@ -15,7 +15,7 @@ public class AcceptCompletionHandler implements CompletionHandler<AsynchronousSo
     public void completed(AsynchronousSocketChannel channel, AioServer aioServer) {
         System.out.println("收到连接" + channel);
         try {
-            aioServer.accept();
+            aioServer.run();
         } finally {
             IoKit.read(channel);
         }

@@ -32,9 +32,9 @@ public class ReadCompletionHandler implements CompletionHandler<Integer, ByteBuf
     public void completed(Integer size, ByteBuffer bb) {
         try {
             bb.flip();
-            System.out.println(new String(BufferKit.get(bb, bb.remaining())));
-            bb.flip();
-            IoKit.write(channel, BufferKit.get(bb, bb.remaining()));
+            byte[] bytes = BufferKit.get(bb, bb.remaining());
+            System.out.println(new String(bytes));
+            IoKit.write(channel, bytes);
         }finally {
             IoKit.read(channel);
         }
