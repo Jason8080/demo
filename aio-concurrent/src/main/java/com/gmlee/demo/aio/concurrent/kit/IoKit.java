@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class IoKit {
 
-    private static final Map<AsynchronousSocketChannel, WriteLock> locks = new ConcurrentHashMap();
+    private static final Map<AsynchronousSocketChannel, WriteLock> map = new ConcurrentHashMap();
 
     /**
      * Read.
@@ -54,10 +54,10 @@ public class IoKit {
     }
 
     private static WriteLock get(AsynchronousSocketChannel channel) {
-        WriteLock write = locks.get(channel);
+        WriteLock write = map.get(channel);
         if(write == null){
             write = new WriteLock(channel);
-            locks.put(channel, write);
+            map.put(channel, write);
         }
         return write;
     }
