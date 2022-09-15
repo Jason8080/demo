@@ -33,6 +33,8 @@ public class ReadCompletionHandler implements CompletionHandler<Integer, ByteBuf
         try {
             bb.flip();
             System.out.println(new String(BufferKit.get(bb, bb.remaining())));
+            bb.flip();
+            IoKit.write(channel, BufferKit.get(bb, bb.remaining()));
         }finally {
             IoKit.read(channel);
         }
