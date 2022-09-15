@@ -11,6 +11,9 @@ import java.util.concurrent.CountDownLatch;
 public class TestClient {
 
     public static void main(String[] args) throws Exception {
+        // ------------------------
+        TestServer.main(args);
+        // ------------------------
         AioClient aioClient = new AioClient();
         Thread.sleep(1000);
         List<Thread> threads = new ArrayList<>();
