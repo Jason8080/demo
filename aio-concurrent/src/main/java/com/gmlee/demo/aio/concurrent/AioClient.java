@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousChannelGroup;
 import java.nio.channels.AsynchronousSocketChannel;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * The type Aio server.
@@ -17,6 +17,8 @@ public class AioClient {
 
     private AsynchronousChannelGroup group;
     private AsynchronousSocketChannel channel;
+
+    private final ExecutorService executorService;
 
     /**
      * The entry point of application.
@@ -34,7 +36,9 @@ public class AioClient {
      * @throws IOException the io exception
      */
     public AioClient() throws IOException {
-        group = AsynchronousChannelGroup.withCachedThreadPool(Executors.newCachedThreadPool(), 10);
+        executorService = new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), Integer.MAX_VALUE, 1, TimeUnit.HOURS,
+                new LinkedBlockingQueue(), (run) -> new Thread(run, String.format("Client%s  ", run.hashCode())), (Runnable r, ThreadPoolExecutor p) -> System.out.println("拒绝任务"));
+        group = AsynchronousChannelGroup.withCachedThreadPool(executorService, 10);
         channel = AsynchronousSocketChannel.open(group);
         connect();
     }
