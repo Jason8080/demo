@@ -2,16 +2,22 @@ package com.gmlee.demo.aio.concurrent.kit;
 
 import com.gmlee.demo.aio.concurrent.handler.ReadCompletionHandler;
 import com.gmlee.demo.aio.concurrent.handler.WriteCompletionHandler;
+import com.gmlee.demo.aio.concurrent.lock.WriteLock;
 
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.ReadPendingException;
 import java.nio.channels.WritePendingException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The type Io kit.
  */
 public class IoKit {
+
+    private static final Map<AsynchronousSocketChannel, WriteLock> locks = new ConcurrentHashMap();
+
     /**
      * Read.
      *
@@ -25,17 +31,34 @@ public class IoKit {
             e.printStackTrace();
         }
     }
+
     /**
      * Read.
      *
      * @param channel the channel
      */
     public synchronized static void write(AsynchronousSocketChannel channel, byte... bytes) {
+        WriteLock write = get(channel);
+        write.lock.lock();
         try {
             ByteBuffer bb = ByteBuffer.wrap(bytes);
-            channel.write(bb, bb, new WriteCompletionHandler(channel));
+            channel.write(bb, bb, new WriteCompletionHandler(write));
+            write.condition.await();
         } catch (WritePendingException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            write.lock.unlock();
         }
+    }
+
+    private static WriteLock get(AsynchronousSocketChannel channel) {
+        WriteLock write = locks.get(channel);
+        if(write == null){
+            write = new WriteLock(channel);
+            locks.put(channel, write);
+        }
+        return write;
     }
 }
