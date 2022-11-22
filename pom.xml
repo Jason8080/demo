@@ -23,5 +23,6 @@
         <module>tools-request</module>
         <module>css-proxy</module>
         <module>aio-concurrent</module>
+        <module>dt-demo</module>
     </modules>
 </project>
