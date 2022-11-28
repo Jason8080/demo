@@ -2,25 +2,48 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <artifactId>demo</artifactId>
         <groupId>com.gm</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
     <artifactId>dt-demo</artifactId>
+    <groupId>com.gm</groupId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <dt.version>1.0.0</dt.version>
-        <tools.version>4.9.14</tools.version>
+        <tools.version>4.9.15</tools.version>
+        <springboot.version>2.3.4.RELEASE</springboot.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>cn.hll.tools</groupId>
+                <artifactId>tools-parent</artifactId>
+                <version>${tools.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
             <groupId>cn.gmlee</groupId>
             <artifactId>dt-spring-boot-starter</artifactId>
-            <version>${dt.version}</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>cn.hll.tools</groupId>
