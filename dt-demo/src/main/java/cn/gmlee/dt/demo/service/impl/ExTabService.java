@@ -29,6 +29,9 @@ public class ExTabService {
      */
     @Transactional(rollbackFor = Exception.class)
     public void batch(List<Long> ids) {
+        // 远程调用
+        // TODO:
+        // 本地逻辑
         for (int i = 0; i < ids.size(); i++){
             if(i == ids.size() - 1){
                 int ex = i / 0;

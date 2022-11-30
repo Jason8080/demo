@@ -1,7 +1,6 @@
 package cn.gmlee.dt.demo.controller;
 
 
-import cn.gmlee.dt.demo.service.TabService;
 import cn.gmlee.dt.demo.service.impl.ExTabService;
 import cn.hll.tools.base.anno.ApiPrint;
 import cn.hll.tools.base.mod.JsonResult;
@@ -18,7 +17,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author Jas°
@@ -29,14 +28,14 @@ import java.util.List;
 @Api(tags = {"测试"})
 @RequestMapping("test")
 public class TestController {
-     @Resource
-     private ExTabService exTabService;
+    @Resource
+    private ExTabService exTabService;
 
-     @ApiOperation(value = "批处理")
-     @ApiPrint(value = "批处理")
-     @PostMapping(value = "batch")
-     public JsonResult batch(@RequestBody List<Long> ids) {
-         exTabService.batch(ids);
-           return JsonResult.OK;
-      }
+    @ApiOperation(value = "批处理")
+    @ApiPrint(value = "批处理")
+    @PostMapping(value = "batch")
+    public JsonResult batch(@RequestBody List<Long> ids) {
+        exTabService.batch(ids);
+        return JsonResult.OK;
+    }
 }
