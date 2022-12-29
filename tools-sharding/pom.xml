@@ -11,15 +11,32 @@
 
     <artifactId>tools-sharding</artifactId>
 
+    <properties>
+        <tools.version>4.12.3</tools.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.hll.tools</groupId>
+                <artifactId>tools-parent</artifactId>
+                <version>${tools.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
             <groupId>cn.hll.tools</groupId>
             <artifactId>tools-sharding</artifactId>
+            <version>${tools.version}</version>
         </dependency>
         <dependency>
             <groupId>cn.hll.tools</groupId>
             <artifactId>tools-mybatis</artifactId>
+            <version>${tools.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

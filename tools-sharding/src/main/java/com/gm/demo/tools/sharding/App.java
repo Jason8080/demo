@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2021/6/10 (周四)
  */
 @SpringBootApplication
-@ComponentScan({"com.gm.demo", "cn.gmlee.tools"})
+@ComponentScan({"com.gm.demo", "cn.hll.tools"})
 public class App {
 
     public static void main(String[] args) {

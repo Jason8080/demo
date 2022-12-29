@@ -11,5 +11,6 @@
 
     <modules>
         <module>dt-demo</module>
+        <module>tools-sharding</module>
     </modules>
 </project>
