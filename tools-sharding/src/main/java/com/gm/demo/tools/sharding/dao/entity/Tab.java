@@ -11,7 +11,7 @@ import java.util.Date;
  * @date 2021/6/10 (周四)
  */
 @Data
-@TableName("sharding_tab")
+@TableName("ts_tab")
 public class Tab implements Serializable {
     private Long id;
     private String column1;
