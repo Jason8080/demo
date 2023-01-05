@@ -38,7 +38,10 @@ rules:
           auditorNames:
             - sharding_key_required_auditor
           allowHintDisable: true
-    defaultShardingColumn: id
+    defaultTableStrategy:
+      standard:
+        shardingColumn: id
+        shardingAlgorithmName: table_inline
     defaultDatabaseStrategy:
       standard:
         shardingColumn: user_id
@@ -49,6 +52,10 @@ rules:
         type: INLINE
         props:
           algorithm-expression: ts_db_${user_id % 2}
+      table_inline:
+        type: INLINE
+        props:
+          algorithm-expression: ts_tab_${id % 2}
       ts_tab_inline:
         type: INLINE
         props:
