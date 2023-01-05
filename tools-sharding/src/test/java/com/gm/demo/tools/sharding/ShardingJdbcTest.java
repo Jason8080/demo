@@ -28,7 +28,7 @@ public class ShardingJdbcTest {
     private TabMapper tabMapper;
 
     /**
-     * Add.
+     * 分库分表新增.
      *
      * @throws Exception the exception
      */
@@ -43,7 +43,7 @@ public class ShardingJdbcTest {
     }
 
     /**
-     * Get.
+     * 分库分表查询.
      *
      * @throws Exception the exception
      */
