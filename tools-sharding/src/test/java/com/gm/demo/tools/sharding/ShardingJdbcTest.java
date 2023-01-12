@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.temporal.ChronoUnit;
@@ -39,6 +40,7 @@ public class ShardingJdbcTest {
      * @throws Exception the exception
      */
     @Test
+//    @Transactional
     public void add() throws Exception {
         Tab tab = new Tab();
         tab.setColumn1("username");
