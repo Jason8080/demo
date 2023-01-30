@@ -11,6 +11,7 @@ import com.gm.demo.tools.sharding.dao.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +52,7 @@ public class ShardingJdbcTest {
      */
     @Test
     @Transactional
+    @Rollback(false)
     // 开启事务的同时, 会提前获取连接, 保证事务内操作是同一个连接
     // 没有事务时, 只会在执行持久化操作时, 才会获取连接
     // 所以, 不开事务, 切了数据源, 就会使用新节点, 开了事务, 切换数据源则不受影响
