@@ -51,7 +51,7 @@ public class ShardingJdbcTest {
      * @throws Exception the exception
      */
     @Test
-    @Transactional
+//    @Transactional
     @Rollback(false)
     // 开启事务的同时, 会提前获取连接, 保证事务内操作是同一个连接
     // 没有事务时, 只会在执行持久化操作时, 才会获取连接
