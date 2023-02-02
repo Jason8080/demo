@@ -92,8 +92,7 @@ public class ShardingJdbcTest {
         LambdaQueryWrapper<Tab> qw = Wrappers.<Tab>lambdaQuery()
                 .eq(Tab::getUserId, 1)
 //                .between(Tab::getDate, LocalDateTimeUtil.offsetCurrent(-1, ChronoUnit.DAYS), new Date())
-                ;
-        List<Tab> tabs = tabMapper.selectList(qw);
+                ;List<Tab> tabs = tabMapper.selectList(qw);
         System.out.println(JsonUtil.format(tabs));
     }
 }

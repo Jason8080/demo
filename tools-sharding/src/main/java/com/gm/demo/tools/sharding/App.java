@@ -1,6 +1,5 @@
 package com.gm.demo.tools.sharding;
 
-import cn.hll.tools.ds.config.dynamic.DynamicDatasourceAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Jas°
  * @date 2021/6/10 (周四)
  */
-@SpringBootApplication(exclude = DynamicDatasourceAutoConfiguration.class)
+@SpringBootApplication
 @ComponentScan({"com.gm.demo", "cn.hll.tools"})
 public class App {
 
