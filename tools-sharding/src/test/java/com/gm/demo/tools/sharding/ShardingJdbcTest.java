@@ -1,7 +1,6 @@
 package com.gm.demo.tools.sharding;
 
 import cn.hll.tools.base.util.JsonUtil;
-import cn.hll.tools.base.util.LocalDateTimeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.gm.demo.tools.sharding.dao.entity.Tab;
@@ -14,10 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
@@ -37,16 +34,6 @@ public class ShardingJdbcTest {
 
     /**
      * 动态切换数据.
-     * <p>
-     * 在线切换数据源, 必须保证1点: 不能影响正在运行的业务...
-     * 但是切换数据源是需要时间的, 谁能保证切换的那一刻, 程序没有在使用这个数据源呢?
-     *
-     * -------------- 当然官方是有连接探测器的...
-     * 但是, 用探测器检查, 然后没有活跃连接时再切换, 是不是有点low ...
-     * 或者说, 给数据源加锁? 诶.....这倒可以, 但还是low.....  这不影响性能和体验吗?
-     * -------------- 所以已获取连接的地方不能换数据源
-     * -------------- 新取的连接从新数据源中去取 ....  这才是我们比较优雅的做法...
-     * </p>
      *
      * @throws Exception the exception
      */
@@ -89,7 +76,8 @@ public class ShardingJdbcTest {
     public void getUser() throws Exception {
         LambdaQueryWrapper<User> qw = Wrappers.<User>lambdaQuery()
                 .eq(User::getGender, false)
-                .between(User::getBirthday, LocalDateTimeUtil.offsetCurrent(-1, ChronoUnit.DAYS), new Date());
+//                .between(User::getBirthday, LocalDateTimeUtil.offsetCurrent(-1, ChronoUnit.DAYS), new Date())
+                ;
         List<User> users = userMapper.selectList(qw);
         System.out.println(JsonUtil.format(users));
     }
@@ -103,7 +91,8 @@ public class ShardingJdbcTest {
     public void get() throws Exception {
         LambdaQueryWrapper<Tab> qw = Wrappers.<Tab>lambdaQuery()
                 .eq(Tab::getUserId, 1)
-                .between(Tab::getDate, LocalDateTimeUtil.offsetCurrent(-1, ChronoUnit.DAYS), new Date());
+//                .between(Tab::getDate, LocalDateTimeUtil.offsetCurrent(-1, ChronoUnit.DAYS), new Date())
+                ;
         List<Tab> tabs = tabMapper.selectList(qw);
         System.out.println(JsonUtil.format(tabs));
     }
