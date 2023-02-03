@@ -1,6 +1,8 @@
 package cn.gmlee.dt.demo.service.impl;
 
 import cn.gmlee.dt.demo.dao.mapper.TabMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,8 @@ import java.util.List;
  */
 @Service
 public class ExTabService {
+
+    private static final Logger log = LoggerFactory.getLogger(ExTabService.class);
 
     @Resource
     private TabMapper tabMapper;
@@ -38,6 +42,7 @@ public class ExTabService {
                 System.out.println(ex);
             }
             tabMapper.deleteById(ids.get(i));
+            log.info("已删除: {}", ids.get(i));
         }
     }
 }
