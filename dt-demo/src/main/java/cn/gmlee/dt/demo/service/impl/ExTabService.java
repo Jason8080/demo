@@ -1,6 +1,8 @@
 package cn.gmlee.dt.demo.service.impl;
 
 import cn.gmlee.dt.demo.dao.mapper.TabMapper;
+import cn.hll.tools.base.mod.HttpResult;
+import cn.hll.tools.base.util.HttpUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -34,7 +36,8 @@ public class ExTabService {
     @Transactional(rollbackFor = Exception.class)
     public void batch(List<Long> ids) {
         // 远程调用
-        // TODO:
+        HttpResult httpResult = HttpUtil.post("http://127.0.0.1:8080/tab/del", 3);
+        System.out.println(httpResult.byteResponseBody2String());
         // 本地逻辑
         for (int i = 0; i < ids.size(); i++){
             if(i == ids.size() - 1){

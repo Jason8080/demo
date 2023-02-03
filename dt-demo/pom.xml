@@ -72,6 +72,11 @@
         </dependency>
         <dependency>
             <groupId>cn.hll.tools</groupId>
+            <artifactId>tools-often</artifactId>
+            <version>${tools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-code</artifactId>
             <version>${tools.version}</version>
             <scope>test</scope>

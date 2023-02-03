@@ -92,6 +92,20 @@ public class TabController {
             return JsonResult.OK;
       }
 
+      @ApiOperation(value = "物理删除")
+      @ApiPrint(value = "物理删除")
+      @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
+            @ApiImplicitParam(name = "id", value = "编号", dataType = "long", dataTypeClass = Long.class),
+      })
+      @PostMapping(value = "del")
+      public JsonResult del(
+            @RequestBody @NotNull(message = "编号是空") Long id
+      ) {
+            tabService.removeById(id);
+            return JsonResult.OK;
+      }
+
       @ApiOperation(value = "获取单条")
       @ApiPrint(value = "获取单条")
       @GetMapping(value = "getById")
