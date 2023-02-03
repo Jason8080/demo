@@ -2,7 +2,6 @@ package cn.gmlee.dt.demo.controller;
 
 
 import cn.gmlee.dt.demo.service.impl.ExTabService;
-import cn.hll.tools.base.anno.ApiPrint;
 import cn.hll.tools.base.mod.JsonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,7 +31,6 @@ public class TestController {
     private ExTabService exTabService;
 
     @ApiOperation(value = "批处理")
-    @ApiPrint(value = "批处理")
     @PostMapping(value = "batch")
     public JsonResult batch(@RequestBody List<Long> ids) {
         exTabService.batch(ids);
