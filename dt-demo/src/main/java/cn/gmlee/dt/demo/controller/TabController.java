@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -92,6 +93,7 @@ public class TabController {
             return JsonResult.OK;
       }
 
+      @Transactional
       @ApiOperation(value = "物理删除")
       @ApiPrint(value = "物理删除")
       @ApiImplicitParams({

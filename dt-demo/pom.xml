@@ -41,13 +41,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.gmlee</groupId>
-            <artifactId>dt-spring-boot-starter</artifactId>
-            <version>1.0.0</version>
+            <groupId>cn.hll.tools</groupId>
+            <artifactId>tools-webapp</artifactId>
+            <version>${tools.version}</version>
         </dependency>
         <dependency>
             <groupId>cn.hll.tools</groupId>
-            <artifactId>tools-webapp</artifactId>
+            <artifactId>tools-mybatis</artifactId>
             <version>${tools.version}</version>
         </dependency>
         <dependency>

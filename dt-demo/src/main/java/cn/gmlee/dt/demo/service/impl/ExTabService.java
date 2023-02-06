@@ -29,7 +29,12 @@ public class ExTabService {
 
 
     /**
-     * Batch.
+     * 事务验证.
+     * <p>
+     *     预期效果: 全部回滚.
+     *     远程事务失效: 会导致 id=3 的数据被删除
+     *     本地事务失效: 会导致 `首条` 记录被删除
+     * </p>
      *
      * @param ids the ids
      */
