@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.gmlee.dt.demo.conf.DtTransactionManagementAutoConfiguration
