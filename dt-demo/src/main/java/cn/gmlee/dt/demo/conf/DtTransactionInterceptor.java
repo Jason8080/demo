@@ -10,8 +10,8 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
 public class DtTransactionInterceptor extends TransactionInterceptor {
 
     @Override
-    protected TransactionInfo createTransactionIfNecessary(PlatformTransactionManager tm, TransactionAttribute txAttr, String joinpointIdentification) {
-        return super.createTransactionIfNecessary(tm, txAttr, joinpointIdentification);
+    protected TransactionInfo createTransactionIfNecessary(PlatformTransactionManager tm, TransactionAttribute txAttr, String s) {
+        return super.createTransactionIfNecessary(tm, txAttr, s);
     }
 
     @Override
