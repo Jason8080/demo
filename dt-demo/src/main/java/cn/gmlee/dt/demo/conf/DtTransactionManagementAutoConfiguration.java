@@ -3,7 +3,6 @@ package cn.gmlee.dt.demo.conf;
 import cn.hll.tools.ds.config.dynamic.DynamicDatasourceAutoConfiguration;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
