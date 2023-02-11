@@ -93,7 +93,7 @@ public class TabController {
             return JsonResult.OK;
       }
 
-      @Transactional
+      @Transactional(timeout = 3)
       @ApiOperation(value = "物理删除")
       @ApiPrint(value = "物理删除")
       @ApiImplicitParams({
