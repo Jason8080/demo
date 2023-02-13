@@ -1,10 +1,12 @@
 package cn.gmlee.dt.demo.controller;
 
 
-
+import cn.gmlee.dt.demo.controller.vo.TabVo;
+import cn.gmlee.dt.demo.dao.entity.Tab;
+import cn.gmlee.dt.demo.service.TabService;
+import cn.hll.tools.base.anno.ApiPrint;
 import cn.hll.tools.base.mod.JsonResult;
 import cn.hll.tools.base.mod.PageRequest;
-import cn.hll.tools.base.anno.ApiPrint;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -14,15 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import cn.gmlee.dt.demo.service.TabService;
-import cn.gmlee.dt.demo.dao.entity.Tab;
-import cn.gmlee.dt.demo.controller.vo.TabVo;
-
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.util.List;
-
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -93,7 +89,7 @@ public class TabController {
             return JsonResult.OK;
       }
 
-      @Transactional(timeout = 3)
+      @Transactional
       @ApiOperation(value = "物理删除")
       @ApiPrint(value = "物理删除")
       @ApiImplicitParams({
