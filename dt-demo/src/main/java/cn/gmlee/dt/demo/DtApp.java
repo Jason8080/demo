@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class DtApp {
 
     /**
-     * The entry point of application.
+     * The entry point of application.CtClientAutoConfiguration
      *
      * @param args the input arguments
      */

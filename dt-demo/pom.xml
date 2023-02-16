@@ -16,6 +16,7 @@
 
     <properties>
         <dt.version>1.0.0</dt.version>
+        <ct.version>1.0.0</ct.version>
         <tools.version>4.12.5</tools.version>
         <springboot.version>2.3.4.RELEASE</springboot.version>
     </properties>
@@ -47,6 +48,21 @@
         </dependency>
         <dependency>
             <groupId>cn.hll.tools</groupId>
+            <artifactId>tools-ds</artifactId>
+            <version>${tools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>ct-client</artifactId>
+            <version>${ct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.gmlee</groupId>
+            <artifactId>ct-server</artifactId>
+            <version>${ct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hll.tools</groupId>
             <artifactId>tools-mybatis</artifactId>
             <version>${tools.version}</version>
         </dependency>
@@ -57,7 +73,7 @@
         </dependency>
         <dependency>
             <groupId>cn.hll.tools</groupId>
-            <artifactId>tools-dt</artifactId>
+            <artifactId>tools-spring</artifactId>
             <version>${tools.version}</version>
         </dependency>
         <dependency>
