@@ -7,6 +7,7 @@ import cn.gmlee.dt.demo.service.TabService;
 import cn.hll.tools.base.anno.ApiPrint;
 import cn.hll.tools.base.mod.JsonResult;
 import cn.hll.tools.base.mod.PageRequest;
+import cn.hll.tools.ds.anno.Ds;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -89,6 +90,7 @@ public class TabController {
             return JsonResult.OK;
       }
 
+      @Ds("order")
       @Transactional
       @ApiOperation(value = "物理删除")
       @ApiPrint(value = "物理删除")

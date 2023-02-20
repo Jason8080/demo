@@ -47,11 +47,6 @@
             <version>${tools.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
-            <artifactId>tools-ds</artifactId>
-            <version>${tools.version}</version>
-        </dependency>
-        <dependency>
             <groupId>cn.gmlee</groupId>
             <artifactId>ct-client</artifactId>
             <version>${ct.version}</version>
