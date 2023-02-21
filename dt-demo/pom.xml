@@ -17,7 +17,7 @@
     <properties>
         <dt.version>1.0.0</dt.version>
         <ct.version>1.0.0</ct.version>
-        <tools.version>4.12.5</tools.version>
+        <tools.version>4.12.6</tools.version>
         <springboot.version>2.3.4.RELEASE</springboot.version>
     </properties>
 

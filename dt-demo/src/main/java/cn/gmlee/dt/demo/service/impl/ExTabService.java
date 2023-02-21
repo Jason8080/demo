@@ -1,6 +1,7 @@
 package cn.gmlee.dt.demo.service.impl;
 
 import cn.gmlee.ct.client.anno.Ct;
+import cn.gmlee.dt.demo.dao.entity.Tab;
 import cn.gmlee.dt.demo.dao.mapper.TabMapper;
 import cn.hll.tools.base.mod.HttpResult;
 import cn.hll.tools.base.mod.JsonResult;
@@ -49,6 +50,7 @@ public class ExTabService {
         AssertUtil.isTrue(httpResult.isOk(), httpResult.getErr());
         JsonResult jsonResult = httpResult.jsonResponseBody2bean(JsonResult.class);
         AssertUtil.isOk(jsonResult, jsonResult.getMsg());
+        Tab tab = tabMapper.selectById(4);
         // 本地逻辑
         for (int i = 0; i < ids.size(); i++) {
             if (i == ids.size() - 1) {
