@@ -9,8 +9,23 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <tools.version>4.21.1</tools.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.gmlee.tools</groupId>
+                <artifactId>tools-parent</artifactId>
+                <version>${tools.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <modules>
-        <module>dt-demo</module>
-        <module>tools-sharding</module>
+        <module>tools-mate</module>
     </modules>
 </project>

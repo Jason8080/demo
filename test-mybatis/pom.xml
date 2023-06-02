@@ -12,33 +12,31 @@
     <artifactId>test-mybatis</artifactId>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-ds</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-mybatis</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-code</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-swagger</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-datalog</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-often</artifactId>
         </dependency>
     </dependencies>

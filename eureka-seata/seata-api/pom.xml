@@ -20,7 +20,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-cloud</artifactId>
             <version>3.0.2</version>
             <exclusions>

@@ -20,15 +20,15 @@
             <version>2.4.6</version>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-swagger</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-webapp</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-often</artifactId>
         </dependency>
     </dependencies>

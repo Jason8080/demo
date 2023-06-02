@@ -31,7 +31,7 @@
                 <type>pom</type>
             </dependency>
             <dependency>
-                <groupId>cn.hll.tools</groupId>
+                <groupId>cn.gmlee.tools</groupId>
                 <artifactId>tools-parent</artifactId>
                 <version>${tools.version}</version>
                 <scope>import</scope>
@@ -42,7 +42,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-webapp</artifactId>
             <version>${tools.version}</version>
         </dependency>
@@ -57,37 +57,37 @@
             <version>${ct.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-mybatis</artifactId>
             <version>${tools.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-swagger</artifactId>
             <version>${tools.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-spring</artifactId>
             <version>${tools.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-jackson</artifactId>
             <version>${tools.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-logback</artifactId>
             <version>${tools.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-often</artifactId>
             <version>${tools.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-code</artifactId>
             <version>${tools.version}</version>
             <scope>test</scope>

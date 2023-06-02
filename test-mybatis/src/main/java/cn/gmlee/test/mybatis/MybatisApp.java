@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2021/8/27 (周五)
  */
 @SpringBootApplication
-@ComponentScan({"cn.gmlee.test", "cn.hll.tools"})
+@ComponentScan({"cn.gmlee.test", "cn.gmlee.tools"})
 public class MybatisApp {
     public static void main(String[] args) {
         SpringApplication.run(MybatisApp.class, args);

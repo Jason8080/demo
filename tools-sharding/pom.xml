@@ -18,7 +18,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>cn.hll.tools</groupId>
+                <groupId>cn.gmlee.tools</groupId>
                 <artifactId>tools-parent</artifactId>
                 <version>${tools.version}</version>
                 <scope>import</scope>
@@ -29,17 +29,17 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-jackson</artifactId>
             <version>${tools.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-sharding</artifactId>
             <version>${tools.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-mybatis</artifactId>
             <version>${tools.version}</version>
         </dependency>

@@ -28,15 +28,15 @@
             <version>${asm.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-base</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-jackson</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.hll.tools</groupId>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-logback</artifactId>
         </dependency>
         <dependency>
