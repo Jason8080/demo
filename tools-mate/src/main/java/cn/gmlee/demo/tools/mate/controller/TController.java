@@ -45,17 +45,17 @@ public class TController {
             return JsonResult.OK;
       }
 
-      @ApiOperation(value = "获取单条")
-      @ApiPrint(value = "获取单条")
-      @GetMapping(value = "getById")
+      @ApiOperation(value = "保存String")
+      @ApiPrint(value = "保存String")
+      @PostMapping(value = "saveString")
       @ApiImplicitParams({
             @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
-            @ApiImplicitParam(name = "id", value = "编号", paramType = "query", dataType = "long", dataTypeClass = Long.class),
       })
-      public JsonResult getById(
-            @NotNull(message = "编号是空") Long id
+      public JsonResult saveString(
+            @RequestBody @Validated T t
       ) {
-            return JsonResult.OK.newly(tMapper.selectByPrimaryKey(id));
+            tMapper.insertString(t.getCode());
+            return JsonResult.OK;
       }
 
       @ApiOperation(value = "分页查询")

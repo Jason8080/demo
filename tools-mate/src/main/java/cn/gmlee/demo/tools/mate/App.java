@@ -1,6 +1,5 @@
 package cn.gmlee.demo.tools.mate;
 
-import cn.gmlee.tools.mybatis.config.plus.MyBatisPlusConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,7 +10,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @MapperScan("**.dao.mapper.**")
 @ComponentScan({"cn.gmlee"})
-@SpringBootApplication(exclude = MyBatisPlusConfiguration.class)
+@SpringBootApplication
 public class App {
     /**
      * 入口.
