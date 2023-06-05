@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * <p>
@@ -45,6 +45,19 @@ public class TController {
             return JsonResult.OK;
       }
 
+      @ApiOperation(value = "保存List")
+      @ApiPrint(value = "保存List")
+      @PostMapping(value = "saveList")
+      @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
+      })
+      public JsonResult saveList(
+              @RequestBody @Validated List<String> code
+              ) {
+            tMapper.insertList(code);
+            return JsonResult.OK;
+      }
+
       @ApiOperation(value = "保存String")
       @ApiPrint(value = "保存String")
       @PostMapping(value = "saveString")
@@ -54,7 +67,7 @@ public class TController {
       public JsonResult saveString(
             @RequestBody @Validated T t
       ) {
-            tMapper.insertString(t.getCode());
+            tMapper.insertString(t.getCode(), "哟呵");
             return JsonResult.OK;
       }
 

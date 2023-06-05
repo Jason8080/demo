@@ -24,4 +24,16 @@
         id, code, env, status, state, creator, create_by, create_at, updater, update_by, update_at, del, del_mark
     </sql>
 
+    <insert id="insertString">
+        insert into `t` (`code`) values
+        <foreach collection="code" item="code" open="" separator="," close="">
+            (#{code})
+        </foreach>
+    </insert>
+    <insert id="insertList">
+        insert into `t` (`code`) values
+        <foreach collection="code" item="code" open="" separator="," close="">
+            (#{code})
+        </foreach>
+    </insert>
 </mapper>

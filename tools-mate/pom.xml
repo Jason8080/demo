@@ -44,6 +44,10 @@
         </dependency>
         <dependency>
             <groupId>cn.gmlee.tools</groupId>
+            <artifactId>tools-logback</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-often</artifactId>
         </dependency>
         <dependency>
@@ -63,6 +67,18 @@
         </dependency>
     </dependencies>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
