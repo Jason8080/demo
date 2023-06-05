@@ -1,5 +1,6 @@
 package cn.gmlee.demo.tools.mate.dao.mapper;
 
+import cn.gmlee.demo.tools.mate.controller.vo.TVo;
 import cn.gmlee.demo.tools.mate.dao.entity.T;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
@@ -17,4 +18,5 @@ import java.util.List;
 public interface TMapper extends Mapper<T> {
     void insertString(@Param("code") String... code);
     void insertList(@Param("code") List<String> code);
+    void insertInteriorList(TVo vo);
 }

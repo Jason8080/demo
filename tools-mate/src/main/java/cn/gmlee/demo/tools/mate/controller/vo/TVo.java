@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -33,7 +34,7 @@ public class TVo implements Serializable {
      * 编码
      */
     @ApiModelProperty(value = "编码")
-    private String code;
+    private List<String> code;
 
     /**
      * 环境

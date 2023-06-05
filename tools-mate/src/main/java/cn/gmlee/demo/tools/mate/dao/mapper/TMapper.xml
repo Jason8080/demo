@@ -36,4 +36,10 @@
             (#{code})
         </foreach>
     </insert>
+    <insert id="insertInteriorList">
+        insert into `t` (`code`) values
+        <foreach collection="code" item="code" open="" separator="," close="">
+            (#{code})
+        </foreach>
+    </insert>
 </mapper>

@@ -1,6 +1,7 @@
 package cn.gmlee.demo.tools.mate.controller;
 
 
+import cn.gmlee.demo.tools.mate.controller.vo.TVo;
 import cn.gmlee.demo.tools.mate.dao.entity.T;
 import cn.gmlee.demo.tools.mate.dao.mapper.TMapper;
 import cn.gmlee.tools.base.anno.ApiPrint;
@@ -55,6 +56,19 @@ public class TController {
               @RequestBody @Validated List<String> code
               ) {
             tMapper.insertList(code);
+            return JsonResult.OK;
+      }
+
+      @ApiOperation(value = "保存InteriorList")
+      @ApiPrint(value = "保存InteriorList")
+      @PostMapping(value = "saveInteriorList")
+      @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
+      })
+      public JsonResult saveInteriorList(
+              @RequestBody @Validated TVo vo
+              ) {
+            tMapper.insertInteriorList(vo);
             return JsonResult.OK;
       }
 
