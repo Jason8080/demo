@@ -4,24 +4,25 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="cn.gmlee.demo.tools.mate.dao.entity.T">
-        <id column="id" property="id" />
-        <result column="code" property="code" />
-        <result column="env" property="env" />
-        <result column="status" property="status" />
-        <result column="state" property="state" />
-        <result column="creator" property="creator" />
-        <result column="create_by" property="createBy" />
-        <result column="create_at" property="createAt" />
-        <result column="updater" property="updater" />
-        <result column="update_by" property="updateBy" />
-        <result column="update_at" property="updateAt" />
-        <result column="del" property="del" />
-        <result column="del_mark" property="delMark" />
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="env" property="env"/>
+        <result column="status" property="status"/>
+        <result column="state" property="state"/>
+        <result column="creator" property="creator"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_at" property="createAt"/>
+        <result column="updater" property="updater"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_at" property="updateAt"/>
+        <result column="del" property="del"/>
+        <result column="del_mark" property="delMark"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, code, env, status, state, creator, create_by, create_at, updater, update_by, update_at, del, del_mark
+        id
+        , code, env, status, state, creator, create_by, create_at, updater, update_by, update_at, del, del_mark
     </sql>
 
     <insert id="insertString">
@@ -42,4 +43,34 @@
             (#{code})
         </foreach>
     </insert>
+    <select id="selectStr" resultType="cn.gmlee.demo.tools.mate.dao.entity.T">
+        select * from `t`
+        <where>
+            `code` = #{code}
+        </where>
+    </select>
+    <select id="selectVo" resultType="cn.gmlee.demo.tools.mate.dao.entity.T">
+        select * from `t`
+        <where>
+            <foreach collection="code" item="code" open="`code` in (" separator="," close=")">
+                #{code}
+            </foreach>
+        </where>
+    </select>
+    <select id="selectString" resultType="cn.gmlee.demo.tools.mate.dao.entity.T">
+        select * from `t`
+        <where>
+            <foreach collection="code" item="code" open="`code` in (" separator="," close=")">
+                #{code}
+            </foreach>
+        </where>
+    </select>
+    <select id="selectList" resultType="cn.gmlee.demo.tools.mate.dao.entity.T">
+        select * from `t`
+        <where>
+            <foreach collection="code" item="code" open="`code` in (" separator="," close=")">
+                #{code}
+            </foreach>
+        </where>
+    </select>
 </mapper>

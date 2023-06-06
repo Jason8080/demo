@@ -85,6 +85,19 @@ public class TController {
             return JsonResult.OK;
       }
 
+      @ApiOperation(value = "编码查询")
+      @ApiPrint(value = "编码查询")
+      @PostMapping(value = "encodeQuery")
+      @ApiImplicitParams({
+            @ApiImplicitParam(name = "current", value = "起始页", paramType = "query", dataType = "integer", dataTypeClass = Integer.class),
+            @ApiImplicitParam(name = "size", value = "页数量", paramType = "query", dataType = "integer", dataTypeClass = Integer.class),
+            @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
+      })
+      public JsonResult encodeQuery(@RequestBody TVo vo
+      ) {
+            return JsonResult.OK.newly(tMapper.selectVo(vo));
+      }
+
       @ApiOperation(value = "分页查询")
       @ApiPrint(value = "分页查询")
       @PostMapping(value = "listPageBy")
@@ -93,8 +106,7 @@ public class TController {
             @ApiImplicitParam(name = "size", value = "页数量", paramType = "query", dataType = "integer", dataTypeClass = Integer.class),
             @ApiImplicitParam(name = "token", value = "身份令牌", paramType = "header", dataType = "string", dataTypeClass = String.class),
       })
-      public JsonResult listPageBy(
-              PageRequest page, @RequestBody T vo
+      public JsonResult listPageBy(@RequestBody T vo
       ) {
             return JsonResult.OK.newly(tMapper.select(vo));
       }

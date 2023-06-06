@@ -19,4 +19,8 @@ public interface TMapper extends Mapper<T> {
     void insertString(@Param("code") String... code);
     void insertList(@Param("code") List<String> code);
     void insertInteriorList(TVo vo);
+    List<T> selectVo(TVo vo);
+    List<T> selectStr(@Param("code") String code);
+    List<T> selectString(@Param("code") String... code);
+    List<T> selectList(@Param("code") List<String> code);
 }

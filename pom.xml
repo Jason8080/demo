@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <tools.version>4.22.0</tools.version>
+        <tools.version>4.22.1</tools.version>
     </properties>
 
     <dependencyManagement>
