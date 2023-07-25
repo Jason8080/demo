@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <tools.version>4.22.1</tools.version>
+        <tools.version>5.1.3</tools.version>
     </properties>
 
     <dependencyManagement>
@@ -27,5 +27,6 @@
 
     <modules>
         <module>tools-mate</module>
+        <module>k8s_app_demo/k8s_app_demo</module>
     </modules>
 </project>
