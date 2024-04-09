@@ -1,6 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.gm</groupId>
         <artifactId>demo</artifactId>
@@ -9,29 +10,106 @@
     </parent>
 
     <artifactId>k8s_app_demo</artifactId>
-    <name>Archetype - k8s_app_demo</name>
+    <name>k8s_app_demo</name>
     <url>http://maven.apache.org</url>
+
+    <properties>
+        <docker.maven.plugin.version>1.4.10</docker.maven.plugin.version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-webapp</artifactId>
-            <version>5.1.3</version>
+            <version>5.5.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-swagger</artifactId>
-            <version>5.1.3</version>
+            <version>5.5.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-logback</artifactId>
-            <version>5.1.3</version>
+            <version>5.5.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>cn.gmlee.tools</groupId>
             <artifactId>tools-often</artifactId>
-            <version>5.1.3</version>
+            <version>5.5.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>stg</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <ldw.docker.repostory>10.37.5.104:1180</ldw.docker.repostory>
+                <ldw.docker.registry.name>stg</ldw.docker.registry.name>
+                <ldw.profiles.active>stg</ldw.profiles.active>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>test</id>
+            <properties>
+                <ldw.docker.repostory>testharbor.liangdawang.com:65443</ldw.docker.repostory>
+                <ldw.docker.registry.name>test</ldw.docker.registry.name>
+                <ldw.profiles.active>test</ldw.profiles.active>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <ldw.docker.repostory>harbor.liangdawang.com</ldw.docker.repostory>
+                <ldw.docker.registry.name>prod</ldw.docker.registry.name>
+                <ldw.profiles.active>prod</ldw.profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <!--   dockerfile-maven-plugin      -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>${docker.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>${ldw.docker.repostory}/${ldw.docker.registry.name}/${project.artifactId}</repository>
+                    <tag>${project.version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                        <ENV_ACTIVE>${ldw.profiles.active}</ENV_ACTIVE>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://10.37.20.201:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://10.37.20.201:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
