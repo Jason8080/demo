@@ -15,6 +15,7 @@ public class Noe implements Serializable {
     private Integer c;
     private String key;
     @NotEmpty(message = "值内容不可以为空")
+//    @El("${a}+${b} > 5")
     @El(conditions = "${a}==${b}", value = "${key}!='' && ${value}!=null && ${value}!=''", message = "值内容是空")
     private String value;
 }
