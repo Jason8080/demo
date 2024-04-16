@@ -73,6 +73,7 @@
     </profiles>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <!--   dockerfile-maven-plugin      -->
             <plugin>
@@ -92,8 +93,7 @@
                     <repository>${ldw.docker.repostory}/${ldw.docker.registry.name}/${project.artifactId}</repository>
                     <tag>${project.version}</tag>
                     <buildArgs>
-                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-                        <ENV_ACTIVE>${ldw.profiles.active}</ENV_ACTIVE>
+                        <JAR_FILE>${project.artifactId}.jar</JAR_FILE>
                     </buildArgs>
                 </configuration>
             </plugin>
