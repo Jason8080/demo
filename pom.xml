@@ -26,6 +26,6 @@
     </dependencyManagement>
 
     <modules>
-        <module>k8s_app_demo/k8s_app_demo</module>
+        <module>dynamic-api</module>
     </modules>
 </project>

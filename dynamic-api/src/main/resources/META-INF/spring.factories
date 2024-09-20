@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.gmlee.demo.dynamic.api.config.DynamicApiAutoConfiguration
