@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -27,9 +26,5 @@ public class ArgsAdapterController {
         Map<String, String> cookieMap = WebUtil.getCookieMap(request);
         System.out.println(cookieMap);
         return R.OK;
-    }
-
-    public R handle(Object... os) {
-        return null;
     }
 }
