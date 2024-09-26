@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class LdwPaymentCallbackService implements LdwPaymentCallbackServer {
 
-    @ApiPrint("保金支付 · 处理中心")
+    @ApiPrint(value = "保金支付 · 处理中心", simple = true, format = true)
     public R bondHandler(String orderNo, String batchNo) {
         return R.OK;
     }
